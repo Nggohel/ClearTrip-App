@@ -1,0 +1,19 @@
+.rightaside-sesction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 30.5rem;
+  height: 45rem;
+  width: 20rem;
+}
+.rightaside-sesction-offers {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.rightaside-sesction-offers a {
+  margin-left: 8.5rem;
+  color: blue;
+  font-weight: 500;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.rightaside-carousel {
+  margin-top: 30px;
+  width: 18rem;
+  height: 15rem;
+
+  border-radius: 5px;
+}
+.rightaside-carousel img {
+  object-fit: cover;
+}
