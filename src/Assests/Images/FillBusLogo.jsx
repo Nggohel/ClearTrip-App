@@ -12,7 +12,7 @@ const FillBusLogo = () => {
           maskType: "alpha",
         }}
       >
-        <path fill="#D9D9D9" d="M0 0h24v24H0z" />
+        <path fill="#000" d="M0 0h24v24H0z" />
       </mask>
       <g mask="url(#a)">
         <path

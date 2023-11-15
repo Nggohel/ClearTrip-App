@@ -1,16 +1,8 @@
-import NavBar from "./NavBar";
-import LeftSideSection from "./leftSideSection";
-import RightSideSection from "./RightSideSection";
-import MainSection from "./MainSection";
+import LaptopApp from "./LaptopApp";
 function App() {
   return (
     <>
-      <NavBar />
-      <div style={{ display: "flex" }}>
-        <LeftSideSection />
-        <MainSection />
-        <RightSideSection />
-      </div>
+      <LaptopApp />
     </>
   );
 }

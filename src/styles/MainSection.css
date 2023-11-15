@@ -1,0 +1,110 @@
+.middle-section {
+  /* border: 1px solid palevioletred; */
+  width: 796px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 0px 20px;
+  margin-top: 16px;
+}
+.middle-section h1 {
+  padding: 0;
+  margin: 0;
+}
+.middle-section h2 {
+  padding: 0;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.middle-section-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgray;
+  width: 700px;
+  height: 320px;
+  border-radius: 7px;
+}
+.flightsearch-innerdata {
+  padding: 10px 20px;
+  height: 240px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.flightsearch-section {
+  border: none;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+.flightsearch-button {
+  display: flex;
+  margin-top: 10px;
+}
+.flightsearch-button button {
+  margin-bottom: 5px;
+  padding: 9px;
+  margin-left: 10px;
+  background-color: #fff;
+  border: 1px solid lightgray;
+  border-radius: 18px;
+  font-weight: 600;
+}
+.flightsearch-button button:hover {
+  background-color: #f3f2f2;
+}
+.flightsearch-search {
+  border: 1px solid lightgray;
+  width: 570px;
+  height: 45px;
+  margin-left: 14px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.flightsearch-search-calender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  margin-top: 30px;
+  padding: 5px;
+  border: 1px solid grey;
+}
+.flightsearch-search-calender button {
+  color: #fff;
+  background-color: #f77728;
+  height: 55px;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.popular-search {
+  padding-bottom: 30px !important;
+}
+.cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.cards-data {
+  width: 180px;
+  height: 60px;
+  border: 1px solid lightgray;
+  margin-left: 8px;
+  border-radius: 5px;
+}
+.cards-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.card-innerdata {
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -1,6 +1,11 @@
 .rightaside-secondcarousel {
-  width: 18rem;
-  height: 18rem;
-  line-height: 20px;
-  background-color: aquamarine;
+  width: 16.5rem;
+  height: 17rem;
+  line-height: 1.3rem;
+  border-radius: 7px;
+  border: 1px solid lightgray;
+}
+
+.rightaside-secondcarousel > div {
+  height: 98% !important;
 }

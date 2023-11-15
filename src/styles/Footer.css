@@ -1,0 +1,46 @@
+.footer {
+  background-color: rgb(232, 231, 231);
+}
+.footer-data {
+  width: 950px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 150px;
+  padding: 15px 0;
+}
+.cleartrip-connect-details {
+  width: 700px;
+}
+.cleartrip-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+.cleartrip-details p {
+  font-size: 13px;
+  font-weight: 400;
+}
+.cleartrip-socialconnect-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cleartrip-socialconnect-data p {
+  font-size: 12px;
+}
+.footer-lower {
+  margin: 0px 120px;
+}
+.flight-routes {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  text-align: center;
+  gap: 10px;
+}
+.flight-routes-spans {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(147, 146, 146);
+}
