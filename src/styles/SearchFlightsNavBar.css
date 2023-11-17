@@ -1,0 +1,47 @@
+.search-flights-navbar {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftside-searchflights-navbar {
+  /* border: 1px solid purple; */
+  display: flex;
+  align-items: center;
+}
+.rightside-searchflights-navbar {
+  /* border: 1px solid purple; */
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  text-align: center;
+}
+
+.flights-search-boxs {
+  height: 65px;
+  width: 1140px;
+  /* border: 1px solid gold; */
+  padding: 12px;
+  margin: 0px 70px;
+  display: flex;
+  justify-content: space-around;
+}
+.flights-search-box {
+  border: 1px solid lightgray;
+  width: 140px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.flights-search-button {
+  width: 140px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 4px;
+}

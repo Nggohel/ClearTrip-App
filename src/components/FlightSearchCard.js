@@ -12,14 +12,6 @@ function FlightSearchCard({ icon }) {
               <option>Round trip</option>
             </select>
           </form>
-          {/* <form>
-            <span>{icon}</span>
-            <select className="flightsearch-section">
-              <option>One way</option>
-              <option>Round trip</option>
-            </select>
-          </form> */}
-
           <div className="flightsearch-button">
             <button>Regular fare</button>
             <button>Student fare</button>

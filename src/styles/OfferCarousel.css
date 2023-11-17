@@ -1,0 +1,50 @@
+button.slick-arrow.slick-prev {
+  background: none;
+  left: 0px;
+  z-index: 1;
+}
+button.slick-arrow.slick-next {
+  background: none;
+  right: 0px;
+  z-index: 1;
+}
+.offers-card {
+  width: 340px;
+  height: 60px;
+  background-color: rgb(236, 248, 244);
+  border-radius: 14px;
+}
+.offer-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: 1px solid palevioletred; */
+}
+.offer-icon {
+  /* margin: 5px; */
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.offers-data {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid black; */
+  font-size: 13px;
+  font-weight: 500;
+}
+.credit-offers {
+  display: flex;
+  flex-direction: row;
+}
+.bank-card {
+  font-weight: 600;
+}
+.card-offer {
+  color: grey;
+  font-size: 11px;
+  text-align: center;
+  margin-left: 10px;
+}
