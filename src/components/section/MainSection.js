@@ -1,9 +1,9 @@
 import React from "react";
-import "./../styles/MainSection.css";
-import FlightSearchCard from "./FlightSearchCard";
+import "./../../styles/MainSection.css";
+import FlightSearchCard from "./../Flights/FlightSearchCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Arrow from "../Assests/Images/Arrow";
+import Arrow from "../../Assests/Images/Arrow";
 function MainSection() {
   return (
     <>

@@ -1,9 +1,9 @@
 import { Hotel } from "@mui/icons-material";
-import SearchFlightLogo from "../Assests/Images/SearchFlightLogo";
-import AppLogo from "./../Assests/Images/AppLogo.png";
-import SupportLogo from "../Assests/Images/SupportLogo";
-import AvtaarLogo from "../Assests/Images/AvtaarLogo";
-import "./../styles/SearchFlightsNavBar.css";
+import SearchFlightLogo from "./../../Assests/Images/SearchFlightLogo";
+import AppLogo from "./../../Assests/Images/AppLogo.png";
+import SupportLogo from "./../../Assests/Images/SupportLogo";
+import AvtaarLogo from "./../../Assests/Images/AvtaarLogo";
+import "./../../styles/SearchFlightsNavBar.css";
 
 function SearchFlightsNavBar() {
   return (

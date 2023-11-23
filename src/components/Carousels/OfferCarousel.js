@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./../styles/OfferCarousel.css";
+import "./../../styles/OfferCarousel.css";
+// import "./../styles/OfferCarousel.css";
 function OfferCarousel({ icon, offer, bankCard, card }) {
   const [settings] = useState({
     className: "center",

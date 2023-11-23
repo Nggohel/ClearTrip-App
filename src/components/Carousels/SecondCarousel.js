@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import "./../styles/SecondCarousel.css";
+import "./../../styles/SecondCarousel.css";
 
 function SecondCarousel() {
   return (

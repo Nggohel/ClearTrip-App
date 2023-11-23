@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import Slider1 from "./../Assests/SliderImage/Slider1.webp";
-import Slider2 from "./../Assests/SliderImage/Slider2.webp";
-import Slider3 from "./../Assests/SliderImage/Slider3.webp";
-import Slider4 from "./../Assests/SliderImage/Slider4.webp";
-import Slider5 from "./../Assests/SliderImage/Slider5.webp";
-import Slider6 from "./../Assests/SliderImage/Slider6.webp";
-import "./../styles/TopCarouselCard.css";
+import Slider1 from "./../../Assests/SliderImage/Slider1.webp";
+import Slider2 from "./../../Assests/SliderImage/Slider2.webp";
+import Slider3 from "./../../Assests/SliderImage/Slider3.webp";
+import Slider4 from "./../../Assests/SliderImage/Slider4.webp";
+import Slider5 from "./../../Assests/SliderImage/Slider5.webp";
+import Slider6 from "./../../Assests/SliderImage/Slider6.webp";
+import "./../../styles/TopCarouselCard.css";
 
 function TopCarouselCard() {
   const totalSlides = 5;

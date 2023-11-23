@@ -1,4 +1,4 @@
-import "./../styles/MainSection.css";
+import "./../../styles/MainSection.css";
 
 function FlightSearchCard({ icon }) {
   return (

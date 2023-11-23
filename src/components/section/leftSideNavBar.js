@@ -1,10 +1,10 @@
-import FightLogo from "../Assests/Images/Fightlogo";
-import FillBusLogo from "../Assests/Images/FillBusLogo";
-import Hotel from "../Assests/Images/FillHotelLogo";
-import MytripLogo from "../Assests/Images/MytripLogo";
-import SupportLogo from "../Assests/Images/SupportLogo";
-import "./../styles/leftSideSection.css";
-function leftSideSection() {
+import FightLogo from "../../Assests/Images/Fightlogo";
+import FillBusLogo from "../../Assests/Images/FillBusLogo";
+import Hotel from "../../Assests/Images/FillHotelLogo";
+import MytripLogo from "../../Assests/Images/MytripLogo";
+import SupportLogo from "../../Assests/Images/SupportLogo";
+import "./../../styles/leftSideSection.css";
+function leftSideNavBar() {
   return (
     <>
       <aside>
@@ -35,4 +35,4 @@ function leftSideSection() {
   );
 }
 
-export default leftSideSection;
+export default leftSideNavBar;

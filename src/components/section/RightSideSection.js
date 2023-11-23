@@ -1,6 +1,6 @@
-import SecondCarousel from "./SecondCarousel";
-import TopCarouselCard from "./TopCarouselCard";
-import "./../styles/RightSideSection.css";
+import SecondCarousel from "../Carousels/SecondCarousel";
+import TopCarouselCard from "../Carousels/TopCarouselCard";
+import "./../../styles/RightSideSection.css";
 
 function RightSideSection() {
   return (

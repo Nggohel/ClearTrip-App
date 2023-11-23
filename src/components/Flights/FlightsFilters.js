@@ -4,8 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import "./../styles/FlightsFilters.css";
-
+import "./../../styles/FlightsFilters.css";
 function FlightsFilters() {
   const [rangeValue, setRangeValue] = useState(3483);
 

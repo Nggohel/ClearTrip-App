@@ -1,5 +1,8 @@
-import "./../styles/FinalFlightDataCard.css";
+// import "./../styles/FinalFlightDataCard.css";
+import "./../../styles/FinalFlightDataCard.css";
 function FinalFlightDataCard() {
+  const handleBookFlight = () => {};
+
   return (
     <>
       <div className="flightsdata">
@@ -47,7 +50,9 @@ function FinalFlightDataCard() {
             <span>price</span>
             <span>offerData</span>
           </div>
-          <button className="flight-finaldata-btn">Book now</button>
+          <button className="flight-finaldata-btn" onClick={handleBookFlight}>
+            Book now
+          </button>
         </div>
         {/* </div> */}
 
@@ -78,6 +83,7 @@ function FinalFlightDataCard() {
         <div className="left-flight-data">
           <div>
             <span>logo</span>
+            <br />
             <span>logoname</span>
           </div>
           <div className="middle-flight-data">
@@ -94,6 +100,7 @@ function FinalFlightDataCard() {
         <div className="right-flight-data">
           <div>
             <span>logo</span>
+            <br />
             <span>logoname</span>
           </div>
           <div className="middle-flight-data">
