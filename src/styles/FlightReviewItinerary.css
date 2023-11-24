@@ -100,7 +100,7 @@
   background-size: 260px;
   background-position: 109% 40%;
   background-repeat: no-repeat;
-  border: 1px solid gold;
+  border: 1px solid lightgray;
   background-color: rgb(249, 230, 231);
   margin-left: 7.5rem;
   border-radius: 10px;
@@ -133,10 +133,145 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border: 1px solid black;
+  margin-top: 20px;
 }
 .axisbank-offer-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: 20px;
+}
+/* Accordion */
+.aboveaccordion-title {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  height: 50px;
+  width: 791px;
+  margin-left: 7.5rem;
+  background-color: #d6e8fc;
+  display: flex;
+}
+.flight-depature-details {
+  color: #36c;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 2px solid rgb(51, 102, 204);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  width: 218px;
+  gap: 5px;
+  margin-left: 36px;
+  margin-right: 28px;
+  padding: 12px;
+}
+.flight-arried-details {
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  width: 218px;
+  gap: 5px;
+  padding: 12px;
+}
+.port-name {
+  display: flex;
+  gap: 2px;
+}
+.travelling-guidedata-card {
+  border: 1px solid lightgray;
+  padding: 0px 20px;
+  padding-top: 16px;
+  margin-left: 7.5rem;
+  width: 791px;
+}
+.travelling-guidedata {
+  height: 64px;
+  width: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.travelling-guidedata-col {
+  display: flex;
+  gap: 9px;
+  margin: 10px;
+}
+.travelling-guidedata-text {
+  font-size: 12px;
+  line-height: 18px;
+}
+.flight-review-accordion {
+  width: 791px;
+  margin-left: 7.5rem;
+  background-color: #fff !important;
+}
+.refund {
+  width: 791px;
+  height: 104px;
+  margin-bottom: 32px;
+  margin-left: 7.5rem;
+}
+.refund-inner {
+  height: 80px;
+  background: linear-gradient(111.67deg, #fff1ed, #fff 53.4%);
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border: 1px solid rgba(255, 184, 165, 0.35);
+  border-bottom: none;
+  padding: 16px;
+}
+.refund-inner-first {
+  display: flex;
+  justify-content: space-between;
+}
+.free {
+  color: #11a670;
+  font-size: 16px;
+  font-weight: 600;
+}
+.price {
+  color: grey;
+  line-height: 22px;
+  font-size: 16px;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+.claimed-text {
+  height: 24px;
+  background: linear-gradient(
+    90.01deg,
+    #fbe6e0 0.01%,
+    rgba(255, 241, 237, 0) 41.83%
+  );
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border: 1px solid rgba(255, 184, 165, 0.35);
+  border-top: none;
+}
+.claimed-text-span {
+  color: #992f0e;
+  padding: 4px;
+  margin-left: 16px;
+  font-size: 14px;
+}
+.continue {
+  margin-left: 7.5rem;
+  margin-bottom: 30px;
+}
+.continue-btn {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0px 28px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #f77728;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  width: 140px;
 }

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import ArrowItinerary from "../../Assests/Images/ArrowItinerary";
 import AxisLogo from "../../Assests/Images/AxisLogo";
 import Rupees from "../../Assests/Images/AxisbankLogo/Rupees";
@@ -8,7 +9,23 @@ import "../../styles/FlightReviewItinerary.css";
 import Seat from "../../Assests/Images/AxisbankLogo/Seat";
 import Cancel from "../../Assests/Images/AxisbankLogo/Cancel";
 import Dining from "../../Assests/Images/AxisbankLogo/Dining";
+import FlightReviewAccordion from "../Accordion/FlightReviewAccordion";
+import Departureplan from "../../Assests/Images/Flight/Departureplan";
+import Arrivedplan from "../../Assests/Images/Flight/Arrivedplan";
+import PaidMeal from "../../Assests/Images/Flight/PaidMeal";
+import Laguage from "../../Assests/Images/Flight/Laguage";
+import PaidSeat from "../../Assests/Images/Flight/PaidSeat";
+import CabinLogo from "../../Assests/Images/Flight/CabinLogo";
+import Cancelticket from "../../Assests/Images/Flight/Cancelticket";
+import DateChange from "../../Assests/Images/Flight/DateChange";
+import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
 function LeftFlightReviewItinerary() {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleContinueClick = () => {
+    setShowForm(true);
+  };
+
   return (
     <>
       <div className="review-leftside">
@@ -173,37 +190,177 @@ function LeftFlightReviewItinerary() {
             <div className="axisbank-offer">
               <div style={{ display: "flex", gap: "70px" }}>
                 <div className="axisbank-offer-col-one">
-                  <div>
+                  <div className="travelling-guidedata-col">
                     <span>
                       <Rupees />
                     </span>
-                    <span>No convenience Fee</span>
+                    <span style={{ fontSize: "12px" }}>No convenience Fee</span>
                   </div>
-                  <div>
+                  <div className="travelling-guidedata-col">
                     <span>
                       <Seat />
                     </span>
-                    <span>Free seat up to ₹700</span>
+                    <span style={{ fontSize: "12px" }}>
+                      Free seat up to ₹700
+                    </span>
                   </div>
                 </div>
                 <div className="axisbank-offer-col">
-                  <div>
+                  <div className="travelling-guidedata-col">
                     <span>
                       <Cancel />
                     </span>
-                    <span>Free cancellation or date change at ₹1</span>
+                    <span style={{ fontSize: "12px" }}>
+                      Free cancellation or date change at ₹1
+                    </span>
                   </div>
-                  <div>
+                  <div className="travelling-guidedata-col">
                     <span>
                       <Dining />
                     </span>
-                    <span>Free meal up to ₹350</span>
+                    <span style={{ fontSize: "12px" }}>
+                      Free meal up to ₹350
+                    </span>
                   </div>
                 </div>
               </div>
               <button className="axisbank-btn">Check your eligibility</button>
             </div>
           </div>
+
+          {/* Accordion */}
+          <div className="aboveaccordion-title">
+            <div className="flight-depature-details">
+              <div>
+                <Departureplan />
+              </div>
+              <div className="port-name">
+                <div>BLR</div>
+                <div>→</div>
+                <div>BOM</div>
+              </div>
+              <div>: Standard fare</div>
+            </div>
+            <div className="flight-arried-details">
+              <div>
+                <Arrivedplan />
+              </div>
+              <div className="port-name">
+                <div>BOM</div>
+                <div>→</div>
+                <div>BLR</div>
+              </div>
+              <div>: Standard fare</div>
+            </div>
+          </div>
+          <div className="travelling-guidedata-card">
+            <div className="travelling-guidedata">
+              <div>
+                <div className="travelling-guidedata-col">
+                  <Cancelticket />
+                  <div className="travelling-guidedata-text">
+                    Cancellation fee starts from ₹3,900
+                  </div>
+                </div>
+                <div className="travelling-guidedata-col">
+                  <DateChange />
+                  <div className="travelling-guidedata-text">
+                    Date change allowed from ₹3,650
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="travelling-guidedata-col">
+                  <CabinLogo />
+                  <div className="travelling-guidedata-text">
+                    Cabin/person: 7kg
+                  </div>
+                </div>
+                <div className="travelling-guidedata-col">
+                  <PaidMeal />
+                  <div className="travelling-guidedata-text">Paid meal</div>
+                </div>
+              </div>
+              <div>
+                <div className="travelling-guidedata-col">
+                  <Laguage />
+                  <div className="travelling-guidedata-text">
+                    Check-in/person: 15kg(1 Piece)
+                  </div>
+                </div>
+                <div className="travelling-guidedata-col">
+                  <PaidSeat />
+                  <div className="travelling-guidedata-text">Paid seat</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <FlightReviewAccordion />
+
+          {/* HR */}
+
+          <hr
+            style={{ margin: "30px", width: "791px", marginLeft: "7.5rem" }}
+          ></hr>
+
+          {/* Medical */}
+          <div className="refund">
+            <div className="refund-inner">
+              <div className="refund-inner-first">
+                <p style={{ fontSize: "16px", fontWeight: "500" }}>
+                  This booking is covered by
+                  <img src={mediCancelDTSvg} />
+                </p>
+                <p>
+                  <span className="free">Free</span>
+                  <span className="price">₹199</span>
+                </p>
+              </div>
+              <p
+                style={{ fontSize: "14px", fontWeight: "300", display: "flex" }}
+              >
+                <p>
+                  Get a full refund on flight and hotel bookings for medical
+                  reasons, only on Cleartrip.
+                </p>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    color: "#0f6bff",
+                    cursor: "pointer",
+                  }}
+                >
+                  Learn More
+                </span>
+              </p>
+            </div>
+            <div className="claimed-text">
+              <p>
+                <span className="claimed-text-span">
+                  2.5k travellers availed in last one month
+                </span>
+              </p>
+            </div>
+          </div>
+
+          {/* flipkart */}
+
+          {/* btn */}
+          <div className="continue">
+            <button className="continue-btn" onClick={handleContinueClick}>
+              Continue
+            </button>
+          </div>
+
+          {showForm && (
+            <div className="additional-info-form">
+              <label htmlFor="phoneNumber">Phone Number:</label>
+              <input type="text" id="phoneNumber" name="phoneNumber" />
+              <label htmlFor="name">Name:</label>
+              <input type="text" id="name" name="name" />
+            </div>
+          )}
         </div>
       </div>
     </>
