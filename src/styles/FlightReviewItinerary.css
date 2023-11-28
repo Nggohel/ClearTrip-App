@@ -275,3 +275,62 @@
   border: none;
   width: 140px;
 }
+.number-btn {
+  min-width: 80px;
+  line-height: 20px;
+  font-size: 14px;
+  padding-left: 12px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-number {
+  width: 346px;
+  line-height: 20px;
+  font-size: 14px;
+  padding: 8px;
+  height: 36px;
+  color: #1a1a1a;
+  border-color: #e6e6e6;
+  border-radius: 4px;
+  border-width: 1px;
+}
+.additional-info-form {
+  margin-left: 7.5rem;
+  font-size: 14px;
+}
+.mobile-card {
+  margin-top: 15px;
+  width: 791px;
+  display: flex;
+  gap: 20px;
+}
+.email {
+  width: 447px;
+  line-height: 20px;
+  font-size: 14px;
+  padding: 8px;
+  height: 36px;
+  color: #1a1a1a;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #e6e6e6;
+  border-width: 1px;
+}
+.email-card {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.continue-second {
+  margin-top: 30px;
+  margin-left: 7.5rem;
+  margin-bottom: 30px;
+}

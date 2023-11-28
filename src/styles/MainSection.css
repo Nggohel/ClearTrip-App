@@ -1,5 +1,4 @@
 .middle-section {
-  /* border: 1px solid palevioletred; */
   width: 796px;
   height: 700px;
   display: flex;
@@ -38,17 +37,20 @@
 .flightsearch-section {
   border: none;
   font-size: 1rem;
-  margin: 0;
-  padding: 0;
 }
+
 .flightsearch-button {
+  /* border: 1px solid black; */
   display: flex;
   margin-top: 10px;
+  align-items: start;
+  justify-content: start;
+  gap: 9px;
 }
+
 .flightsearch-button button {
   margin-bottom: 5px;
   padding: 9px;
-  margin-left: 10px;
   background-color: #fff;
   border: 1px solid lightgray;
   border-radius: 18px;
@@ -59,12 +61,28 @@
 }
 .flightsearch-search {
   border: 1px solid lightgray;
-  width: 570px;
-  height: 45px;
-  margin-left: 14px;
+  height: 52px;
   margin-top: 20px;
-  border-radius: 10px;
+  border-radius: 6px;
 }
+.departure-inputcard {
+  width: 290px;
+  height: 50px;
+  position: relative;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+}
+.search-input {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  width: 200px;
+}
+.departure-icon {
+  margin: 0px 12px;
+}
+
 .flightsearch-search-calender {
   display: flex;
   align-items: center;
@@ -73,6 +91,17 @@
   margin-top: 30px;
   padding: 5px;
   border: 1px solid grey;
+}
+.trasition {
+  z-index: 10;
+  margin-left: 16px;
+  margin-right: 16px;
+  left: -32px;
+  top: 8px;
+}
+.flightsearch-search-calender {
+  display: flex;
+  align-items: center;
 }
 .flightsearch-search-calender button {
   color: #fff;
@@ -84,6 +113,7 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
 .popular-search {
   padding-bottom: 30px !important;
 }
@@ -107,4 +137,8 @@
 .card-innerdata {
   font-size: 14px;
   font-weight: 600;
+}
+.calender {
+  display: flex;
+  gap: 5px;
 }

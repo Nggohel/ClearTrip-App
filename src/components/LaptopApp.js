@@ -30,7 +30,14 @@ function LaptopApp() {
       <div className="laptop-adfor-download">
         <img src={DataImage} />
       </div>
-      <h2 style={{ fontWeight: "610", marginLeft: "230px", marginTop: "45px" }}>
+      <h2
+        style={{
+          fontWeight: "610",
+          marginLeft: "230px",
+          marginTop: "45px",
+          marginBottom: "17px",
+        }}
+      >
         Popular destination
       </h2>
       <div className="laptop-popular-destination">
@@ -42,8 +49,8 @@ function LaptopApp() {
       </div>
       <div className="laptop-homepage-details">
         <div>
-          <h3>Why book on Cleartrip?</h3>
-          <p>
+          <h3 className="details-title">Why book on Cleartrip?</h3>
+          <p className="details-para">
             On Cleartrip.com, you can turn all your plans into trips. From
             flight ticket bookings, and booking hotels online to airport, rental
             and outstation cab booking, with Cleartrip, no travel dream is far
@@ -59,49 +66,48 @@ function LaptopApp() {
           </p>
         </div>
         <div>
-          <span>
-            <b>Booking flights & hotels online with Cleartrip</b>
-          </span>
-          <br></br>
-          <span>
+          <h5 className="details-title-h5">
+            Booking flights & hotels online with Cleartrip
+          </h5>
+          <p className="details-para-2">
             From queries to itineraries, for all things travel, there is
             Cleartrip. Checking your flight updates and PNR status is easy with
             our simple, intuitive app and booking site. Booking online hotels
             gets seamless with a range of choices and the greatest hotel deals.
-          </span>
-          <p>
+          </p>
+          <p className="details-para-2">
             Here’s why booking flights and hotels with Cleartrip is your Clear
             Advantage:
           </p>
-          <p>
+          <p className="details-para-2">
             <b>CT Flexmax:</b> Reschedule or cancel your domestic flight booking
             for free up to 24 hours before departure.
           </p>
-          <p>
+          <p className="details-para-2">
             <b>CT Flex:</b> Amend your domestic flight booking against your date
             of travel and choice of airline. Say hello to flexible flight
             bookings!
           </p>
-          <p>
+          <p className="details-para-2">
             <b>Easy hotel cancellation:</b> Cancel your hotel stay easily. Zero
             fees on hotel cancellations up to 24 hours before check-in on 20k+
             hotels.
           </p>
-          <p>
+          <p className="details-para-2">
             <b>Instant refund initiation:</b> All refunds on flight and hotel
             cancellations are initiated instantly.
           </p>
-          <p>
+          <p className="details-para-2">
             <b>Medi-cancel refund:</b> Cancel your domestic flight booking
             easily on valid medical grounds and get up to ₹3500 against airline
             cancellation charges per passenger per segment.
           </p>
-          <p>
+          <p className="details-para-2">
             <b>International travel insurance:</b> Cancel your domestic flight
             booking easily on valid medical grounds and get up to ₹3500 against
             airline cancellation charges per passenger per segment.
           </p>
-          <p>
+          <p className="details-para-2">
             <b>
               Special Fares For Armed Personnel, Senior Citizens and Student
               travellers:
@@ -110,29 +116,34 @@ function LaptopApp() {
             citizens and students on domestic flights. Additional discounts with
             coupon codes.
           </p>
-          <h3>
+          <br></br>
+          <h3 className="details-title">
             What are the best offers available for travel bookings on Cleartrip?
           </h3>
-          <p>
+          <p className="details-para">
             Get the best offers on hotels and flights using bank cards such as
             HDFC, ICICI, Bank of Baroda, Federal Bank, etc. You can also grab
             amazing discounts during our exciting sale events. Apart from this,
             find unmissable deals and offers on hotel stays and flight bookings
             throughout the year.
           </p>
-          <h3>Are there any offers for new users on Cleartrip?</h3>
-          <p>
+          <br></br>
+          <h3 className="details-title">
+            Are there any offers for new users on Cleartrip?
+          </h3>
+          <p className="details-para">
             Firsts are always special. So new users, you get FLAT 12% off on
             your airfare and up to 18% off on hotels using code
             <a href="/offers/india/dom-ctfirst">CTFIRST</a>. Cleartrip is here
             to make your <a href="/flights">online flight booking</a> seamless
             and simple.
           </p>
-          <h3>
+          <br></br>
+          <h3 className="details-title">
             How can I find the best deals and discounts on flights and hotels
             online on Cleartrip?
           </h3>
-          <p>
+          <p className="details-para">
             With Cleartrip, there are multiple deals available for your online
             flight and <a href="/hotels">hotel booking.</a> Whenever you select
             a hotel or a flight ticket, you can find the best available deals
@@ -143,8 +154,11 @@ function LaptopApp() {
             </a>
             & <a href="/offers/india/hotels">hotels booking discount offers</a>.
           </p>
-          <h3>Which is the best time to book flight tickets online?</h3>
-          <p>
+          <br></br>
+          <h3 className="details-title">
+            Which is the best time to book flight tickets online?
+          </h3>
+          <p className="details-para">
             There’s no specific right time to book your travel. With Cleartrip,
             there are deals and offers available on online flight tickets all
             year round, to make your booking easy and affordable. However, there
@@ -155,6 +169,7 @@ function LaptopApp() {
             best price!
           </p>
         </div>
+        <br></br>
       </div>
       <Footer />
     </>

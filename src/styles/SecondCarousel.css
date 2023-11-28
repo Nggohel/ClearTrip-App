@@ -1,11 +1,40 @@
 .rightaside-secondcarousel {
+  padding: 24px 0px;
   width: 16.5rem;
-  height: 17rem;
+  height: 15rem;
   line-height: 1.3rem;
   border-radius: 7px;
   border: 1px solid lightgray;
 }
 
+.rightaside-secondcarousel-card {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  text-align: start;
+  margin-left: 25px;
+}
 .rightaside-secondcarousel > div {
   height: 98% !important;
 }
+.secondcarousel-card-title {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.secondcarousel-offer-details {
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 14px;
+}
+.card-coupon {
+  font-weight: 400;
+  font-size: 14px;
+}
+.card-knowmore {
+  color: #36c;
+  font-weight: 600;
+  font-size: 14px;
+}
+

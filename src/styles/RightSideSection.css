@@ -8,6 +8,7 @@
 .rightaside-sesction-offers {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 .rightaside-sesction-offers a {
   margin-left: 8.5rem;

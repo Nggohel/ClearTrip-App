@@ -1,20 +1,19 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LaptopApp from "./LaptopApp";
-// import SearchFlightsNavBar from "./SearchFlightsNavBar";
-import SearchFlightsNavBar from "./Flights/SearchFlightsNavBar";
-import FlightsFilters from "./Flights/FlightsFilters";
-import SearchFlightData from "./Flights/SearchFlightData";
 import FlightReviewItinerary from "./Flights/FlightReviewItinerary";
+import SearchFlight from "./Flights/SearchFlight";
 
 function App() {
   return (
     <>
-      {/* <LaptopApp /> */}
-      {/* <SearchFlightsNavBar /> */}
-      {/* <div style={{ display: "flex", marginTop: "20px" }}>
-        <FlightsFilters />
-        <SearchFlightData />
-      </div> */}
-      <FlightReviewItinerary />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LaptopApp />} />
+          <Route path="/search" element={<SearchFlight />} />
+          <Route path="/reviewitinerary" element={<FlightReviewItinerary />} />
+        </Routes>
+      </Router>
     </>
   );
 }

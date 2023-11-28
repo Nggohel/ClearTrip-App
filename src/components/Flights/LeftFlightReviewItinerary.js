@@ -19,6 +19,7 @@ import CabinLogo from "../../Assests/Images/Flight/CabinLogo";
 import Cancelticket from "../../Assests/Images/Flight/Cancelticket";
 import DateChange from "../../Assests/Images/Flight/DateChange";
 import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
+import DownArrow from "../../Assests/Images/DownArrow";
 function LeftFlightReviewItinerary() {
   const [showForm, setShowForm] = useState(false);
 
@@ -28,6 +29,7 @@ function LeftFlightReviewItinerary() {
 
   return (
     <>
+      {/* heading-itinerary */}
       <div className="review-leftside">
         <div className="heading-itinerary">
           <div className="no-heading">1</div>
@@ -304,6 +306,7 @@ function LeftFlightReviewItinerary() {
           ></hr>
 
           {/* Medical */}
+
           <div className="refund">
             <div className="refund-inner">
               <div className="refund-inner-first">
@@ -352,17 +355,55 @@ function LeftFlightReviewItinerary() {
               Continue
             </button>
           </div>
-
-          {showForm && (
-            <div className="additional-info-form">
-              <label htmlFor="phoneNumber">Phone Number:</label>
-              <input type="text" id="phoneNumber" name="phoneNumber" />
-              <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" />
-            </div>
-          )}
         </div>
       </div>
+
+      {/* 2 */}
+
+      {showForm && (
+        <div className="review-leftside">
+          <div className="heading-itinerary">
+            <div className="no-heading">2</div>
+            <div>
+              <h2>Add Contact details</h2>
+              <p style={{ fontSize: "12px" }}>
+                E-tickets will be sent to this email address and phone number
+              </p>
+            </div>
+          </div>
+          <div className="additional-info-form">
+            <label htmlFor="phoneNumber">Mobile Number:</label>
+            <div className="mobile-card">
+              <button className="number-btn">
+                <div>+91</div>
+                <DownArrow />
+              </button>
+
+              <input
+                type="text"
+                id="phoneNumber"
+                className="mobile-number"
+                placeholder="Mobile number"
+              />
+            </div>
+
+            <div className="email-card">
+              <label htmlFor="name">Email address</label>
+              <input
+                type="email"
+                id="name"
+                name="name"
+                className="email"
+                placeholder="Email address"
+              />
+            </div>
+          </div>
+
+          <div className="continue-second">
+            <button className="continue-btn">Continue</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

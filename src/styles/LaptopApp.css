@@ -18,7 +18,6 @@
 .laptop-popular-destination {
   display: flex;
   justify-content: space-around;
-  /* border: 1px solid black; */
   width: 73%;
   margin-left: 230px;
 }
@@ -30,4 +29,34 @@
 .laptop-homepage-details {
   margin-top: 30px;
   margin-left: 230px;
+}
+.laptop-homepage-details p,
+h3 {
+  /* margin-top: 10px; */
+}
+.laptop-homepage-details-span {
+  /* margin: 10px; */
+}
+.details-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: #1a1a1a;
+}
+.details-para {
+  line-height: 20px;
+  font-size: 14px;
+  padding-top: 16px;
+  color: #4d4d4d;
+}
+.details-title-h5 {
+  padding-top: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+.details-para-2 {
+  line-height: 20px;
+  font-size: 14px;
+  padding-top: 16px;
+  color: #4d4d4d;
 }
