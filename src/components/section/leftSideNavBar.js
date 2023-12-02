@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import FightLogo from "../../Assests/Images/Fightlogo";
 import FillBusLogo from "../../Assests/Images/FillBusLogo";
 import Hotel from "../../Assests/Images/FillHotelLogo";
@@ -5,15 +6,23 @@ import MytripLogo from "../../Assests/Images/MytripLogo";
 import SupportLogo from "../../Assests/Images/SupportLogo";
 import "./../../styles/leftSideSection.css";
 function leftSideNavBar() {
+  const navigate = useNavigate();
+
+  const handleFlightPage = () => {
+    navigate("/");
+  };
+  const handleHotelPage = () => {
+    navigate("/hotel");
+  };
   return (
     <>
       <aside>
         <div className="left-aside">
-          <div className="left-aside-bar">
+          <div className="left-aside-bar" onClick={handleFlightPage}>
             <FightLogo />
             <span>Flights</span>
           </div>
-          <div className="left-aside-bar">
+          <div className="left-aside-bar" onClick={handleHotelPage}>
             <Hotel />
             <span>Hotel</span>
           </div>

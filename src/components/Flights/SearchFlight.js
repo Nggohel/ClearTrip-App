@@ -2,13 +2,13 @@ import FlightsFilters from "./FlightsFilters";
 import SearchFlightData from "./SearchFlightData";
 import SearchFlightsNavBar from "./SearchFlightsNavBar";
 
-function SearchFlight() {
+function SearchFlight({ searchvalue }) {
   return (
     <>
       <SearchFlightsNavBar />
       <div style={{ display: "flex", marginTop: "20px" }}>
         <FlightsFilters />
-        <SearchFlightData />
+        <SearchFlightData searchvalue={searchvalue} />
       </div>
     </>
   );

@@ -30,16 +30,7 @@ function LaptopApp() {
       <div className="laptop-adfor-download">
         <img src={DataImage} />
       </div>
-      <h2
-        style={{
-          fontWeight: "610",
-          marginLeft: "230px",
-          marginTop: "45px",
-          marginBottom: "17px",
-        }}
-      >
-        Popular destination
-      </h2>
+      <h2 className="popular-destination">Popular destination</h2>
       <div className="laptop-popular-destination">
         <img src={goa} />
         <img src={delhi} />

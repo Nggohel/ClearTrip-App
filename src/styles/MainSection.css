@@ -90,7 +90,7 @@
   height: 60px;
   margin-top: 30px;
   padding: 5px;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
 }
 .trasition {
   z-index: 10;
@@ -103,7 +103,7 @@
   display: flex;
   align-items: center;
 }
-.flightsearch-search-calender button {
+.search-btn {
   color: #fff;
   background-color: #f77728;
   height: 55px;
@@ -112,21 +112,36 @@
   border-radius: 5px;
   font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
 }
-
+input[type="text"] {
+  border: none !important;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100px;
+  color: #1a1a1a;
+}
+.react-datepicker__input-container {
+  outline: none;
+  border: 0px solid white;
+}
+input.react-datepicker-ignore-onclickoutside {
+  height: 50px !important;
+  outline: none;
+}
 .popular-search {
   padding-bottom: 30px !important;
 }
 .cards {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-around;
+  gap: 10px;
 }
 .cards-data {
   width: 180px;
   height: 60px;
   border: 1px solid lightgray;
-  margin-left: 8px;
   border-radius: 5px;
 }
 .cards-data {
@@ -138,7 +153,21 @@
   font-size: 14px;
   font-weight: 600;
 }
-.calender {
+
+.choose-date {
   display: flex;
+  flex-direction: row;
   gap: 5px;
+  cursor: pointer;
+}
+.calender {
+  width: 330px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
 }

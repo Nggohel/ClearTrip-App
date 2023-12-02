@@ -1,13 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./../../styles/MainSection.css";
 import Departureplan from "../../Assests/Images/Flight/Departureplan";
 import Trasition from "../../Assests/Images/Flight/Trasition";
 import { useState } from "react";
 import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
+import FlightCalendar from "../FlightCalendar";
+
 function FlightSearchCard({ icon }) {
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchData, setSearchData] = useState("");
+
+  // const navigate = useNavigate();
 
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
@@ -17,7 +22,10 @@ function FlightSearchCard({ icon }) {
   };
 
   const handleSearchButton = () => {
-    navigate("/search");
+    setSearchData(wherefromValue);
+  };
+  const handleCalendarClick = () => {
+    // setIsOpen(!isOpen);
   };
 
   return (
@@ -77,13 +85,41 @@ function FlightSearchCard({ icon }) {
           </div>
           <div className="flightsearch-search-calender">
             <div className="calender">
-              <div>
-                <CalenderLogo />
+              <div className="choose-date">
+                <div>
+                  <CalenderLogo />
+                </div>
+                <div>
+                  <FlightCalendar />
+                </div>
               </div>
-              <div>Tue, Nov 28</div>
+              <svg width="1" height="36" viewBox="0 0 1 36" fill="none">
+                <line
+                  x1="0.5"
+                  y1="2.18557e-8"
+                  x2="0.499998"
+                  y2="36"
+                  stroke="#E6E6E6"
+                ></line>
+              </svg>
+              <div className="choose-date">
+                <div>
+                  <CalenderLogo />
+                </div>
+                <div>
+                  <FlightCalendar />
+                </div>
+              </div>
             </div>
-            <div>Tue, Dec 28</div>
-            <button onClick={handleSearchButton}>Search flights</button>
+            <Link to="/search">
+              <button
+                className="search-btn"
+                onClick={handleSearchButton}
+                searchvalue={searchData}
+              >
+                Search flights
+              </button>
+            </Link>
           </div>
         </div>
       </div>

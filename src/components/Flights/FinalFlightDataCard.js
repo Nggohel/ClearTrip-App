@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./../../styles/FinalFlightDataCard.css";
-function FinalFlightDataCard() {
+function FinalFlightDataCard({ searchvalue }) {
   const navigate = useNavigate();
 
   const handleBookFlight = () => {
@@ -9,11 +9,12 @@ function FinalFlightDataCard() {
 
   return (
     <>
+      {console.log(searchvalue)}
       <div className="flightsdata">
         <div className="final-flight-data">
           <div className="left">
             <div className="left-div">
-              <span>logo</span>
+              <span>{searchvalue}</span>
               <span>logoname</span>
             </div>
             <div className="left-div">
@@ -85,7 +86,7 @@ function FinalFlightDataCard() {
         </div>
       </div>
 
-      {/* flightcard */} 
+      {/* flightcard */}
 
       <div className="flight-data">
         <div className="left-flight-data">
