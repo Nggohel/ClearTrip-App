@@ -93,23 +93,15 @@ function FlightSearchCard({ icon }) {
                   <FlightCalendar />
                 </div>
               </div>
-              <svg width="1" height="36" viewBox="0 0 1 36" fill="none">
-                <line
-                  x1="0.5"
-                  y1="2.18557e-8"
-                  x2="0.499998"
-                  y2="36"
-                  stroke="#E6E6E6"
-                ></line>
-              </svg>
-              <div className="choose-date">
+
+              {/* <div className="choose-date">
                 <div>
                   <CalenderLogo />
                 </div>
                 <div>
                   <FlightCalendar />
                 </div>
-              </div>
+              </div> */}
             </div>
             <Link to="/search">
               <button

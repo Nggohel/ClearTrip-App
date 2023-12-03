@@ -8,16 +8,19 @@
   padding: 0px 20px;
   margin-top: 16px;
 }
+
 .middle-section h1 {
   padding: 0;
   margin: 0;
 }
+
 .middle-section h2 {
   padding: 0;
   margin-top: 0.5rem;
   font-weight: 500;
   font-size: 1rem;
 }
+
 .middle-section-card {
   display: flex;
   align-items: center;
@@ -27,6 +30,7 @@
   height: 320px;
   border-radius: 7px;
 }
+
 .flightsearch-innerdata {
   padding: 10px 20px;
   height: 240px;
@@ -34,6 +38,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .flightsearch-section {
   border: none;
   font-size: 1rem;
@@ -56,15 +61,18 @@
   border-radius: 18px;
   font-weight: 600;
 }
+
 .flightsearch-button button:hover {
   background-color: #f3f2f2;
 }
+
 .flightsearch-search {
   border: 1px solid lightgray;
   height: 52px;
   margin-top: 20px;
   border-radius: 6px;
 }
+
 .departure-inputcard {
   width: 290px;
   height: 50px;
@@ -73,12 +81,14 @@
   display: flex;
   align-items: center;
 }
+
 .search-input {
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
   width: 200px;
 }
+
 .departure-icon {
   margin: 0px 12px;
 }
@@ -86,12 +96,13 @@
 .flightsearch-search-calender {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 38px;
   height: 60px;
   margin-top: 30px;
   padding: 5px;
-  /* border: 1px solid grey; */
+  width: 589px;
 }
+
 .trasition {
   z-index: 10;
   margin-left: 16px;
@@ -99,10 +110,12 @@
   left: -32px;
   top: 8px;
 }
+
 .flightsearch-search-calender {
   display: flex;
   align-items: center;
 }
+
 .search-btn {
   color: #fff;
   background-color: #f77728;
@@ -114,41 +127,48 @@
   font-weight: 600;
   cursor: pointer;
 }
-input[type="text"] {
+
+/* input[type="text"] {
   border: none !important;
   font-size: 16px;
   font-weight: 600;
   width: 100px;
   color: #1a1a1a;
-}
+} */
 .react-datepicker__input-container {
   outline: none;
   border: 0px solid white;
 }
+
 input.react-datepicker-ignore-onclickoutside {
   height: 50px !important;
   outline: none;
 }
+
 .popular-search {
   padding-bottom: 30px !important;
 }
+
 .cards {
   display: flex;
   align-items: start;
   justify-content: space-around;
   gap: 10px;
 }
+
 .cards-data {
   width: 180px;
   height: 60px;
   border: 1px solid lightgray;
   border-radius: 5px;
 }
+
 .cards-data {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
+
 .card-innerdata {
   font-size: 14px;
   font-weight: 600;
@@ -157,9 +177,11 @@ input.react-datepicker-ignore-onclickoutside {
 .choose-date {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 5px;
   cursor: pointer;
 }
+
 .calender {
   width: 330px;
   height: 55px;
@@ -170,4 +192,21 @@ input.react-datepicker-ignore-onclickoutside {
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
+}
+
+.from-or-to-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.from-or-to-datepicker {
+  height: 50px;
+  width: 100px;
+  outline: none;
+  border: 0px solid white;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: #1a1a1a;
 }

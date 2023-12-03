@@ -1,46 +1,56 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import "./../styles/MainSection.css";
 
 const FlightCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [maxDate, setmaxDate] = useState(new Date("2014/02/10"));
+
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [endDate, setEndDate] = useState(new Date());
+
   const currentDate = new Date();
 
   const maxDate = new Date();
 
   maxDate.setMonth(currentDate.getMonth() + 9);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
   return (
-    <div>
-      <DatePicker
-        selected={selectedDate}
-        onChange={handleDateChange}
-        dateFormat="EE, MMM d" // Format to display month, day, year, and day of the week
-        dropdownMode="select"
-        defaultValue={new Date()}
-        className="date-picker"
-        minDate={new Date()}
-        maxDate={maxDate}
-      />
 
-      {/* <DatePicker
-        selectsRange={true}
+    <div className="from-or-to-date">
+    
+      <DatePicker
+        selected={startDate}
+        dateFormat="EE, MMM d"
+        onChange={(date) => setStartDate(date)}
+        selectsStart
         startDate={startDate}
         endDate={endDate}
-        onChange={(update) => {
-          setDateRange(update);
-        }}
-        withPortal
-      /> */}
+        minDate={startDate}
+        className="from-or-to-datepicker"
+      />
+
+      <svg width="1" height="36" viewBox="0 0 1 36" fill="none">
+        <line
+          x1="0.5"
+          y1="2.18557e-8"
+          x2="0.499998"
+          y2="36"
+          stroke="#E6E6E6"
+        ></line>
+      </svg>
+
+      <DatePicker
+        selected={endDate}
+        dateFormat="EE, MMM d"
+        onChange={(date) => setEndDate(date)}
+        selectsEnd
+        startDate={startDate}
+        endDate={endDate}
+        minDate={startDate}
+        maxDate={maxDate}
+        className="from-or-to-datepicker"
+      />
     </div>
   );
 };
