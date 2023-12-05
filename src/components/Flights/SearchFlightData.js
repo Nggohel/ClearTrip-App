@@ -3,7 +3,7 @@ import ICICI from "../../Assests/Images/ICICI";
 import FinalFlightDataCard from "./FinalFlightDataCard";
 import "./../../styles/SearchFlightData.css";
 
-function SearchFlightData({ searchvalue }) {
+function SearchFlightData() {
   return (
     <div>
       <OfferCarousel
@@ -12,7 +12,7 @@ function SearchFlightData({ searchvalue }) {
         bankCard={"ICICICC"}
         card={"with ICICI Credit Cards"}
       />
-      <FinalFlightDataCard searchvalue={searchvalue} />
+      <FinalFlightDataCard />
     </div>
   );
 }

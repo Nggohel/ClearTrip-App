@@ -15,17 +15,15 @@ function SearchFlightsNavBar() {
           <Hotel style={{ color: "darkgray" }} />
         </div>
         <div className="rightside-searchflights-navbar">
-          <span>INR Rs.</span>
-          <span>
-            <span>
-              <SupportLogo />
-            </span>
-            <span>Support</span>
-          </span>
-          <span>
+          <div>INR Rs.</div>
+          <div>
+            <SupportLogo />
+          </div>
+          <div>Support</div>
+          <div>
             <AvtaarLogo />
-          </span>
-          <span>Log in</span>
+          </div>
+          <div>Log in</div>
         </div>
       </div>
       <div className="flights-search-boxs">

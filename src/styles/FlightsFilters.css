@@ -2,7 +2,6 @@
   margin-left: 100px;
   width: 240px;
   height: auto;
-  /* border: 1px solid black; */
 }
 .MuiAccordion-gutters.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
   box-shadow: none;
@@ -19,6 +18,7 @@
 .checkbox-container {
   display: flex;
   align-items: center;
+  margin: 5px;
 }
 .checkbox-label {
   font-size: 12px;

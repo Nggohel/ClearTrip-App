@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./../../styles/MainSection.css";
 import Departureplan from "../../Assests/Images/Flight/Departureplan";
@@ -5,14 +6,17 @@ import Trasition from "../../Assests/Images/Flight/Trasition";
 import { useState } from "react";
 import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
 import FlightCalendar from "../FlightCalendar";
+import FinalFlightDataCard from "./FinalFlightDataCard";
+export const srcValue = React.createContext();
 
 function FlightSearchCard({ icon }) {
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchData, setSearchData] = useState("");
+  const [day, setDay] = useState("");
+  const [searchData, setSearchData] = useState({});
 
-  // const navigate = useNavigate();
+  let FromValue = wherefromValue.split("-");
+  let ToValue = wheretoValue.split("-");
 
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
@@ -22,10 +26,18 @@ function FlightSearchCard({ icon }) {
   };
 
   const handleSearchButton = () => {
-    setSearchData(wherefromValue);
-  };
-  const handleCalendarClick = () => {
-    // setIsOpen(!isOpen);
+    console.log(FromValue[0]);
+    console.log(ToValue[0]);
+    console.log(day);
+
+    localStorage.setItem(
+      "SearchData",
+      JSON.stringify({
+        source: FromValue[0],
+        destination: ToValue[0],
+        day: day,
+      })
+    );
   };
 
   return (
@@ -74,12 +86,15 @@ function FlightSearchCard({ icon }) {
                 onChange={handleWhereToLocation}
                 list="browser"
               />
-              <datalist id="browser" style={{ maxWidth: "180px" }}>
-                <option value="BLR Bangalore, IN - Kempegowda International Airport (BLR)" />
-                <option value="BOM Mumbai, IN - Chatrapati Shivaji Airport (BOM)" />
-                <option value="DEL New Delhi, IN - Indira Gandhi Airport (DEL)" />
-                <option value="CCU Kolkata, IN - Netaji Subhas Chandra Bose Airport (CCU)" />
-                <option value="GOI Goa, IN - Dabolim Airport (GOI)" />
+              <datalist id="browser" style={{ marginLeft: "-55px" }}>
+                <option
+                  className="datalist-option"
+                  value="BLR-Bangalore, IN - Kempegowda International Airport (BLR)"
+                />
+                <option value="BOM-Mumbai, IN - Chatrapati Shivaji Airport (BOM)" />
+                <option value="DEL-New Delhi, IN - Indira Gandhi Airport (DEL)" />
+                <option value="CCU-Kolkata, IN - Netaji Subhas Chandra Bose Airport (CCU)" />
+                <option value="GOI-Goa, IN - Dabolim Airport (GOI)" />
               </datalist>
             </div>
           </div>
@@ -90,31 +105,26 @@ function FlightSearchCard({ icon }) {
                   <CalenderLogo />
                 </div>
                 <div>
-                  <FlightCalendar />
+                  <FlightCalendar
+                    onDayOfWeekChange={(dayOfWeek) => {
+                      setDay(dayOfWeek);
+                    }}
+                  />
                 </div>
               </div>
-
-              {/* <div className="choose-date">
-                <div>
-                  <CalenderLogo />
-                </div>
-                <div>
-                  <FlightCalendar />
-                </div>
-              </div> */}
             </div>
             <Link to="/search">
-              <button
-                className="search-btn"
-                onClick={handleSearchButton}
-                searchvalue={searchData}
-              >
+              <button className="search-btn" onClick={handleSearchButton}>
                 Search flights
               </button>
             </Link>
           </div>
         </div>
       </div>
+
+      {/* <srcValue.Provider value={searchData}>
+        <FinalFlightDataCard />
+      </srcValue.Provider> */}
     </>
   );
 }
