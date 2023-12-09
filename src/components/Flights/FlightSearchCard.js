@@ -6,13 +6,13 @@ import Trasition from "../../Assests/Images/Flight/Trasition";
 import { useState } from "react";
 import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
 import FlightCalendar from "../FlightCalendar";
-import FinalFlightDataCard from "./FinalFlightDataCard";
 export const srcValue = React.createContext();
 
 function FlightSearchCard({ icon }) {
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
-  const [day, setDay] = useState("");
+  const [dayDeparture, setDayDeparture] = useState("");
+  const [dayArrival, setDayArrival] = useState("");
   const [searchData, setSearchData] = useState({});
 
   let FromValue = wherefromValue.split("-");
@@ -28,14 +28,14 @@ function FlightSearchCard({ icon }) {
   const handleSearchButton = () => {
     console.log(FromValue[0]);
     console.log(ToValue[0]);
-    console.log(day);
 
     localStorage.setItem(
       "SearchData",
       JSON.stringify({
         source: FromValue[0],
         destination: ToValue[0],
-        day: day,
+        dayDeparture: dayDeparture,
+        dayArrival: dayArrival,
       })
     );
   };
@@ -106,8 +106,11 @@ function FlightSearchCard({ icon }) {
                 </div>
                 <div>
                   <FlightCalendar
-                    onDayOfWeekChange={(dayOfWeek) => {
-                      setDay(dayOfWeek);
+                    DayOfDepartureChange={(dayOfDeparture) => {
+                      setDayDeparture(dayOfDeparture);
+                    }}
+                    DayOfArrivalChange={(dayOfArrival) => {
+                      setDayArrival(dayOfArrival);
                     }}
                   />
                 </div>

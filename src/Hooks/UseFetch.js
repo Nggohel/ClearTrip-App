@@ -1,24 +1,27 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (initialUrl, initialData = null) => {
+const useFetch = (initialUrl, method = "GET", body = {}) => {
   const [url, setUrl] = useState(initialUrl);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(body);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const fetchData = async (options) => {
+  const fetchData = async (url, method, data) => {
     setIsError(false);
     setIsLoading(true);
 
     try {
-      const response = await fetch(url, options);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      const response = await fetch(url, {
+        method: method, // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+          projectID: "d0hy5azls1gu",
+        },
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+      });
 
       const result = await response.json();
-      setData(result);
+      setData(result.data);
     } catch (error) {
       setIsError(true);
     }
@@ -27,14 +30,10 @@ const useFetch = (initialUrl, initialData = null) => {
   };
 
   useEffect(() => {
-    fetchData({ method: "GET" });
-  }, [url]);
+    fetchData(url, method, data);
+  }, []);
 
-  const request = async (options) => {
-    fetchData(options);
-  };
-
-  return { data, isLoading, isError, setUrl, request };
+  return { data, isLoading, isError };
 };
 
 export default useFetch;

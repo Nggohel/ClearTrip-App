@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./../styles/MainSection.css";
 
-const FlightCalendar = ({ onDayOfWeekChange }) => {
+const FlightCalendar = ({ DayOfDepartureChange, DayOfArrivalChange }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   const [endDate, setEndDate] = useState(new Date());
@@ -14,12 +14,16 @@ const FlightCalendar = ({ onDayOfWeekChange }) => {
   maxDate.setMonth(currentDate.getMonth() + 9);
 
   useEffect(() => {
-    const dayOfWeek = startDate.toLocaleDateString(undefined, {
+    const dayOfDeparture = startDate.toLocaleDateString(undefined, {
       weekday: "short",
     });
-    console.log(dayOfWeek);
-    onDayOfWeekChange(dayOfWeek);
-  }, [startDate, onDayOfWeekChange]);
+    const dayOfArrival = endDate.toLocaleDateString(undefined, {
+      weekday: "short",
+    });
+
+    DayOfDepartureChange(dayOfDeparture);
+    DayOfArrivalChange(dayOfArrival);
+  }, [startDate, endDate, DayOfArrivalChange, DayOfArrivalChange]);
 
   return (
     <div className="from-or-to-date">

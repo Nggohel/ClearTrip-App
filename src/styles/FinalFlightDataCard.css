@@ -7,6 +7,7 @@
   width: 815px;
   height: 106px;
   display: flex;
+
   align-items: center;
   justify-content: space-around;
 }
@@ -14,14 +15,20 @@
   width: 292px;
   height: 106px;
   display: flex;
+  border: 1px solid lightgray;
 }
-.left-div {
+.right {
+  width: 292px;
+  height: 106px;
+  display: flex;
+}
+.left-div,
+.right-div {
   /* border: 1px solid gold; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10px;
-  
 }
 .flight-finaldata-btn {
   width: 90px;
@@ -66,26 +73,46 @@
 }
 .flight-data {
   margin-top: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 815px;
-  height: 100px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
   gap: 14px;
 }
+
+.leftside-flight-data,
+.rightside-flight-data {
+  display: flex;
+  flex-direction: column;
+  width: 405px;
+  gap: 5px;
+}
+
 .left-flight-data {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid lightgray;
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   padding: 5px;
   border-radius: 5px;
+  /* gap: 35px; */
 }
 .middle-flight-data {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
+}
+.source-and-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.arrival-and-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .right-flight-data {
   display: flex;
@@ -93,14 +120,15 @@
   justify-content: space-between;
   border: 1px solid lightgray;
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   padding: 5px;
   border-radius: 5px;
 }
 .flight-price {
+  text-align: right;
   font-size: 20px;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 20px;
 }
 .flight-duration {
   line-height: 1.5;
@@ -127,7 +155,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   gap: 5px;
 }
 .flight-id {
@@ -135,4 +163,13 @@
   font-size: 12px;
   margin-left: 8px;
   font-weight: 500;
+}
+.place {
+  line-height: 14px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.selected-flight{
+  background-color: lightblue;
+  border: 1px solid blue;
 }
