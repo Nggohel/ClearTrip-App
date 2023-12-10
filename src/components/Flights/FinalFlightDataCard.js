@@ -3,6 +3,7 @@ import SearchFlightLogo from "../../Assests/Images/SearchFlightLogo";
 import "./../../styles/FinalFlightDataCard.css";
 import { useState } from "react";
 import useFetch from "../../Hooks/UseFetch";
+import Uparrow from "../../Assests/Uparrow";
 
 function FinalFlightDataCard() {
   const navigate = useNavigate();
@@ -33,23 +34,37 @@ function FinalFlightDataCard() {
   const [rightClick, setRightClick] = useState(false);
   const [isDepatureFlightData, setisDepatureFlightData] = useState(null);
   const [isArrivalFlightData, setisArrivalFlightData] = useState(null);
+  const [leftside, setLeftside] = useState("card-active");
 
   const handleBookFlight = () => {
     navigate("/reviewitinerary");
   };
 
-  const handleLeftFlightClick = (flight) => {
+  const handleLeftFlightClick = (e, flight) => {
+    e.stopPropagation();
+
+    document.querySelectorAll(".left-flight-data").forEach((el) => {
+      el.classList.remove("card-active");
+    });
+
+    e.currentTarget.classList.add("card-active");
+
     setLeftClick(true);
     setisDepatureFlightData(flight);
   };
 
-  const handleRightFlightClick = (flight) => {
+  const handleRightFlightClick = (e, flight) => {
+    e.stopPropagation();
+
+    document.querySelectorAll(".right-flight-data").forEach((el) => {
+      el.classList.remove("card-active");
+    });
+
+    e.currentTarget.classList.add("card-active");
+
     setRightClick(true);
     setisArrivalFlightData(flight);
   };
-
-  // console.log(isDepatureFlightData);
-  // console.log(isArrivalFlightData);
 
   return (
     <>
@@ -228,7 +243,10 @@ function FinalFlightDataCard() {
             <span>Departure</span>
             <span>Duration</span>
           </div>
-          <div className="right-flightsheadings">Price</div>
+          <div className="right-flightsheadings">
+            Price
+            <Uparrow />
+          </div>
         </div>
         <div className="flight-heading">
           <div className="left-flightsheadings">
@@ -236,7 +254,10 @@ function FinalFlightDataCard() {
             <span>Departure</span>
             <span>Duration</span>
           </div>
-          <div className="right-flightsheadings">Price</div>
+          <div className="right-flightsheadings">
+            Price
+            <Uparrow />
+          </div>
         </div>
       </div>
 
@@ -248,9 +269,13 @@ function FinalFlightDataCard() {
             data.flights.map((flight, index) => (
               <div
                 key={index}
-                className="left-flight-data"
-                onClick={() => {
-                  handleLeftFlightClick(flight);
+                className={
+                  index == 0
+                    ? "left-flight-data card-active"
+                    : "left-flight-data"
+                }
+                onClick={(e) => {
+                  handleLeftFlightClick(e, flight);
                 }}
               >
                 <div className="logo">
@@ -284,10 +309,15 @@ function FinalFlightDataCard() {
           {arrivalData.flights &&
             arrivalData.flights.map((flight, index) => (
               <div
-                className="right-flight-data"
+                className={
+                  index == 0
+                    ? "right-flight-data card-active"
+                    : "right-flight-data"
+                }
+                id="right-data"
                 key={index}
-                onClick={() => {
-                  handleRightFlightClick(flight);
+                onClick={(e) => {
+                  handleRightFlightClick(e, flight);
                 }}
               >
                 <div className="logo">
@@ -320,25 +350,3 @@ function FinalFlightDataCard() {
   );
 }
 export default FinalFlightDataCard;
-
-{
-  /* <div className="left">
-<div className="left-div">
-  <span>logo</span>
-  <span>logoname</span>
-</div>
-<div className="left-div">
-  <span>time</span>
-  <span>place</span>
-</div>
-<div className="left-div">
-  <span>time</span>
-  <hr></hr>
-  <span>place</span>
-</div>
-<div className="left-div">
-  <span>time</span>
-  <span>place</span>
-</div>
-</div> */
-}

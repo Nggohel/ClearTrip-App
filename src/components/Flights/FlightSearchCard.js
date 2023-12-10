@@ -124,10 +124,6 @@ function FlightSearchCard({ icon }) {
           </div>
         </div>
       </div>
-
-      {/* <srcValue.Provider value={searchData}>
-        <FinalFlightDataCard />
-      </srcValue.Provider> */}
     </>
   );
 }

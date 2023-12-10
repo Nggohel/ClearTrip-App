@@ -20,6 +20,7 @@ import Cancelticket from "../../Assests/Images/Flight/Cancelticket";
 import DateChange from "../../Assests/Images/Flight/DateChange";
 import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
 import DownArrow from "../../Assests/Images/DownArrow";
+import ChooseFlightseat from "./ChooseFlightseat";
 function LeftFlightReviewItinerary() {
   const [showForm, setShowForm] = useState(false);
 
@@ -404,6 +405,7 @@ function LeftFlightReviewItinerary() {
           </div>
         </div>
       )}
+      <ChooseFlightseat />
     </>
   );
 }

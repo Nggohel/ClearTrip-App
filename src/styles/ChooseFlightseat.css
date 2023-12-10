@@ -1,0 +1,73 @@
+.choose-seat {
+  margin-left: 7.5rem;
+}
+.typeof-seat {
+  width: 750px;
+  height: 20px;
+  padding: 16px 20px;
+  border: 1px solid gray;
+  display: flex;
+  align-items: center;
+}
+.seats {
+  width: 440px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.seat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.light-green {
+  height: 16px;
+  width: 16px;
+  background-color: lightgreen;
+}
+.light-blue {
+  height: 16px;
+  width: 16px;
+  background-color: lightblue;
+}
+.blue {
+  height: 16px;
+  width: 16px;
+  background-color: blue;
+}
+.dark-blue {
+  height: 16px;
+  width: 16px;
+  background-color: darkblue;
+}
+.dark-purple {
+  height: 16px;
+  width: 16px;
+  background-color: darkorchid;
+}
+.maroon {
+  height: 16px;
+  width: 16px;
+  background-color: darkred;
+}
+
+.seats-price {
+  font-size: 12px;
+  line-height: 16px;
+  color: grey;
+}
+.totalseat {
+  width: 750px;
+  height: 200px;
+  border: 1px solid gray;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arragement-of-seat {
+  width: 700px;
+  height: 150px;
+  background-color: white;
+}
