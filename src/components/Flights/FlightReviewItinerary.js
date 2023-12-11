@@ -3,6 +3,7 @@ import AvtaarLogo from "../../Assests/Images/AvtaarLogo";
 import flightSeat from "../../Assests/Images/flightseat";
 import "../../styles/FlightReviewItinerary.css";
 import LeftFlightReviewItinerary from "./LeftFlightReviewItinerary";
+import RightFlightReviewItinerary from "./RightFlightReviewItinerary";
 
 function FlightReviewItinerary() {
   return (
@@ -18,8 +19,10 @@ function FlightReviewItinerary() {
       </div>
       <hr className="hr-line"></hr>
 
-      <LeftFlightReviewItinerary />
-      
+      <div style={{ display: "flex" }}>
+        <LeftFlightReviewItinerary />
+        <RightFlightReviewItinerary />
+      </div>
     </>
   );
 }

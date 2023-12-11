@@ -30,6 +30,7 @@ function LeftFlightReviewItinerary() {
 
   return (
     <>
+    <div className="main-leftside-div">
       {/* heading-itinerary */}
       <div className="review-leftside">
         <div className="heading-itinerary">
@@ -358,7 +359,7 @@ function LeftFlightReviewItinerary() {
           </div>
         </div>
       </div>
-
+      <ChooseFlightseat />
       {/* 2 */}
 
       {showForm && (
@@ -405,7 +406,7 @@ function LeftFlightReviewItinerary() {
           </div>
         </div>
       )}
-      <ChooseFlightseat />
+      </div>
     </>
   );
 }
