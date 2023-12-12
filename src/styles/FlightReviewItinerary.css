@@ -340,7 +340,7 @@
 }
 
 /* RightSide */
-aside {
+.aside {
   width: 300px;
   height: 700px;
   border: 1px solid black;
@@ -353,7 +353,6 @@ aside {
   top: 0px;
   width: 266px;
   height: 310px;
-  border: 1px solid blueviolet;
 }
 .billing-data {
   display: flex;

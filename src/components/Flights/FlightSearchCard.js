@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./../../styles/MainSection.css";
 import Departureplan from "../../Assests/Images/Flight/Departureplan";
 import Trasition from "../../Assests/Images/Flight/Trasition";

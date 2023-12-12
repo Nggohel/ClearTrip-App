@@ -9,7 +9,11 @@ function FinalFlightDataCard() {
   const navigate = useNavigate();
   const searchData = JSON.parse(localStorage.getItem("SearchData"));
 
-  const { data, isLoading, isError } = useFetch(
+  const {
+    data: departuredata,
+    isLoading,
+    isError,
+  } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search=
     {"source":"${searchData.source}","destination":"${searchData.destination}"}
     &day=${searchData.dayDeparture}`,
@@ -28,7 +32,7 @@ function FinalFlightDataCard() {
   );
 
   console.log("arrivalData", arrivalData.flights);
-  console.log("Depaturedata", data.flights);
+  // console.log("Depaturedata", data.flights);
 
   const [leftClick, setLeftClick] = useState(false);
   const [rightClick, setRightClick] = useState(false);
@@ -101,8 +105,8 @@ function FinalFlightDataCard() {
               </div>
             </div>
           ) : (
-            data.flights &&
-            data.flights.length > 0 && (
+            departuredata.flights &&
+            departuredata.flights.length > 0 && (
               <div>
                 <div className="left">
                   <div className="left-div logo">
@@ -110,25 +114,29 @@ function FinalFlightDataCard() {
                       <SearchFlightLogo />
                     </span>
                     <span className="flight-id">
-                      {data.flights[0].flightID.split("-")[0]}
+                      {departuredata.flights[0].flightID.split("-")[0]}
                     </span>
                   </div>
                   <div className="left-div flight-time">
-                    <span>{data.flights[0].departureTime}</span>
-                    <span className="place">{data.flights[0].source}</span>
+                    <span>{departuredata.flights[0].departureTime}</span>
+                    <span className="place">
+                      {departuredata.flights[0].source}
+                    </span>
                   </div>
                   <div className="left-div">
                     <span className="flight-duration">
-                      {data.flights[0].duration} hr
+                      {departuredata.flights[0].duration} hr
                     </span>
                     <hr></hr>
                     <span className="flight-stop">
-                      {data.flights[0].stops} stop
+                      {departuredata.flights[0].stops} stop
                     </span>
                   </div>
                   <div className="left-div flight-time">
-                    <span>{data.flights[0].arrivalTime}</span>
-                    <span className="place">{data.flights[0].destination}</span>
+                    <span>{departuredata.flights[0].arrivalTime}</span>
+                    <span className="place">
+                      {departuredata.flights[0].destination}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -211,11 +219,11 @@ function FinalFlightDataCard() {
                   isDepatureFlightData.ticketPrice}
               </span>
             ) : (
-              data.flights &&
+              departuredata.flights &&
               arrivalData.flights && (
                 <span>
                   {arrivalData.flights[0].ticketPrice +
-                    data.flights[0].ticketPrice}
+                    departuredata.flights[0].ticketPrice}
                 </span>
               )
             )}
@@ -265,8 +273,8 @@ function FinalFlightDataCard() {
 
       <div className="flight-data">
         <div className="leftside-flight-data">
-          {data.flights &&
-            data.flights.map((flight, index) => (
+          {departuredata.flights &&
+            departuredata.flights.map((flight, index) => (
               <div
                 key={index}
                 className={

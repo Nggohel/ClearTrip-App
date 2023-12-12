@@ -9,13 +9,13 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 2,
+    centerPadding: "30px",
+    slidesToShow: 3,
     speed: 500,
   });
 
   return (
-    <div style={{ height: "70px", width: "815px" }}>
+    <div style={{ height: "70px", width: "815px", overflow: "hidden" }}>
       <Slider {...settings}>
         <div>
           <div className="offers-card">

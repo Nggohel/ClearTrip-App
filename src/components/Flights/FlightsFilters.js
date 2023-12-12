@@ -8,16 +8,49 @@ import "./../../styles/FlightsFilters.css";
 function FlightsFilters() {
   const [rangeValue, setRangeValue] = useState(3483);
 
+  const [checkboxValues, setCheckboxValues] = useState({
+    "non-stop": false,
+    "stop-one": false,
+    "stop-two": false,
+    "departuretime-earlymorning": false,
+    "departuretime-morning": false,
+    "departuretime-afternoon": false,
+    "departuretime-evening": false,
+    "departuretime-night": false,
+    "arrivaltime-earlymorning": false,
+    "arrivaltime-morning": false,
+    "arrivaltime-afternoon": false,
+    "arrivaltime-evening": false,
+    "arrivaltime-night": false,
+    "duration-hr": false,
+    "layover-duration": false,
+  });
+
+  const handleCheckboxChange = (event) => {
+    const { id, value } = event.target;
+    console.log(id);
+    console.log(value);
+    setCheckboxValues((prevValues) => ({
+      ...prevValues,
+      [id]: value,
+    }));
+  };
+
+  console.log("Checkbox values:", checkboxValues);
+
   const handleRangeChange = (event) => {
     setRangeValue(parseInt(event.target.value, 10));
   };
+
   return (
     <>
       <div className="searchflightpage-leftsection">
         <div>
           <b>169 of 169</b> flights
         </div>
+
         {/* 1st */}
+
         <div>
           <Accordion defaultExpanded={true}>
             <AccordionSummary
@@ -34,42 +67,50 @@ function FlightsFilters() {
                     type="checkbox"
                     id="non-stop"
                     name="non-stop"
-                    value="Non-Stop"
+                    value="0"
                     className="checkbox-input"
+                    checked={checkboxValues["non-stop"]}
+                    onChange={handleCheckboxChange}
                   />
                   <label htmlFor="non-stop" className="checkbox-label">
-                    Non-stop
+                    0-stop
                   </label>
                 </div>
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
                     className="checkbox-input"
-                    id="stop1"
-                    name="stop"
-                    value="Stop"
+                    id="stop-one"
+                    name="stop-one"
+                    value="1"
+                    checked={checkboxValues["stop-one"]}
+                    onChange={handleCheckboxChange}
                   />
-                  <label htmlFor="non-stop" className="checkbox-label">
-                    1 stop
+                  <label htmlFor="stop-one" className="checkbox-label">
+                    1-stop
                   </label>
                 </div>
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
                     className="checkbox-input"
-                    id="stop2"
-                    name="stop"
-                    value="Stop"
+                    id="stop-two"
+                    name="stop-two"
+                    value="2"
+                    checked={checkboxValues["stop-two"]}
+                    onChange={handleCheckboxChange}
                   />
-                  <label htmlFor="non-stop" className="checkbox-label">
-                    2 stop
+                  <label htmlFor="stop-two" className="checkbox-label">
+                    2-stop
                   </label>
                 </div>
               </form>
             </AccordionDetails>
           </Accordion>
         </div>
+
         {/* 2nd */}
+
         <div>
           <Accordion defaultExpanded={true}>
             <AccordionSummary
@@ -86,32 +127,80 @@ function FlightsFilters() {
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
-                    id="evening"
-                    name="evening"
-                    value="evening"
+                    id="departuretime-earlymorning"
+                    name="earlymorning"
+                    value="24:00-08:00"
                     className="checkbox-input"
+                    checked={checkboxValues["earlymorning"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="earlymorning" className="checkbox-label">
+                    Early Mornig 24:00-08:00
+                  </label>
+                </div>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="departuretime-morning"
+                    name="morning"
+                    value="08:00-12:00"
+                    className="checkbox-input"
+                    checked={checkboxValues["morning"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="morning" className="checkbox-label">
+                    Morning 08:00-12:00
+                  </label>
+                </div>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="departuretime-afternoon"
+                    name="afternoon"
+                    value="12:00-16:00"
+                    className="checkbox-input"
+                    checked={checkboxValues["afternoon"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="afternoon" className="checkbox-label">
+                    Afternoon 12:00-16:00
+                  </label>
+                </div>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="departuretime-evening"
+                    name="evening"
+                    value="16:00-20:00"
+                    className="checkbox-input"
+                    checked={checkboxValues["evening"]}
+                    onChange={handleCheckboxChange}
                   />
                   <label htmlFor="evening" className="checkbox-label">
-                    Evening 4 pm- 8 pm
+                    Evening 16:00-20:00
                   </label>
                 </div>
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
                     className="checkbox-input"
-                    id="night"
+                    id="departuretime-night"
                     name="night"
-                    value="night"
+                    value="20:00-24:00"
+                    checked={checkboxValues["night"]}
+                    onChange={handleCheckboxChange}
                   />
                   <label htmlFor="night" className="checkbox-label">
-                    Night 8pm-Midnight
+                    Night 20:00-24:00
                   </label>
                 </div>
               </form>
             </AccordionDetails>
           </Accordion>
         </div>
+
         {/* 3 */}
+
         <div>
           <Accordion defaultExpanded={true}>
             <AccordionSummary
@@ -128,30 +217,32 @@ function FlightsFilters() {
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
-                    id="earlymorning"
+                    id="arrivaltime-earlymorning"
                     name="earlymorning"
-                    value="earlymorning"
+                    value="24:00-8:00"
                     className="checkbox-input"
+                    checked={checkboxValues["arrivaltime-earlymorning"]}
+                    onChange={handleCheckboxChange}
                   />
                   <label htmlFor="earlymorning" className="checkbox-label">
                     <div className="checkbox-label-gap">
                       <span>Early Morning</span>
-                      <span style={{ marginLeft: "15px" }}>Midnight- 8 am</span>
+                      <span style={{ marginLeft: "15px" }}>24:00-8:00</span>
                     </div>
                   </label>
                 </div>
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
-                    id="morning"
+                    id="arrivaltime-morning"
                     name="morning"
-                    value="morning"
+                    value="08:00-12:00"
                     className="checkbox-input"
                   />
                   <label htmlFor="morning" className="checkbox-label">
                     <div className="checkbox-label-gap">
                       <span>Morning</span>
-                      <span style={{ marginLeft: "15px" }}>8 am- Noon</span>
+                      <span style={{ marginLeft: "15px" }}>08:00-12:00</span>
                     </div>
                   </label>
                 </div>
@@ -159,29 +250,29 @@ function FlightsFilters() {
                   <input
                     type="checkbox"
                     className="checkbox-input"
-                    id="afternoon"
+                    id="arrivaltime-afternoon"
                     name="afternoon"
-                    value="afternoon"
+                    value="12:00-16:00"
                   />
                   <label htmlFor="afternoon" className="checkbox-label">
                     <div className="checkbox-label-gap">
                       <span>AfterNoon</span>
-                      <span style={{ marginLeft: "15px" }}>Noon-4pm</span>
+                      <span style={{ marginLeft: "15px" }}>12:00-16:00</span>
                     </div>
                   </label>
                 </div>
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
-                    id="evening"
+                    id="arrivaltime-evening"
                     name="evening"
-                    value="evening"
+                    value="16:00-20:00"
                     className="checkbox-input"
                   />
                   <label htmlFor="evening" className="checkbox-label">
                     <div className="checkbox-label-gap">
                       <span>Evening</span>
-                      <span style={{ marginLeft: "15px" }}>4 pm- 8 pm</span>
+                      <span style={{ marginLeft: "15px" }}>16:00-20:00</span>
                     </div>
                   </label>
                 </div>
@@ -189,14 +280,14 @@ function FlightsFilters() {
                   <input
                     type="checkbox"
                     className="checkbox-input"
-                    id="night"
+                    id="arrivaltime-night"
                     name="night"
-                    value="night"
+                    value="08:00-24:00"
                   />
                   <label htmlFor="night" className="checkbox-label">
                     <div className="checkbox-label-gap">
                       <span>Night</span>
-                      <span style={{ marginLeft: "15px" }}>8pm-Midnight</span>
+                      <span style={{ marginLeft: "15px" }}>08:00-24:00</span>
                     </div>
                   </label>
                 </div>
@@ -240,7 +331,9 @@ function FlightsFilters() {
             </AccordionDetails>
           </Accordion>
         </div>
+
         {/* 5th */}
+
         <div>
           <Accordion defaultExpanded={true}>
             <AccordionSummary
@@ -365,7 +458,36 @@ function FlightsFilters() {
               <Typography className="filters-title">Trip duration</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <form></form>
+              <form>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="duration"
+                    name="duration"
+                    value="1"
+                    className="checkbox-input"
+                    checked={checkboxValues["duration"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="duration" className="checkbox-label">
+                    1 Hr
+                  </label>
+                </div>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="duration"
+                    name="duration"
+                    value="2"
+                    className="checkbox-input"
+                    checked={checkboxValues["duration"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="duration" className="checkbox-label">
+                    2 Hr
+                  </label>
+                </div>
+              </form>
             </AccordionDetails>
           </Accordion>
         </div>
@@ -382,7 +504,22 @@ function FlightsFilters() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <form></form>
+              <form>
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="layover-duration"
+                    name="layover-duration"
+                    value="1"
+                    className="checkbox-input"
+                    checked={checkboxValues["layover-duration"]}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor="layover-duration" className="checkbox-label">
+                    1 Hr
+                  </label>
+                </div>
+              </form>
             </AccordionDetails>
           </Accordion>
         </div>
