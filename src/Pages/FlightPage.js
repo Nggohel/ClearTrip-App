@@ -1,19 +1,19 @@
-import NavBar from "./NavBar";
-import LeftSideSection from "./section/leftSideNavBar";
-import RightSideSection from "./section/RightSideSection";
-import MainSection from "./section/MainSection";
-import Offer1 from "./../Assests/Images/Offer1.webp";
-import Offer2 from "./../Assests/Images/Offer2.webp";
-import Offer3 from "./../Assests/Images/Offer3.webp";
-import DataImage from "./../Assests/Images/DataImage.webp";
-import goa from "./../Assests/Images/goa.jpg";
-import delhi from "./../Assests/Images/delhi.jpg";
-import banglore from "./../Assests/Images/bangalore.webp";
-import varanasi from "./../Assests/Images/varanasi.jpg";
-import abuDhabi from "./../Assests/Images/abuDhabi.jpg";
-// import "./../styles/LaptopApp.css";
-import Footer from "./Footer";
-function LaptopApp() {
+import NavBar from "../components/NavBar";
+import LeftSideSection from "../components/section/leftSideNavBar";
+import RightSideSection from "../components/section/RightSideSection";
+import MainSection from "../components/section/MainSection";
+import Offer1 from "../Assests/Images/Offer1.webp";
+import Offer2 from "../Assests/Images/Offer2.webp";
+import Offer3 from "../Assests/Images/Offer3.webp";
+import DataImage from "../Assests/Images/DataImage.webp";
+import goa from "../Assests/Images/goa.jpg";
+import delhi from "../Assests/Images/delhi.jpg";
+import banglore from "../Assests/Images/bangalore.webp";
+import varanasi from "../Assests/Images/varanasi.jpg";
+import abuDhabi from "../Assests/Images/abuDhabi.jpg";
+import "./../styles/FlightPage.css";
+import Footer from "../components/Footer";
+function FlightPage() {
   return (
     <>
       <NavBar />
@@ -22,23 +22,23 @@ function LaptopApp() {
         <MainSection />
         <RightSideSection />
       </div>
-      <div className="laptop-offerimg">
+      <div className="flightpage-offerimg">
         <img src={Offer1} />
         <img src={Offer2} />
         <img src={Offer3} />
       </div>
-      <div className="laptop-adfor-download">
+      <div className="flightpage-adfor-download">
         <img src={DataImage} />
       </div>
       <h2 className="popular-destination">Popular destination</h2>
-      <div className="laptop-popular-destination">
+      <div className="flightpage-popular-destination">
         <img src={goa} />
         <img src={delhi} />
         <img src={banglore} />
         <img src={varanasi} />
         <img src={abuDhabi} />
       </div>
-      <div className="laptop-homepage-details">
+      <div className="flightpage-homepage-details">
         <div>
           <h3 className="details-title">Why book on Cleartrip?</h3>
           <p className="details-para">
@@ -167,4 +167,4 @@ function LaptopApp() {
   );
 }
 
-export default LaptopApp;
+export default FlightPage;

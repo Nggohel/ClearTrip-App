@@ -346,14 +346,18 @@
   border: 1px solid black;
   overflow-y: scroll;
 }
+
 .main-rightside-div {
   background: rgb(255, 255, 255);
   z-index: 79;
   position: sticky;
   top: 0px;
   width: 266px;
-  height: 310px;
+  height: 304px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
 }
+
 .billing-data {
   display: flex;
   flex-direction: column;
@@ -383,6 +387,7 @@
   color: #666;
   font-weight: 400;
 }
+
 .other-expense {
   overflow: hidden;
   opacity: 1;
@@ -399,44 +404,50 @@
   justify-content: space-between;
   height: 28px;
 }
+
 .otherexpense-details {
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
   color: #666;
 }
+
 .otherexpense-price {
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
   color: #1a1a1a;
 }
+
 .emi {
-  width: 242px;
+  width: 265px;
   height: 80px;
   background-color: rgb(255, 241, 236);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  padding: 12px;
   border: 1px solid #e6e6e6;
-  margin: 0px 16px 16px;
+  padding: 12px;
 }
+
 .emi-details {
   margin-left: 8px;
   width: 218px;
   height: 56px;
 }
+
 .emi-offer {
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
   display: flex;
 }
+
 .monthlty-price {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
 }
+
 .all-plans {
   color: rgb(15, 107, 255);
   margin-top: 2px;
@@ -445,9 +456,220 @@
   line-height: 16px;
   cursor: pointer;
 }
+
 .credit-card-data {
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
   color: grey;
+}
+
+.main-offer-div {
+  margin-top: 20px;
+  width: 266px;
+  height: 849px;
+  padding-bottom: 16px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+
+.offer-title-div {
+  width: 234px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  margin: 16px;
+}
+
+.offer-title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+.coupon-card {
+  width: 224px;
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding-right: 4px;
+  padding-left: 4px;
+  margin-right: 16px;
+  margin-left: 16px;
+  align-items: center;
+  background-color: #fff;
+}
+.coupon-card-input {
+  width: 159px;
+  height: 36px;
+  border: none !important;
+  padding-left: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  padding: 8px;
+  color: #1a1a1a;
+  outline: none;
+}
+.coupon-apply {
+  width: 38px;
+  height: 36px;
+  border: none;
+  background: #fff;
+  color: grey;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 0 8px 0 0;
+  cursor: pointer;
+}
+.coupon-details-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  margin-top: 16px;
+}
+.coupon-details-card {
+  width: 234px;
+  height: 32px;
+  margin-bottom: 16px;
+  display: flex;
+}
+.coupon-button-active {
+  border: 1.5px solid #000;
+  border-radius: 16px;
+  background-color: #f3f3f3;
+  color: #1a1a1a;
+  padding: 5px 9px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.coupon-button {
+  padding: 5px 9px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  margin-left: 8px;
+}
+.banks-offers-card {
+  display: flex;
+  flex-direction: column;
+  width: 234px;
+  height: 663px;
+}
+.banks-offers-list {
+  list-style-type: none;
+  width: 100%;
+}
+.offer-div {
+  width: 234px;
+  height: 41px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ticket {
+  display: flex;
+  gap: 6px;
+  width: 86px;
+  height: 25;
+  padding: 8px;
+  background: #ecf3ff;
+  border-radius: 8px;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  width: fit-content;
+  position: relative;
+}
+.coupons-div {
+  display: flex;
+  align-items: center;
+}
+.coupons {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.semi-circle-top {
+  position: absolute;
+  background: #fff;
+  height: 4px;
+  width: 8px;
+  border-radius: 0 0 6px 6px;
+  top: 0;
+  left: 36px;
+}
+.semi-circle-bottom {
+  position: absolute;
+  background: #fff;
+  height: 4px;
+  width: 8px;
+  border-radius: 6px 6px 0 0;
+  bottom: 0;
+  left: 36px;
+}
+.coupons-apply-btn {
+  border: none;
+  background: #fff;
+  color: #0f6bff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+}
+.coupons-off-percentage {
+  color: #11a670;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  padding: 0;
+  margin-top: 12px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.coupons-moredata {
+  color: grey;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 0;
+  margin-top: 8px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.know-more {
+  cursor: pointer;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.dotted-line {
+  border-width: 0.5px;
+  margin: 24px 0px;
+  border-color: #e6e6e6;
+  border-style: dashed;
+}
+.view-alloffer {
+  color: #0f6bff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 20px;
+  float: right;
+  cursor: pointer;
 }

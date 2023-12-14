@@ -1,0 +1,23 @@
+.hotel-middle-section{
+  width: 796px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 0px 20px;
+  margin-top: 16px;
+  gap: 35px;
+  margin-top: 45px;
+}
+.hotel-middle-section h2 {
+  padding: 0;
+  margin-top: 0.3rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.hotel-homepage-banner {
+  cursor: pointer;
+  margin-bottom: 16px;
+  /* margin-top: 40px; */
+}

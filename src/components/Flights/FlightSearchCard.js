@@ -106,11 +106,11 @@ function FlightSearchCard({ icon }) {
                 </div>
                 <div>
                   <FlightCalendar
-                    DayOfDepartureChange={(dayOfDeparture) => {
-                      setDayDeparture(dayOfDeparture);
+                    StartDay={(dayOfstart) => {
+                      setDayDeparture(dayOfstart);
                     }}
-                    DayOfArrivalChange={(dayOfArrival) => {
-                      setDayArrival(dayOfArrival);
+                    EndDay={(dayOfEnd) => {
+                      setDayArrival(dayOfEnd);
                     }}
                   />
                 </div>

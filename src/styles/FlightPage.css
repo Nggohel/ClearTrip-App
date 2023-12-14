@@ -1,32 +1,32 @@
-.laptop-offerimg {
+.flightpage-offerimg {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-left: 240px;
   width: 73%;
 }
-.laptop-offerimg img {
+.flightpage-offerimg img {
   width: 312px;
   height: 162px;
 }
-.laptop-adfor-download img {
+.flightpage-adfor-download img {
   margin-top: 40px;
   margin-left: 240px;
   width: 984px;
   height: 247px;
 }
-.laptop-popular-destination {
+.flightpage-popular-destination {
   display: flex;
   justify-content: space-around;
   width: 73%;
   margin-left: 230px;
 }
-.laptop-popular-destination img {
+.flightpage-popular-destination img {
   width: 184px;
   height: 235px;
   border-radius: 6px;
 }
-.laptop-homepage-details {
+.flightpage-homepage-details {
   margin-top: 30px;
   margin-left: 240px;
 }

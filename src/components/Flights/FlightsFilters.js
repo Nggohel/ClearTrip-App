@@ -9,9 +9,9 @@ function FlightsFilters() {
   const [rangeValue, setRangeValue] = useState(3483);
 
   const [checkboxValues, setCheckboxValues] = useState({
-    "non-stop": false,
-    "stop-one": false,
-    "stop-two": false,
+    "non-stop": "",
+    "stop-one": "",
+    "stop-two": "",
     "departuretime-earlymorning": false,
     "departuretime-morning": false,
     "departuretime-afternoon": false,
@@ -26,13 +26,23 @@ function FlightsFilters() {
     "layover-duration": false,
   });
 
+  // const handleCheckboxChange = (event) => {
+  //   const { id, checked } = event.target;
+  //   console.log(id);
+  //   // console.log(value);
+  //   setCheckboxValues((prevValues) => ({
+  //     ...prevValues,
+  //     [id]: checked,
+  //   }));
+  // };
+
   const handleCheckboxChange = (event) => {
-    const { id, value } = event.target;
+    const { id, value, checked } = event.target;
     console.log(id);
-    console.log(value);
+    // console.log(value);
     setCheckboxValues((prevValues) => ({
       ...prevValues,
-      [id]: value,
+      [id]: checked ? value : "",
     }));
   };
 
@@ -67,9 +77,9 @@ function FlightsFilters() {
                     type="checkbox"
                     id="non-stop"
                     name="non-stop"
-                    value="0"
                     className="checkbox-input"
-                    checked={checkboxValues["non-stop"]}
+                    value="0"
+                    // checked={checkboxValues["non-stop"]}
                     onChange={handleCheckboxChange}
                   />
                   <label htmlFor="non-stop" className="checkbox-label">
@@ -83,7 +93,7 @@ function FlightsFilters() {
                     id="stop-one"
                     name="stop-one"
                     value="1"
-                    checked={checkboxValues["stop-one"]}
+                    // checked={checkboxValues["stop-one"]}
                     onChange={handleCheckboxChange}
                   />
                   <label htmlFor="stop-one" className="checkbox-label">
@@ -97,7 +107,7 @@ function FlightsFilters() {
                     id="stop-two"
                     name="stop-two"
                     value="2"
-                    checked={checkboxValues["stop-two"]}
+                    // checked={checkboxValues["stop-two"]}
                     onChange={handleCheckboxChange}
                   />
                   <label htmlFor="stop-two" className="checkbox-label">
@@ -476,7 +486,7 @@ function FlightsFilters() {
                 <div className="checkbox-container">
                   <input
                     type="checkbox"
-                    id="duration"
+                    id="duration-two"
                     name="duration"
                     value="2"
                     className="checkbox-input"

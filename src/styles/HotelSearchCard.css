@@ -1,0 +1,110 @@
+.main-hotelsearch-card {
+  width: 691px;
+  height: 296px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 8px 16px;
+}
+.hotelsearch-card {
+  padding: 40px;
+  width: 100%;
+}
+.hotelsearch-input-card {
+  width: 610px;
+  height: 56px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hotelsearch-input-card:hover {
+  border: 1px solid rgb(12, 85, 231);
+}
+.hotelsearch-input {
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 16px;
+  height: auto;
+  border: 0px;
+  background: none;
+  outline: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+  resize: none;
+  cursor: text;
+  width: 100%;
+  padding: 0px;
+  color: rgb(26, 26, 26);
+}
+.hotel-choose-date {
+  margin-top: 32px;
+  width: 293px;
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+}
+.hotel-choose-person {
+  margin-top: 32px;
+  width: 293px;
+  height: 52px;
+  height: 52px;
+  border-radius: 6px;
+  border-color: rgb(230, 230, 230);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #1a1a1a;
+  border: 1px solid #e6e6e6;
+}
+.choose-person-input {
+  width: 227px;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 16px;
+  height: auto;
+  border: 0px;
+  background: none;
+  outline: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+  resize: none;
+  cursor: text;
+  width: 100%;
+  padding: 0px;
+  color: rgb(26, 26, 26);
+  margin-right: 20px;
+}
+.hotel-search {
+  margin-left: auto;
+  width: 220px;
+  margin-top: 24px;
+}
+.hotel-search-btn {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0px 4px;
+  height: 52px;
+  background-color: #f77728;
+  border-radius: 6px;
+  border: 0px none;
+  width: 220px;
+  height: 52px;
+}
+.hotel-search-btn:hover {
+  background-color: #c6672c;
+}
