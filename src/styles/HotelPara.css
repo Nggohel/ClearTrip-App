@@ -1,0 +1,21 @@
+.para-heading {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+.hotel-book-para {
+  color: gray;
+  padding-top: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.hotel-book-secpara {
+  padding-top: 16px;
+  color: gray;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-bottom: 60px;
+}

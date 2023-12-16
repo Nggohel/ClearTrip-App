@@ -9,3 +9,77 @@
   width: 312px;
   height: 162px;
 }
+.top-hotel-deal {
+  margin-bottom: 24px;
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+  cursor: auto;
+  margin-left: 240px;
+}
+.hotels-great-deals-cards {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 240px;
+}
+.hotels-great-deals-card {
+  padding-bottom: 40px;
+  flex-basis: 33.33333%;
+  max-width: 33.33333%;
+}
+
+.hotel-deal-img {
+  width: 112px;
+  height: 112px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.hotel-deal-details {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+  width: 189px;
+  height: 112px;
+}
+.deal-hotelname {
+  width: 100%;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.deal-hotelplace {
+  padding-bottom: 0;
+  padding-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: rgb(128, 128, 128);
+  text-decoration: none;
+  cursor: auto;
+}
+.rating-div {
+  display: flex;
+  padding-top: 36px;
+}
+.hotel-trending {
+  margin-bottom: 24px;
+  margin-top: 10px;
+  padding-top: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+  cursor: auto;
+  margin-left: 240px;
+}
