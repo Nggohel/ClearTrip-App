@@ -2,12 +2,8 @@
   margin-top: 30px;
   width: 16.5rem;
   height: 14.5rem;
-
   border-radius: 5px;
 }
 .rightaside-carousel img {
   object-fit: cover;
 }
-/* .carousel.carousel-slider {
-  width: 100% !important;
-} */

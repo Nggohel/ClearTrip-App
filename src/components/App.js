@@ -5,6 +5,7 @@ import FlightReviewItinerary from "./Flights/FlightReviewItinerary";
 import SearchFlight from "./Flights/SearchFlight";
 import HotelPage from "../Pages/HotelPage";
 import HotelSearchPage from "../Pages/HotelSearchPage";
+import HotelDetailsPage from "./Hotel/HotelDetailsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/reviewitinerary" element={<FlightReviewItinerary />} />
           <Route path="/hotel" element={<HotelPage />} />
           <Route path="/hotelsearch" element={<HotelSearchPage />} />
+          <Route path="/hoteldetails" element={<HotelDetailsPage />} />
         </Routes>
       </Router>
     </>

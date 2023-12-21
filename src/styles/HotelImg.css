@@ -1,0 +1,10 @@
+.hotels-images {
+  width: 288px;
+  height: 240px;
+}
+.hotel-img {
+  object-fit: cover;
+}
+#hotelCarousel {
+  border-radius: 5px !important;
+}

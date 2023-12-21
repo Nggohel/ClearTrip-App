@@ -31,13 +31,14 @@ function HotelSearchCard() {
                 type="text"
                 className="hotelsearch-input"
                 style={{ width: "550px", height: "56px" }}
-                placeholder="Where from?"
+                placeholder="Enter locality, landmark, city or hotel"
                 value={hotelLocation}
                 list="citylist"
                 onChange={handleHotelLocation}
               />
-              <datalist id="citylist" style={{}}>
+              <datalist id="citylist">
                 <option
+                  style={{ width: "550px", height: "56px" }}
                   className="datalist-option"
                   value="Banglore,Karnataka,India"
                 />
@@ -105,3 +106,8 @@ function HotelSearchCard() {
 }
 
 export default HotelSearchCard;
+
+// infinite observer
+// mutation observer
+// performance observer
+// Resize Observer
