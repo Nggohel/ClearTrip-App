@@ -39,6 +39,30 @@
   padding: 0px;
   color: rgb(26, 26, 26);
 }
+.Dropdown-control {
+  border: 0px !important;
+  width: 550px !important;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 16px;
+  color: rgb(26, 26, 26);
+}
+.Dropdown-control:hover {
+  box-shadow: none !important;
+}
+
+.Dropdown-menu {
+  border-radius: 8px;
+}
+
+.Dropdown-option {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+}
+
 .hotel-choose-date {
   margin-top: 32px;
   width: 293px;
@@ -51,6 +75,7 @@
   border: 1px solid #e6e6e6;
   border-radius: 6px;
 }
+
 .hotel-choose-person {
   margin-top: 32px;
   width: 293px;
@@ -67,6 +92,7 @@
   color: #1a1a1a;
   border: 1px solid #e6e6e6;
 }
+
 .choose-person-input {
   width: 227px;
   font-weight: 500;
@@ -108,11 +134,7 @@
 .hotel-search-btn:hover {
   background-color: #c6672c;
 }
-/* #citylist {
-  width: 500px;
-  height: 500px;
-  border: 1px solid blue;
-} */
+
 option {
   width: 500px !important;
   height: 500px !important;

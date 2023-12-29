@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (initialUrl, method = "GET", body = {}) => {
+const useFetch = (initialUrl, method = "GET") => {
+  // body = {}
   const [url, setUrl] = useState(initialUrl);
-  const [data, setData] = useState(body);
+  const [data, setData] = useState();
+  const [body, setBody] = useState(body);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 

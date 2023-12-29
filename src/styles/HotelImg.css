@@ -1,9 +1,17 @@
-.hotels-images {
+.hotel-img-card {
   width: 288px;
   height: 240px;
+  object-fit: cover;
 }
+/* .hotels-images {
+  width: 288px;
+  height: 240px;
+} */
 .hotel-img {
   object-fit: cover;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
 }
 #hotelCarousel {
   border-radius: 5px !important;

@@ -16,7 +16,32 @@ import DealofthedayCarousel from "../components/Hotel/DealofthedayCarousel";
 import HotelImg from "../components/Carousels/HotelImg";
 import Ratinglogo from "../Assests/ratingLogo/Ratinglogo.svg";
 import { Link } from "react-router-dom";
+import useFetch from "../Hooks/UseFetch";
+import { useEffect, useState } from "react";
+
 function HotelSearchPage() {
+  const [explorebestdeals, setexplorebestdeals] = useState(false);
+  const [dealoftheday, setdealoftheday] = useState(false);
+
+  const storedHotelLocation = JSON.parse(
+    localStorage.getItem("SearchHotelData")
+  );
+
+  // console.log(storedHotelLocation.source);
+
+  const { data, isLoading, isError } = useFetch(
+    `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
+    "${storedHotelLocation.source}"}`,
+    "GET"
+  );
+
+  // optional chaning
+  // console.log("hotelImag", data?.hotels);
+  // console.log("hotelImag", data?.hotels[0].name);
+  // console.log(data?.hotels[0].rooms[0].price);
+  // console.log(data?.hotels[0].rooms[0].costDetails.baseCost);
+  // console.log("hotelImag", data?.hotels[0].images);
+
   return (
     <>
       <nav>
@@ -151,8 +176,9 @@ function HotelSearchPage() {
           </div>
         </div>
       </nav>
-      <hr className="hotel-search-line"></hr>
 
+      <hr className="hotel-search-line"></hr>
+      <main></main>
       {/* cards total */}
       <div className="total-hotel-title">
         <p>
@@ -169,97 +195,128 @@ function HotelSearchPage() {
         </p>
       </div>
 
-      {/* cards  */}
-      <Link
-        to="/hoteldetails"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <div className="hotel-cards">
-          <div style={{ marginLeft: "30px" }}>
-            <HotelImg />
-          </div>
-          <div className="hotel-details">
-            <h4 className="hotel-name">Lemon Tree Hotel Candolim, Goa</h4>
-            <div className="hotel-rating-details">
-              <img src={Ratinglogo} style={{ height: "12px", width: "18px" }} />
-              <h4 className="rating-of-hotel">4.5/5</h4>
+      {/* search hotel data cards(map laga hua he ayha)  */}
+
+      <div className="hotel-container-cards">
+        {data?.hotels &&
+          data?.hotels.map((hotel, index) => (
+            <div
+              className="hotel-cards"
+              key={index}
+              onChange={(index) => {
+                if (index == 7) {
+                  setdealoftheday(true);
+                } else if (index == 15) {
+                  setexplorebestdeals(true);
+                }
+              }}
+            >
+              <div>
+                <HotelImg hotelImageUrl={hotel?.images} />
+              </div>
+              <Link
+                to="/hoteldetails"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className="hotel-details">
+                  <h4 className="hotel-name">{hotel.name}</h4>
+                  <div className="hotel-rating-details">
+                    <img
+                      src={Ratinglogo}
+                      style={{ height: "12px", width: "18px" }}
+                    />
+                    <h4 className="rating-of-hotel">4.5/5</h4>
+                  </div>
+                </div>
+                <div className="typeof-hotel">
+                  <p className="hotel-types">4-star resort · Morjim</p>
+                  <p className="total-people-rated">253 ratings</p>
+                </div>
+                <div className="hotel-price-details">
+                  <div className="price-tax">
+                    <h3 className="hotel-price">
+                      {hotel.rooms[0]?.costDetails.baseCost}
+                    </h3>
+                    <p className="hotel-tax">
+                      + {hotel.rooms[0]?.costDetails.taxesAndFees} tax
+                    </p>
+                    <p className="per-day-or-night">/ night</p>
+                  </div>
+                  <div className="discount-offers">
+                    <p className="actul-price">
+                      {hotel.rooms[0]?.costPerNight}
+                    </p>
+                    <p className="percentage-off">
+                      {hotel.rooms[0]?.costDetails.discount} % off
+                    </p>
+                    <p className="option-of-bank">
+                      + Additional bank discounts
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </div>
-          </div>
-          <div className="typeof-hotel">
-            <p className="hotel-types">4-star resort · Morjim</p>
-            <p className="total-people-rated">253 ratings</p>
-          </div>
-          <div className="hotel-price-details">
-            <div className="price-tax">
-              <h3 className="hotel-price">8,478</h3>
-              <p className="hotel-tax"> + ₹1,454 tax</p>
-              <p className="per-day-or-night">/ night</p>
-            </div>
-            <div className="discount-offers">
-              <p className="actul-price">₹9,903</p>
-              <p className="percentage-off">14% off</p>
-              <p className="option-of-bank">+ Additional bank discounts</p>
-            </div>
-          </div>
-        </div>
-      </Link>
+          ))}
+      </div>
+
       <div style={{ height: "30px", width: "100%" }}></div>
 
       {/* explore best deals */}
-      <div className="explore-deal-container">
-        <div className="explore-deal-basecontainer">
-          <h3 className="explore-deal-title">Explore best deals</h3>
-          <div className="explore-deal-offers">
-            <div className="hotel-offer">
-              <div className="hotel-offer-one">
-                <div className="hotel-offers">
-                  <img
-                    src={Hoteloffer1}
-                    style={{ height: "33px", width: "32px" }}
-                  />
-                  <p className="hotel-offers-para-main">
-                    <span>Jackpot deals</span>
-                    <p className="hotel-offers-para-sec">25% & above</p>
-                  </p>
+      {explorebestdeals ? (
+        <div className="explore-deal-container">
+          <div className="explore-deal-basecontainer">
+            <h3 className="explore-deal-title">Explore best deals</h3>
+            <div className="explore-deal-offers">
+              <div className="hotel-offer">
+                <div className="hotel-offer-one">
+                  <div className="hotel-offers">
+                    <img
+                      src={Hoteloffer1}
+                      style={{ height: "33px", width: "32px" }}
+                    />
+                    <p className="hotel-offers-para-main">
+                      <span>Jackpot deals</span>
+                      <p className="hotel-offers-para-sec">25% & above</p>
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="hotel-offer-second">
-                <div className="hotel-offers">
-                  <img
-                    src={Hoteloffer2}
-                    style={{ height: "33px", width: "32px" }}
-                  />
-                  <p className="hotel-offers-para-main">
-                    <span>Bestseller hotels</span>
-                    <p className="hotel-offers-para-sec">10% - 25% off</p>
-                  </p>
+                <div className="hotel-offer-second">
+                  <div className="hotel-offers">
+                    <img
+                      src={Hoteloffer2}
+                      style={{ height: "33px", width: "32px" }}
+                    />
+                    <p className="hotel-offers-para-main">
+                      <span>Bestseller hotels</span>
+                      <p className="hotel-offers-para-sec">10% - 25% off</p>
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="hotel-offer-third">
-                <div className="hotel-offers">
-                  <img
-                    src={Hoteloffer3}
-                    style={{ height: "33px", width: "32px" }}
-                  />
-                  <p className="hotel-offers-para-main">
-                    <span>Best budget deal</span>
-                    <p className="hotel-offers-para-sec">Min 20% off</p>
-                  </p>
+                <div className="hotel-offer-third">
+                  <div className="hotel-offers">
+                    <img
+                      src={Hoteloffer3}
+                      style={{ height: "33px", width: "32px" }}
+                    />
+                    <p className="hotel-offers-para-main">
+                      <span>Best budget deal</span>
+                      <p className="hotel-offers-para-sec">Min 20% off</p>
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="hotel-offer-four">
-                <div className="hotel-offers">
-                  <img
-                    src={Hoteloffer4}
-                    style={{ height: "33px", width: "32px" }}
-                  />
-                  <p className="hotel-offers-para-main">
-                    <span>Premium hotels</span>
-                    <p className="hotel-offers-para-sec">Min 10% off</p>
-                  </p>
+                <div className="hotel-offer-four">
+                  <div className="hotel-offers">
+                    <img
+                      src={Hoteloffer4}
+                      style={{ height: "33px", width: "32px" }}
+                    />
+                    <p className="hotel-offers-para-main">
+                      <span>Premium hotels</span>
+                      <p className="hotel-offers-para-sec">Min 10% off</p>
+                    </p>
+                  </div>
                 </div>
-              </div>
-              {/* <div className="hotel-offer-five">
+                {/* <div className="hotel-offer-five">
                 <div className="hotel-offers">
                   <img
                     src={Hoteloffer5}
@@ -271,38 +328,44 @@ function HotelSearchPage() {
                   </p>
                 </div>
               </div> */}
+              </div>
+            </div>
+            <div className="explore-deal-carousel">
+              <DealofthedayCarousel slidesToShow={4} />
             </div>
           </div>
-          <div className="explore-deal-carousel">
-            <DealofthedayCarousel slidesToShow={4} />
-          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
 
       {/* deal of the day */}
-
-      <div className="deal-of-day-container">
-        <div className="deal-of-day-details">
-          <div className="deal-of-day-title">
-            <div className="deal-of-day-logo">
-              <img
-                src={Hoteloffer5}
-                style={{ height: "56px", width: "56px" }}
-              />
+      {dealoftheday ? (
+        <div className="deal-of-day-container">
+          <div className="deal-of-day-details">
+            <div className="deal-of-day-title">
+              <div className="deal-of-day-logo">
+                <img
+                  src={Hoteloffer5}
+                  style={{ height: "56px", width: "56px" }}
+                />
+              </div>
+              <div className="dealoftheday-title-container">
+                <h2 className="title-dealofthe-day">Deal</h2>
+                <h2 className="title-dealofthe-day">of the day</h2>
+              </div>
+              <div className="dealoftheday-btn-container">
+                <button className="btn-dealoftheday">View all</button>
+              </div>
             </div>
-            <div className="dealoftheday-title-container">
-              <h2 className="title-dealofthe-day">Deal</h2>
-              <h2 className="title-dealofthe-day">of the day</h2>
+            <div className="deal-of-day-carousels">
+              <DealofthedayCarousel slidesToShow={3} />
             </div>
-            <div className="dealoftheday-btn-container">
-              <button className="btn-dealoftheday">View all</button>
-            </div>
-          </div>
-          <div className="deal-of-day-carousels">
-            <DealofthedayCarousel slidesToShow={3} />
           </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </>
   );
 }

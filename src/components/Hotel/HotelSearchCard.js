@@ -5,17 +5,40 @@ import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
 import personLogo from "../../Assests/Images/personLogo.svg";
 import FlightCalendar from "../FlightCalendar";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 function HotelSearchCard() {
   const Navigate = useNavigate();
   const [dayStart, setDayStart] = useState("");
   const [dayEnd, setDayEnd] = useState("");
   const [hotelLocation, SethotelLocation] = useState("");
 
-  const handleHotelLocation = (e) => {
-    SethotelLocation(e.target.value);
-  };
-  const handleSearchbtn = (e) => {
+  const handleSearchbtn = () => {
+    localStorage.setItem(
+      "SearchHotelData",
+      JSON.stringify({
+        source: hotelLocation,
+        dayCome: dayStart,
+      })
+    );
+
     Navigate("/hotelsearch");
+  };
+
+  const options = [
+    "Bangalore,Karnataka,India",
+    "Mumbai,Maharashtra,India",
+    "Kolkata,West Bengal ,India",
+    "Chennai,Tamil Nadu ,India",
+    "Jaipur,Rajasthan ,India",
+    "Udaipur,Rajasthan ,India",
+  ];
+
+  const handleSearchCity = (selectedOption) => {
+    const city = selectedOption.value.split(",")[0].trim();
+
+    SethotelLocation(city);
   };
 
   return (
@@ -27,29 +50,12 @@ function HotelSearchCard() {
               <Location />
             </div>
             <div>
-              <input
-                type="text"
-                className="hotelsearch-input"
-                style={{ width: "550px", height: "56px" }}
-                placeholder="Enter locality, landmark, city or hotel"
+              <Dropdown
+                options={options}
+                onChange={handleSearchCity}
                 value={hotelLocation}
-                list="citylist"
-                onChange={handleHotelLocation}
+                placeholder="Enter locality, landmark, city or hotel"
               />
-              <datalist id="citylist">
-                <option
-                  style={{ width: "550px", height: "56px" }}
-                  className="datalist-option"
-                  value="Banglore,Karnataka,India"
-                />
-                <option value="Mumbai,Maharashtra,India" />
-                <option value="New Delhi,Delhi ,India" />
-                <option value="Kolkata,West Bengal ,India" />
-                <option value="Goa,Goa ,India" />
-                <option value="Chennai,Tamil Nadu ,India" />
-                <option value="Jaipur,Rajasthan ,India" />
-                <option value="Udaipur,Rajasthan ,India" />
-              </datalist>
             </div>
           </div>
           <div style={{ display: "flex", gap: "20px" }}>

@@ -4,7 +4,7 @@ import "../../styles/HotelCards.css";
 const HotelCards = () => {
   return (
     <>
-      <div className="hotel-cards">
+      <div className="hotel-deal-cards">
         <div>
           <img className="hotel-img" src={hotelImage} alt="headerimage" />
         </div>
