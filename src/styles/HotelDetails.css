@@ -5,7 +5,8 @@
   margin-right: 12px;
   padding-top: 24px;
   width: 624px;
-  height: 245px;
+  height: 225px;
+  border: 1px solid blueviolet;
 }
 .hotel-name {
   font-size: 32px;
@@ -13,7 +14,6 @@
   line-height: 40px;
   color: rgb(26, 26, 26);
   text-decoration: none;
-  /* overflow: hidden; */
   cursor: auto;
   width: 590px;
 }
@@ -92,6 +92,43 @@
   overflow: hidden;
   cursor: auto;
 }
-/* .hotel-meal::before {
-  content: "";
+.amenities-container {
+  margin-right: 12px;
+  width: 590px;
+  height: 272px;
+}
+.amenities-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+  cursor: auto;
+  margin-bottom: 24px;
+}
+
+.typesof-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 24px;
+  column-gap: 10px;
+  padding-bottom: 24px;
+}
+.type-amenities {
+  display: flex;
+  align-items: center;
+  width: 288px;
+}
+.amenities-name {
+  padding-left: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+  cursor: auto;
+}
+/* .amenities-logo{
+  
 } */
