@@ -4,11 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import hotelImg from "../../Assests/HotelOffer/image_of_hotel.jpg";
 import "./../../styles/HotelImg.css";
 
-function HotelImg({ hotelImageUrl }) {
-  // const [getImageURL, setgetImageURL] = useState(hotelImageUrl);
+function SingleHotelImage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // console.log(getImageURL);
   return (
     <>
       <Carousel
@@ -23,10 +21,9 @@ function HotelImg({ hotelImageUrl }) {
         selectedItem={currentIndex}
         useKeyboardArrows={true}
         // onChange={(index) => setCurrentIndex(index)}
-        className="hotels-images"
+        className="singlehotel-all-images"
       >
-        {/* Skelaton lagana he  */}
-        {hotelImageUrl.map((url, index) => (
+        {/* {hotelImageUrl.map((url, index) => (
           <div key={index} className="hotel-img-card">
             <a>
               <img
@@ -38,18 +35,26 @@ function HotelImg({ hotelImageUrl }) {
               />
             </a>
           </div>
-        ))}
-        {/* <div>
+        ))} */}
+        <div className="image-container">
           <img
-            className=""
+            className="single-hotel-image"
             id="hotelCarousel"
             src={hotelImg}
             alt="headerimage"
           />
-        </div> */}
+        </div>
+        <div className="image-container">
+          <img
+            className="single-hotel-image"
+            id="hotelCarousel"
+            src={hotelImg}
+            alt="headerimage"
+          />
+        </div>
       </Carousel>
     </>
   );
 }
 
-export default HotelImg;
+export default SingleHotelImage;

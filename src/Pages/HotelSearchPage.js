@@ -28,33 +28,35 @@ function HotelSearchPage() {
     localStorage.getItem("SearchHotelData")
   );
 
-  // console.log(storedHotelLocation.source);
+  // console.log(stored HotelLocation.source);
 
   const { data, isLoading, isError } = useFetch(
-    `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
-    "${storedHotelLocation.source}"}&limit=8`,
-    "GET"
-  );
-
-  const {
-    data: secondData,
-    isLoadingSecond,
-    isErrorSecond,
-  } = useFetch(
-    `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
-    "${storedHotelLocation.source}"}&limit=16`,
-    "GET"
-  );
-
-  const {
-    data: ThridData,
-    isLoadingThrid,
-    isErrorThrid,
-  } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
     "${storedHotelLocation.source}"}`,
     "GET"
   );
+
+  console.log("Hotel", data);
+
+  // const {
+  //   data: secondData,
+  //   isLoadingSecond,
+  //   isErrorSecond,
+  // } = useFetch(
+  //   `https://academics.newtonscho.tab-titles.MuiBox-root.css-1tfzosol.co/api/v1/bookingportals/hotel?search={"location":
+  //   "${storedHotelLocation.source}"}&limit=16`,
+  //   "GET"
+  // );
+
+  // const {
+  //   data: ThridData,
+  //   isLoadingThrid,
+  //   isErrorThrid,
+  // } = useFetch(
+  //   `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
+  //   "${storedHotelLocation.source}"}`,
+  //   "GET"
+  // );
 
   // optional chaning
 
@@ -215,18 +217,8 @@ function HotelSearchPage() {
 
         <div className="hotel-container-cards">
           {data?.hotels &&
-            data?.hotels.map((hotel, index) => (
-              <div
-                className="hotel-cards"
-                key={index}
-                // onChange={(index) => {
-                //   if (index == 7) {
-                //     setdealoftheday(true);
-                //   } else if (index == 15) {
-                //     setexplorebestdeals(true);
-                //   }
-                // }}
-              >
+            data?.hotels.slice(0, 8).map((hotel, index) => (
+              <div className="hotel-cards" key={index}>
                 <div>
                   <HotelImg hotelImageUrl={hotel?.images} />
                 </div>
@@ -335,7 +327,7 @@ function HotelSearchPage() {
                 </div>
               </div>
               <div className="explore-deal-carousel">
-                <DealofthedayCarousel slidesToShow={4} />
+                <DealofthedayCarousel data={data?.hotels} slidesToShow={4} />
               </div>
             </div>
           </div>
@@ -344,21 +336,12 @@ function HotelSearchPage() {
         )}
 
         <div style={{ height: "30px", width: "100%" }}></div>
+
         {/* Second Api call */}
         <div className="hotel-container-cards">
-          {secondData?.hotels &&
-            secondData?.hotels.slice(8, 16).map((hotel, index) => (
-              <div
-                className="hotel-cards"
-                key={index}
-                // onChange={(index) => {
-                //   if (index == 7) {
-                //     setdealoftheday(true);
-                //   } else if (index == 15) {
-                //     setexplorebestdeals(true);
-                //   }
-                // }}
-              >
+          {data?.hotels &&
+            data?.hotels.slice(8, 16).map((hotel, index) => (
+              <div className="hotel-cards" key={index}>
                 <div>
                   <HotelImg hotelImageUrl={hotel?.images} />
                 </div>
@@ -441,19 +424,9 @@ function HotelSearchPage() {
 
         {/* Third Api call*/}
         <div className="hotel-container-cards">
-          {ThridData?.hotels &&
-            ThridData?.hotels.slice(16).map((hotel, index) => (
-              <div
-                className="hotel-cards"
-                key={index}
-                // onChange={(index) => {
-                //   if (index == 7) {
-                //     setdealoftheday(true);
-                //   } else if (index == 15) {
-                //     setexplorebestdeals(true);
-                //   }
-                // }}
-              >
+          {data?.hotels &&
+            data?.hotels.slice(16).map((hotel, index) => (
+              <div className="hotel-cards" key={index}>
                 <div>
                   <HotelImg hotelImageUrl={hotel?.images} />
                 </div>
@@ -501,8 +474,10 @@ function HotelSearchPage() {
               </div>
             ))}
         </div>
+
         <div style={{ height: "20px", width: "100%" }}></div>
       </main>
+
       <Footer />
     </>
   );

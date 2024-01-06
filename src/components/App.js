@@ -6,10 +6,11 @@ import SearchFlight from "./Flights/SearchFlight";
 import HotelPage from "../Pages/HotelPage";
 import HotelSearchPage from "../Pages/HotelSearchPage";
 import HotelDetailsPage from "./Hotel/HotelDetailsPage";
-
+// import MyMap from "./GoogleMap";
 function App() {
   return (
     <>
+      {/* <MyMap /> */}
       <Router>
         <Routes>
           <Route path="/" element={<FlightPage />} />

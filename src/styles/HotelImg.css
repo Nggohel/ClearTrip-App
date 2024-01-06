@@ -16,3 +16,14 @@
 #hotelCarousel {
   border-radius: 5px !important;
 }
+
+/* SingleHotelImage */
+.single-hotel-image,
+.image-container {
+  width: 600px;
+  height: 408px;
+}
+.singlehotel-all-images {
+  width: 600px;
+  height: 408px;
+}
