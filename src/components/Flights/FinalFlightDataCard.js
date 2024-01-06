@@ -31,7 +31,7 @@ function FinalFlightDataCard() {
     "GET"
   );
 
-  console.log("arrivalData", arrivalData.flights);
+  // console.log("arrivalData", arrivalData.flights);
   // console.log("Depaturedata", data.flights);
 
   const [leftClick, setLeftClick] = useState(false);
@@ -105,8 +105,8 @@ function FinalFlightDataCard() {
               </div>
             </div>
           ) : (
-            departuredata.flights &&
-            departuredata.flights.length > 0 && (
+            departuredata?.flights &&
+            departuredata?.flights.length > 0 && (
               <div>
                 <div className="left">
                   <div className="left-div logo">
@@ -174,8 +174,8 @@ function FinalFlightDataCard() {
               </div>
             </div>
           ) : (
-            arrivalData.flights &&
-            arrivalData.flights.length > 0 && (
+            arrivalData?.flights &&
+            arrivalData?.flights.length > 0 && (
               <div>
                 <div className="right">
                   <div className="right-div logo">
@@ -219,8 +219,8 @@ function FinalFlightDataCard() {
                   isDepatureFlightData.ticketPrice}
               </span>
             ) : (
-              departuredata.flights &&
-              arrivalData.flights && (
+              departuredata?.flights &&
+              arrivalData?.flights && (
                 <span>
                   {arrivalData.flights[0].ticketPrice +
                     departuredata.flights[0].ticketPrice}
@@ -273,8 +273,8 @@ function FinalFlightDataCard() {
 
       <div className="flight-data">
         <div className="leftside-flight-data">
-          {departuredata.flights &&
-            departuredata.flights.map((flight, index) => (
+          {departuredata?.flights &&
+            departuredata?.flights.map((flight, index) => (
               <div
                 key={index}
                 className={
@@ -314,8 +314,8 @@ function FinalFlightDataCard() {
 
         {/* rightSide */}
         <div className="rightside-flight-data">
-          {arrivalData.flights &&
-            arrivalData.flights.map((flight, index) => (
+          {arrivalData?.flights &&
+            arrivalData?.flights.map((flight, index) => (
               <div
                 className={
                   index == 0
