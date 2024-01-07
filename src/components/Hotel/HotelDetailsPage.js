@@ -80,7 +80,7 @@ function HotelDetailsPage() {
               <Tab label="About" href="#about" />
               <Tab label="Location" href="#location" />
               <Tab label="Reviews" href="#reviews" />
-              <Tab label="Rooms" href="#rooms" />
+              <Tab label="Rooms" href="#availablerooms" />
             </Tabs>
 
             {/* all tab container of hotel details */}
@@ -531,7 +531,7 @@ function HotelDetailsPage() {
               </section>
 
               {/* avalible Rooms */}
-              <section id="available_rooms">
+              <section id="availablerooms">
                 <div className="available-rooms">
                   <h1 className="avail-rooms-title">Rooms available</h1>
                   <div className="avail-rooms-filters">
@@ -556,7 +556,13 @@ function HotelDetailsPage() {
                         }}
                       ></div>
                       <h3 className="filter-by">Filter rooms by</h3>
-                      <div></div>
+                      <div className="availrooms-filter-one">
+                        <div className="freecancellation-div">
+                          <p className="freecancellation-para">
+                            Free cancellation
+                          </p>
+                        </div>
+                      </div>
                       <div></div>
                     </div>
                   </div>

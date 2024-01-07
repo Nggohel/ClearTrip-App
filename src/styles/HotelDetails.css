@@ -1,17 +1,14 @@
-.tab-titles.MuiBox-root.css-1tfzos {
-  border-color: black !important;
+.MuiTabs-root .MuiTabs-flexContainer .Mui-selected {
+  font-weight: 600;
+  font-size: 14px;
+  color: black;
 }
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  color: black !important;
+.MuiTabs-root .MuiTabs-flexContainer a {
+  font-weight: 600;
+  font-size: 12px;
+  color: grey;
 }
 
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  color: grey !important;
-}
 .all-details-container {
   scroll-margin-top: 152px;
 }
@@ -661,6 +658,7 @@
 }
 .available-rooms {
   margin-left: 40px;
+  height: 300px;
 }
 .avail-rooms-filters {
   margin-top: 32px;
@@ -683,7 +681,6 @@
 .avail-rooms-type {
   width: 135px;
   height: 38px;
-
   white-space: nowrap;
   border-radius: 30px;
   border: 1.5px solid rgb(231, 231, 231);
@@ -710,4 +707,25 @@
   margin-right: 24px;
 }
 .filter-by {
+}
+
+.availrooms-filter-one {
+  margin-right: 24px;
+}
+.freecancellation-div {
+  padding: 6px 8px;
+  width: fit-content;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1.5px solid rgb(231, 231, 231);
+}
+
+.freecancellation-para {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(26, 26, 26);
 }
