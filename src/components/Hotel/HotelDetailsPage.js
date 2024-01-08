@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HotelSearchNavBar from "./HotelSearchNavBar";
 import "../../styles/HotelDetails.css";
 import Ratinglogo from "../../Assests/ratingLogo/Ratinglogo.svg";
@@ -16,6 +16,17 @@ import Star from "../../Assests/ratingLogo/starLogo";
 import CircleRating1 from "../../Assests/ratingLogo/CircleRating1";
 import CircleRating2 from "../../Assests/ratingLogo/CircleRating2";
 import moreoption from "../../Assests/Images/Hotel-filterLogo/more_option_logo.svg";
+import roomlogo from "../../Assests/Images/room-logo-1.svg";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import DeskIcon from "@mui/icons-material/Desk";
+import HotTubIcon from "@mui/icons-material/HotTub";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import PowerIcon from "@mui/icons-material/Power";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import RoomImageCarousel from "../Carousels/RoomImageCarousel";
+import img1 from "../../Assests/Images/Rooms/image-1.jpg";
+import Footer from "../Footer";
+import { Link } from "react-router-dom";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,23 +56,57 @@ CustomTabPanel.propTypes = {
 
 function HotelDetailsPage() {
   const [value, setValue] = useState(0);
+  const [hotelImgNav, setHotelImgNav] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollContainer = document.getElementById("scrollContainer");
+      const scrollPosition = scrollContainer.scrollTop;
+
+      setHotelImgNav(scrollPosition >= 550);
+    };
+
+    const scrollContainer = document.getElementById("scrollContainer");
+    scrollContainer.addEventListener("scroll", handleScroll);
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // console.log("scrollHeight" + document.documentElement.scrollHeight);
+  // console.log("innerHeight" + window.innerHeight);
+  // console.log("scrollTop" + document.documentElement.scrollTop);
+
   return (
     <>
       <div style={{ position: "fixed" }}>
-        <HotelSearchNavBar />
-        {/* 
-        <hr style={{ marginTop: "12px", marginBottom: "10px" }}></hr> */}
+        {hotelImgNav ? (
+          <div className="single-hotel-nav">
+            <div className="hotelnav-container">
+              <img src={img1} className="hotelnav-image" />
+              <div>
+                <p className="hotelnav-title">The HQ</p>
+                <p className="hotelother-details">
+                  Vasco Da Gama, Goa | Sun, 07 Jan - Mon, 08 Jan | 1 Room, 2
+                  Adults
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <HotelSearchNavBar />
+        )}
 
         <Box
           sx={{
             width: "100%",
-            marginLeft: "30px",
             marginTop: "20px",
+            marginLeft: "20px",
           }}
         >
           <Box
@@ -81,15 +126,34 @@ function HotelDetailsPage() {
               <Tab label="Location" href="#location" />
               <Tab label="Reviews" href="#reviews" />
               <Tab label="Rooms" href="#availablerooms" />
+
+              {hotelImgNav ? (
+                <div className="tab-room-container">
+                  <div className="tab-room-price">
+                    <p className="tabroom-baseprice">₹3,700</p>
+                    <h2 className="tabroom-actulprice">₹2,997</h2>
+                    <p className="tabroom-pernight">/ night + ₹400 tax</p>
+                  </div>
+                  <button className="tab-room-btn">
+                    <a href="#roomOption" id="room-btn-para">
+                      Select room
+                    </a>
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </Tabs>
+            <hr style={{ height: "0.5px", width: "95%" }}></hr>
 
             {/* all tab container of hotel details */}
 
             <div
+              id="scrollContainer"
               className="all-details-container"
               style={{ overflowY: "scroll", height: "100vh" }}
             >
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div style={{ display: "flex", marginLeft: "20px" }}>
                 <div className="leftside-container">
                   <section id="general" className="general">
                     <div className="general-container">
@@ -309,7 +373,11 @@ function HotelDetailsPage() {
 
                         <div className="btn-room">
                           <button className="room-button">
-                            <h4 className="btn-title">Select room</h4>
+                            <h4 className="btn-title">
+                              <a href="#roomOption" id="room-btn-para">
+                                Select room
+                              </a>
+                            </h4>
                           </button>
                         </div>
                       </div>
@@ -333,10 +401,21 @@ function HotelDetailsPage() {
               <section id="location" className="location">
                 <div className="location-container">
                   <h1 className="location-title">Location</h1>
-                  <div className="location-map"></div>
+                  <div className="location-map">
+                    <iframe
+                      src="https://maps.google.com/maps?&q=Vasco Da Gama, Goa&output=embed"
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        borderRadius: "16px",
+                      }}
+                      allowfullscreen=""
+                      loading="lazy"
+                    ></iframe>
+                  </div>
                 </div>
               </section>
-              {/* reviewa */}
+              {/* reviews */}
               <section id="reviews" className="reviews">
                 <div className="reviews-rating-container">
                   <h1 className="reviews-title">Ratings & reviews</h1>
@@ -563,11 +642,182 @@ function HotelDetailsPage() {
                           </p>
                         </div>
                       </div>
-                      <div></div>
+                      <div className="availrooms-filter-one">
+                        <div className="freecancellation-div">
+                          <p className="freecancellation-para">
+                            Free breakfast
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* add bank offer here  */}
+                  {/* <div className="bank-offer">
+                    <OfferCarousel
+                      icon={<ICICI />}
+                      offer={"Flat 12% off"}
+                      bankCard={"ICICICC"}
+                      card={"with ICICI Credit Cards"}
+                    />
+                  </div> */}
+
+                  <div className="roomdetails-container">
+                    {/* add image */}
+                    <div className="room-image">
+                      <RoomImageCarousel />
+                    </div>
+
+                    <div className="services-details">
+                      <h2 className="roomdetails-title">
+                        Club Room with Balcony
+                      </h2>
+                      <p></p>
+                      <div className="room-facilities-div">
+                        <div className="facility">
+                          <AcUnitIcon />
+                          <p className="facility-para">Air conditioning</p>
+                        </div>
+                        <div className="facility">
+                          <DeskIcon />
+                          <p className="facility-para">Desk</p>
+                        </div>
+                        <div className="facility">
+                          <HotTubIcon />
+                          <p className="facility-para">Hot Tub</p>
+                        </div>
+                        <div className="facility">
+                          <OndemandVideoIcon />
+                          <p className="facility-para">TV</p>
+                        </div>
+                        <div className="facility">
+                          <PowerIcon />
+                          <p className="facility-para">Adapter</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="roomOption" className="roomoption-container">
+                    <div className="option-container">
+                      <h2 className="roomoption-title">Room Only</h2>
+                      <div className="with-room-inculdes">
+                        <Fastfood />
+                        <p>Room Only</p>
+                      </div>
+                      <div className="with-room-inculdes">
+                        <CancelOutlinedIcon />
+                        <p>Cancellation charges apply</p>
+                        <img
+                          src={roomlogo}
+                          style={{ height: "22px", width: "22px" }}
+                        />
+                      </div>
+                      {/* <div className="talkal-deal-container">
+                        <div className="talkaldeal-card">
+                          <img
+                            src={tatkallogo}
+                            style={{ height: "20px", width: "20px" }}
+                          />
+                          <p className="talkaldeal-title">TATKAAL DEALS</p>
+                        </div>
+                      </div> */}
+                      <div className="roomoption-prices">
+                        <h2 className="roomoption-baseprice">₹5,779</h2>
+                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <p className="roomoption-pernight">/ night</p>
+                      </div>
+                      <div className="roomoption-discount">
+                        <p className="roomoption-actulprice">₹7,999</p>
+                        <p className="roomoption-percentageoff">28 %</p>
+                        <p className="roomoption-emioffer">
+                          No cost EMI from ₹2,198
+                        </p>
+                      </div>
+                      <button className="roomoption-bookbtn">Book</button>
+                    </div>
+                    <div className="option-container">
+                      <h2 className="roomoption-title">Room with Breakfast</h2>
+                      <div className="with-room-inculdes">
+                        <Fastfood />
+                        <p>Breakfast</p>
+                      </div>
+                      <div className="with-room-inculdes">
+                        <CancelOutlinedIcon />
+                        <p>Cancellation charges apply</p>
+                        <img
+                          src={roomlogo}
+                          style={{ height: "22px", width: "22px" }}
+                        />
+                      </div>
+
+                      {/* <div className="talkal-deal-container">
+                        <div className="talkaldeal-card">
+                          <img
+                            src={tatkallogo}
+                            style={{ height: "20px", width: "20px" }}
+                          />
+                          <p className="talkaldeal-title">TATKAAL DEALS</p>
+                        </div>
+                      </div> */}
+                      <div className="roomoption-prices">
+                        <h2 className="roomoption-baseprice">₹5,779</h2>
+                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <p className="roomoption-pernight">/ night</p>
+                      </div>
+                      <div className="roomoption-discount">
+                        <p className="roomoption-actulprice">₹7,999</p>
+                        <p className="roomoption-percentageoff">28 %</p>
+                        <p className="roomoption-emioffer">
+                          No cost EMI from ₹2,198
+                        </p>
+                      </div>
+                      <button className="roomoption-bookbtn">Book</button>
+                    </div>
+                    <div className="option-container">
+                      <h2 className="roomoption-title">
+                        Room with All Day Meal
+                      </h2>
+                      <div className="with-room-inculdes">
+                        <Fastfood />
+                        <p>Breakfast + Lunch/Dinner</p>
+                      </div>
+                      <div className="with-room-inculdes">
+                        <CancelOutlinedIcon />
+                        <p>Cancellation charges apply</p>
+                        <img
+                          src={roomlogo}
+                          style={{ height: "22px", width: "22px" }}
+                        />
+                      </div>
+                      {/* <div className="talkal-deal-container">
+                        <div className="talkaldeal-card">
+                          <img
+                            src={tatkallogo}
+                            style={{ height: "20px", width: "20px" }}
+                          />
+                          <p className="talkaldeal-title">TATKAAL DEALS</p>
+                        </div>
+                      </div> */}
+                      <div className="roomoption-prices">
+                        <h2 className="roomoption-baseprice">₹5,779</h2>
+                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <p className="roomoption-pernight">/ night</p>
+                      </div>
+                      <div className="roomoption-discount">
+                        <p className="roomoption-actulprice">₹7,999</p>
+                        <p className="roomoption-percentageoff">28 %</p>
+                        <p className="roomoption-emioffer">
+                          No cost EMI from ₹2,198
+                        </p>
+                      </div>
+                      <Link to="/">
+                        <button className="roomoption-bookbtn">Book</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </section>
+              <Footer />
             </div>
           </Box>
         </Box>

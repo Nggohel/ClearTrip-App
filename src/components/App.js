@@ -6,6 +6,7 @@ import SearchFlight from "./Flights/SearchFlight";
 import HotelPage from "../Pages/HotelPage";
 import HotelSearchPage from "../Pages/HotelSearchPage";
 import HotelDetailsPage from "./Hotel/HotelDetailsPage";
+// import { handleScroll } from "../utils/handleScroll";
 // import MyMap from "./GoogleMap";
 function App() {
   return (
