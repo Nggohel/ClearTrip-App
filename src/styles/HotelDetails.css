@@ -1,3 +1,11 @@
+/* .gm-style button.gm-inset-map.gm-inset-light {
+  display: none !important;
+} */
+
+:host(.gm-inset-light) {
+  display: none !important;
+}
+
 .single-hotel-nav {
   max-width: 1366px;
   margin-left: auto;

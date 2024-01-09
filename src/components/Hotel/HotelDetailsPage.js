@@ -99,7 +99,7 @@ function HotelDetailsPage() {
             </div>
           </div>
         ) : (
-          <HotelSearchNavBar />
+          <HotelSearchNavBar searchData={true} />
         )}
 
         <Box
@@ -733,7 +733,9 @@ function HotelDetailsPage() {
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <button className="roomoption-bookbtn">Book</button>
+                      <Link to="/hotelconfirmationpage">
+                        <button className="roomoption-bookbtn">Book</button>
+                      </Link>
                     </div>
                     <div className="option-container">
                       <h2 className="roomoption-title">Room with Breakfast</h2>
@@ -771,7 +773,9 @@ function HotelDetailsPage() {
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <button className="roomoption-bookbtn">Book</button>
+                      <Link to="/hotelconfirmationpage">
+                        <button className="roomoption-bookbtn">Book</button>
+                      </Link>
                     </div>
                     <div className="option-container">
                       <h2 className="roomoption-title">
@@ -810,7 +814,7 @@ function HotelDetailsPage() {
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <Link to="/">
+                      <Link to="/hotelconfirmationpage">
                         <button className="roomoption-bookbtn">Book</button>
                       </Link>
                     </div>

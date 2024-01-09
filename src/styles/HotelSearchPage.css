@@ -1,3 +1,13 @@
+.btnCss {
+  background-color: white;
+  color: #1a1a1a;
+  border: 1px solid black;
+  padding: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-right: 40px;
+}
+
 .hotel-search-card-data {
   display: flex;
   justify-content: center;
