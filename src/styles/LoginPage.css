@@ -1,0 +1,43 @@
+.login-container {
+  /* width: 400px;
+  height: 437px; */
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0px 32px;
+}
+.name-label {
+  line-height: 20px;
+  font-size: 16px;
+  padding: 8px;
+  height: 36px;
+  width: 100%;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+.input-name {
+  line-height: 20px;
+  font-size: 14px;
+  padding: 8px;
+  height: 36px;
+  width: 100%;
+  color: #1a1a1a;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #000;
+  border-color: transparent;
+  color: #fff;
+  width: 336px;
+  height: 40px;
+  border-radius: 8px;
+}

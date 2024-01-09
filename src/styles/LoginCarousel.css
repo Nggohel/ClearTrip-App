@@ -1,0 +1,15 @@
+.login-carousel {
+  width: 400px;
+  height: 437px;
+  background-color: rgb(255, 238, 232);
+}
+.login-carousel-img {
+  width: 350px;
+  height: 287px;
+}
+/* .carousel .control-dots .dot.selected {
+  background: rgb(236, 84, 28) !important;
+} */
+.carousel .control-dots .dot {
+  display: none;
+}
