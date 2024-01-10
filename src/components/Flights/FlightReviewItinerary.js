@@ -18,7 +18,7 @@ function FlightReviewItinerary() {
       </div>
       <hr className="hr-line"></hr>
 
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", gap: "34px" }}>
         <LeftFlightReviewItinerary />
         <RightFlightReviewItinerary />
       </div>
@@ -27,5 +27,3 @@ function FlightReviewItinerary() {
 }
 
 export default FlightReviewItinerary;
-
-
