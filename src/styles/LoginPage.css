@@ -1,11 +1,13 @@
 .login-container {
-  /* width: 400px;
-  height: 437px; */
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   background-color: #fff;
   padding: 0px 32px;
+}
+.customModal {
+  border-radius: 8px;
+  width: 100%;
 }
 .name-label {
   line-height: 20px;
@@ -40,4 +42,17 @@
   width: 336px;
   height: 40px;
   border-radius: 8px;
+}
+.already-acc-para {
+  margin-top: 8px;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}
+.already-acc {
+  color: #36c;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
 }
