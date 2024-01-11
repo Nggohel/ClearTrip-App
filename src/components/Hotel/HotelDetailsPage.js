@@ -103,15 +103,15 @@ function HotelDetailsPage() {
         )}
 
         <Box
-          sx={{
-            width: "100%",
-            marginTop: "20px",
-            marginLeft: "20px",
-          }}
+        // sx={{
+        //   width: "100%",
+        //   marginTop: "20px",
+        //   marginLeft: "20px",
+        // }}
         >
           <Box
-            className="tab-titles"
-            sx={{ borderBottom: 1, borderColor: "black" }}
+          // className="tab-titles"
+          // sx={{ borderBottom: 1, borderColor: "black" }}
           >
             <Tabs
               value={value}

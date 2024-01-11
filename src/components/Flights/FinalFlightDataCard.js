@@ -5,7 +5,9 @@ import { useState } from "react";
 import useFetch from "../../Hooks/UseFetch";
 import Uparrow from "../../Assests/Uparrow";
 
-function FinalFlightDataCard() {
+function FinalFlightDataCard({ checkboxValues, rangeValue }) {
+  console.log("checkboxValues", checkboxValues);
+  console.log("checkboxValues", rangeValue);
   const navigate = useNavigate();
   const searchData = JSON.parse(localStorage.getItem("SearchData"));
 

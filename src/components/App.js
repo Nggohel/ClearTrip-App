@@ -7,12 +7,11 @@ import HotelPage from "../Pages/HotelPage";
 import HotelSearchPage from "../Pages/HotelSearchPage";
 import HotelDetailsPage from "./Hotel/HotelDetailsPage";
 import HotelConfirmationPage from "../Pages/HotelConfirmationPage";
-import LoginPage from "../Pages/LoginPage";
 
 function App() {
   return (
     <>
-      <LoginPage />
+      {/* <LoginPage /> */}
       <Router>
         <Routes>
           <Route path="/" element={<FlightPage />} />

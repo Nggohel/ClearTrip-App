@@ -1,28 +1,73 @@
 import HotelSearchNavBar from "../components/Hotel/HotelSearchNavBar";
-import dealLogo from "../Assests/Images/Hotel-filterLogo/deal_logo.svg";
-import starlogo from "../Assests/Images/Hotel-filterLogo/star_logo.svg";
 import search_logo from "../Assests/Images/Hotel-filterLogo/search_logo.svg";
-import location_logo from "../Assests/Images/Hotel-filterLogo/location_logo.svg";
-import Price_logo from "../Assests/Images/Hotel-filterLogo/Price_logo.svg";
 import moreoption from "../Assests/Images/Hotel-filterLogo/more_option_logo.svg";
 import Hoteloffer1 from "../Assests/HotelOffer/Hoteloffer_1.svg";
 import Hoteloffer2 from "../Assests/HotelOffer/Hoteloffer_2.svg";
 import Hoteloffer3 from "../Assests/HotelOffer/Hoteloffer_3.svg";
 import Hoteloffer4 from "../Assests/HotelOffer/Hoteloffer_4.svg";
 import Hoteloffer5 from "../Assests/HotelOffer/Hoteloffer_5.svg";
-import Starcategory from "../Assests/Images/Hotel-filterLogo/Starcategory";
+import Ratinglogo from "../Assests/ratingLogo/Ratinglogo.svg";
+import HotelImg from "../components/Carousels/HotelImg";
 import "../styles/HotelSearchPage.css";
 import DealofthedayCarousel from "../components/Hotel/DealofthedayCarousel";
-import HotelImg from "../components/Carousels/HotelImg";
-import Ratinglogo from "../Assests/ratingLogo/Ratinglogo.svg";
 import { Link } from "react-router-dom";
 import useFetch from "../Hooks/UseFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 
+import MultiSelect from "../utils/MultiSelect";
+
 function HotelSearchPage() {
+  // const [optionSelected, setSelected] = useState(null);
+  const [optionSelected1, setSelected1] = useState([]);
+  const [optionSelected2, setSelected2] = useState([]);
+  const [optionSelected3, setSelected3] = useState([]);
+  const [optionSelected4, setSelected4] = useState([]);
+  const [optionSelected5, setSelected5] = useState([]);
+  const [optionSelected6, setSelected6] = useState([]);
+
+  const options = [
+    { value: 0, label: "Recommended" },
+    { value: 1, label: "Top-rated" },
+    { value: 2, label: "Price: High to Low" },
+    { value: 3, label: "Price: Low to High" },
+  ];
+
+  const dealOption = [
+    { value: 0, label: "Top-5" },
+    { value: 1, label: "Top-4" },
+    { value: 2, label: "Top-3" },
+  ];
+
+  const StarCategoryOption = [
+    { value: 0, label: "5-star" },
+    { value: 1, label: "4-star" },
+    { value: 2, label: "3-star" },
+  ];
+
+  const GuestratingOption = [
+    { value: 0, label: "4.5 & above" },
+    { value: 1, label: "4 & above" },
+    { value: 2, label: "3.5 & above" },
+    { value: 3, label: "3 & above" },
+  ];
+  const localityOption = [
+    { value: 0, label: "Vasco Da Gama" },
+    { value: 1, label: "Baga" },
+    { value: 2, label: "Vagator" },
+    { value: 3, label: "Anjuna" },
+  ];
+  const priceOption = [
+    { value: 0, label: "500 - 1000" },
+    { value: 1, label: "1000 - 2000" },
+    { value: 2, label: "2000 - 3000" },
+    { value: 3, label: "3000 - 4000" },
+    { value: 4, label: "4000 - 5000" },
+  ];
+
   const [explorebestdeals, setexplorebestdeals] = useState(true);
   const [dealoftheday, setdealoftheday] = useState(true);
+  const [isSortBy, setIssortBy] = useState(false);
 
   const storedHotelLocation = JSON.parse(
     localStorage.getItem("SearchHotelData")
@@ -36,98 +81,44 @@ function HotelSearchPage() {
     "GET"
   );
 
-  console.log("Hotel", data);
+  // console.log("Hotel", data);
 
-  // const {
-  //   data: secondData,
-  //   isLoadingSecond,
-  //   isErrorSecond,
-  // } = useFetch(
-  //   `https://academics.newtonscho.tab-titles.MuiBox-root.css-1tfzosol.co/api/v1/bookingportals/hotel?search={"location":
-  //   "${storedHotelLocation.source}"}&limit=16`,
-  //   "GET"
-  // );
+  //  handleChange for filters value
+  const handleChange1 = (selected) => {
+    setSelected1(selected);
+    console.log("Selected values for MultiSelect 1:", optionSelected1);
+  };
 
-  // const {
-  //   data: ThridData,
-  //   isLoadingThrid,
-  //   isErrorThrid,
-  // } = useFetch(
-  //   `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
-  //   "${storedHotelLocation.source}"}`,
-  //   "GET"
-  // );
+  const handleChange2 = (selected) => {
+    setSelected2(selected);
+    console.log("Deal", selected);
+  };
+
+  const handleChange3 = (selected) => {
+    setSelected3(selected);
+    console.log("star", selected);
+  };
+
+  const handleChange4 = (selected) => {
+    setSelected4(selected);
+  };
+
+  const handleChange5 = (selected) => {
+    setSelected5(selected);
+  };
+
+  const handleChange6 = (selected) => {
+    setSelected6(selected);
+  };
 
   // optional chaning
+
+  console.log(optionSelected3);
 
   return (
     <>
       <nav>
-        <HotelSearchNavBar />
-        {/* make comp of hotel filter */}
-        <div className="hotel-filters">
-          <div className="hotel-filters-title">
-            <p className="hotel-filters-para">All filters</p>
-          </div>
-          <div className="hotel-filters-cards">
-            <div className="filters-cards">
-              <div className="sortby-filter-card">
-                <p className="sortby-para">Sort by: Recommended</p>
-              </div>
-              <div className="deal-filter-card">
-                <img src={dealLogo} style={{ height: "16px", width: "16px" }} />
-                <p className="deals-para">Deals</p>
-                <img
-                  src={moreoption}
-                  style={{ height: "16px", width: "16px" }}
-                />
-              </div>
-              <div className="star-filter-card">
-                <Starcategory />
-                <p className="starcategory-para">Star category</p>
-                <img
-                  src={moreoption}
-                  style={{ height: "16px", width: "16px" }}
-                />
-              </div>
-              <div className="guest-filter-card">
-                <img src={starlogo} style={{ height: "16px", width: "16px" }} />
-                <p className="guestrating-para">Guest rating</p>
-                <img
-                  src={moreoption}
-                  style={{ height: "16px", width: "16px" }}
-                />
-              </div>
-              <div className="locality-filter-card">
-                <img
-                  src={location_logo}
-                  style={{ height: "16px", width: "16px" }}
-                />
-                <p className="locality-para">Locality</p>
-                <img
-                  src={moreoption}
-                  style={{ height: "16px", width: "16px" }}
-                />
-              </div>
-              <div className="price-filter-card">
-                <img
-                  src={Price_logo}
-                  style={{ height: "16px", width: "16px" }}
-                />
-                <p className="price-para">Price</p>
-                <img
-                  src={moreoption}
-                  style={{ height: "16px", width: "16px" }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="filter-search">
-            <img src={search_logo} style={{ height: "24px", width: "24px" }} />
-            <input type="text" className="hotel-filter-search-input" />
-            <img src={moreoption} style={{ height: "16px", width: "16px" }} />
-          </div>
-        </div>
+        <HotelSearchNavBar searchData={true} />
 
         {/* hotel Offer Component  */}
 
@@ -191,6 +182,90 @@ function HotelSearchPage() {
                 <p className="hotel-offers-para-sec">5% & above</p>
               </p>
             </div>
+          </div>
+        </div>
+        {/* make comp of hotel filter */}
+        <div className="hotel-filters">
+          <div className="hotel-filters-title">
+            <p className="hotel-filters-para">All filters</p>
+          </div>
+          <div className="hotel-filters-cards">
+            <div className="filters-cards">
+              <div>
+                <MultiSelect
+                  key="example_id"
+                  options={options}
+                  onChange={handleChange1}
+                  value={optionSelected1}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Sort by: Recommended"
+                />
+              </div>
+
+              <div>
+                <MultiSelect
+                  key="example"
+                  options={dealOption}
+                  onChange={handleChange2}
+                  value={optionSelected2}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Deals"
+                />
+              </div>
+              <div>
+                <MultiSelect
+                  key="example_id"
+                  options={StarCategoryOption}
+                  onChange={handleChange3}
+                  value={optionSelected3}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Star category"
+                />
+              </div>
+
+              <div>
+                <MultiSelect
+                  key="example_id"
+                  options={GuestratingOption}
+                  onChange={handleChange4}
+                  value={optionSelected4}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Guest rating"
+                />
+              </div>
+
+              <div>
+                <MultiSelect
+                  key="example_id"
+                  options={localityOption}
+                  onChange={handleChange5}
+                  value={optionSelected5}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Locality"
+                />
+              </div>
+              <div>
+                <MultiSelect
+                  key="example_id"
+                  options={priceOption}
+                  onChange={handleChange6}
+                  value={optionSelected6}
+                  isSelectAll={true}
+                  menuPlacement={"bottom"}
+                  placeholder="Price"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="filter-search">
+            <img src={search_logo} style={{ height: "24px", width: "24px" }} />
+            <input type="text" className="hotel-filter-search-input" />
+            <img src={moreoption} style={{ height: "16px", width: "16px" }} />
           </div>
         </div>
       </nav>
@@ -478,6 +553,7 @@ function HotelSearchPage() {
         <div style={{ height: "20px", width: "100%" }}></div>
       </main>
 
+      {/* {isSortBy ? <ReactMultiSelect /> : ""} */}
       <Footer />
     </>
   );

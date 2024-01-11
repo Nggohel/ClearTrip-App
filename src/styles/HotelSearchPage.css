@@ -7,7 +7,31 @@
   font-weight: 600;
   margin-right: 40px;
 }
-
+.css-b62m3t-container {
+  width: max-content;
+}
+.css-b62m3t-container .css-13cymwt-control {
+  padding: 0px 8px;
+  width: fit-content;
+  white-space: nowrap;
+  border-style: solid;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(231, 231, 231);
+  border-radius: 30px;
+  border-width: 1.5px;
+  cursor: pointer;
+}
+.css-1jqq78o-placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(26, 26, 26) !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
 .hotel-search-card-data {
   display: flex;
   justify-content: center;
@@ -65,9 +89,9 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 1200px;
+  width: 1284px;
   height: 72px;
-  margin: 10px 50px;
+  margin: 10px 0 10px 60px;
 }
 
 .hotel-filters-title {
@@ -85,7 +109,7 @@
   text-decoration: none;
 }
 .hotel-filters-cards {
-  width: 800px;
+  width: 884px;
   height: 58px;
   position: relative;
   display: flex;
@@ -97,40 +121,12 @@
   /* padding-right: 36px; */
   align-items: center;
 }
-.sortby-filter-card {
-  padding: 6px 8px;
-  width: fit-content;
-  white-space: nowrap;
-  border-style: solid;
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(231, 231, 231);
-  border-radius: 30px;
-  border-width: 1.5px;
-  cursor: pointer;
-}
-.sortby-para {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: rgb(26, 26, 26);
-  text-decoration: none;
-  cursor: auto;
-}
+
 .deal-filter-card {
-  margin-left: 4px;
-  padding-bottom: 12px;
-  padding-top: 12px;
-  padding: 6px 8px;
-  width: fit-content;
-  white-space: nowrap;
-  border-style: solid;
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(231, 231, 231);
-  border-radius: 30px;
-  border-width: 1.5px;
   cursor: pointer;
   align-items: center;
   display: flex;
+  width: 100px;
 }
 .deals-para {
   font-size: 14px;
@@ -177,6 +173,7 @@
   border: 1px solid #e6e6e6;
   border-radius: 8px;
   padding: 0px 5px;
+  margin-left: 25px;
 }
 
 .hotel-filter-search-input {
@@ -198,7 +195,7 @@
 .hotel-offer {
   width: 920px;
   height: 54px;
-  margin: 8px 50px;
+  margin: 15px 60px;
   display: flex;
   gap: 16px;
   flex-direction: row;

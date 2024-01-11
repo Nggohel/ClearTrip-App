@@ -5,7 +5,9 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./../../styles/FlightsFilters.css";
-function FlightsFilters() {
+
+function FlightsFilters({}) {
+  
   const [rangeValue, setRangeValue] = useState(3483);
 
   const [checkboxValues, setCheckboxValues] = useState({
@@ -39,7 +41,6 @@ function FlightsFilters() {
   const handleCheckboxChange = (event) => {
     const { id, value, checked } = event.target;
     console.log(id);
-    // console.log(value);
     setCheckboxValues((prevValues) => ({
       ...prevValues,
       [id]: checked ? value : "",
@@ -47,11 +48,13 @@ function FlightsFilters() {
   };
 
   console.log("Checkbox values:", checkboxValues);
+  console.log("nonStopValue :", checkboxValues["non-stop"]);
 
   const handleRangeChange = (event) => {
     setRangeValue(parseInt(event.target.value, 10));
   };
 
+  console.log("rangeValue:", rangeValue);
   return (
     <>
       <div className="searchflightpage-leftsection">

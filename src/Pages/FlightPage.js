@@ -13,9 +13,12 @@ import varanasi from "../Assests/Images/varanasi.jpg";
 import abuDhabi from "../Assests/Images/abuDhabi.jpg";
 import "./../styles/FlightPage.css";
 import Footer from "../components/Footer";
+import LoginPage from "../Pages/LoginPage";
+
 function FlightPage() {
   return (
     <>
+    <LoginPage />
       <NavBar />
       <div style={{ display: "flex" }}>
         <LeftSideSection />
