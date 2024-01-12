@@ -1,13 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import SearchFlightLogo from "../../Assests/Images/SearchFlightLogo";
 import "./../../styles/FinalFlightDataCard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/UseFetch";
 import Uparrow from "../../Assests/Uparrow";
+import { useFlightContext } from "../../Hooks/useFlightContext";
 
-function FinalFlightDataCard({ checkboxValues, rangeValue }) {
-  console.log("checkboxValues", checkboxValues);
-  console.log("checkboxValues", rangeValue);
+function FinalFlightDataCard() {
+  const { rangeValue, stops, isApply, departuretime, duration } =
+    useFlightContext();
+  console.log("departuretime:", departuretime);
+  console.log("stops:", stops);
+  // console.log("checkboxValues", checkboxValues);
+
+  console.log(isApply);
+
+  const convertToApiFormat = (filter) => {
+    const { stops, departureTime, ticketPrice, duration } = filter;
+
+    // Convert departureTime to the required format
+    if (typeof departureTime === "string" && departureTime.includes("-")) {
+      const [startTime, endTime] = departureTime.split("-");
+      const apiDepartureTime = {
+        $lte: endTime,
+        $gte: startTime,
+      };
+
+      const apiTicketPrice = {
+        $lte: ticketPrice,
+        $gte: 500,
+      };
+
+      return {
+        stops,
+        departureTime: apiDepartureTime,
+        ticketPrice: apiTicketPrice,
+        duration,
+      };
+    }
+  };
+
+  // console.log("checkboxValues", checkboxValues);
+  // console.log("Price", rangeValue);
+
+  // const filteringData = {
+  //   stops: checkboxValues["non-stop"],
+  //   departureTime: checkboxValues["departuretime-morning"],
+  //   duration: checkboxValues["duration-1"],
+  //   ticketPrice: rangeValue,
+  // };
+
+  // const ApiData = convertToApiFormat(filteringData);
+
+  // console.log(JSON.stringify(ApiData));
+
   const navigate = useNavigate();
   const searchData = JSON.parse(localStorage.getItem("SearchData"));
 
@@ -33,8 +79,36 @@ function FinalFlightDataCard({ checkboxValues, rangeValue }) {
     "GET"
   );
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const apiUrl = `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search={"source":"${
+  //         searchData.source
+  //       }","destination":"${searchData.destination}"}&day=${
+  //         searchData.dayDeparture
+  //       }&filter=${JSON.stringify(ApiData)}`;
+  //       const response = await fetch(apiUrl, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           projectID: "d0hy5azls1gu",
+  //         },
+  //       });
+
+  //       const result = await response.json();
+  //       console.log(result.data);
+  //     } catch (error) {
+  //       console.log("Error", error);
+  //     }
+  //   };
+
+  //   if (isApply) {
+  //     fetchData();
+  //   }
+  // }, [isApply, searchData, ApiData]);
+
   // console.log("arrivalData", arrivalData.flights);
-  // console.log("Depaturedata", data.flights);
+  // console.log("Depaturedata", departuredata);
 
   const [leftClick, setLeftClick] = useState(false);
   const [rightClick, setRightClick] = useState(false);

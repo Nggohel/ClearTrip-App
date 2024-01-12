@@ -6,6 +6,17 @@
 .MuiAccordion-gutters.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
   box-shadow: none;
 }
+.filter-btn {
+  font-size: 14px;
+  color: white;
+  border: 0px solid;
+  height: 30px;
+  width: 90px;
+  font-weight: 600;
+  background-color: #36c;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
 .filters-title {
   color: #1a1a1a;
