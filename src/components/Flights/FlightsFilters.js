@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -6,82 +6,50 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./../../styles/FlightsFilters.css";
 import { useFlightContext } from "../../Hooks/useFlightContext";
-function FlightsFilters({}) {
-  const {
-    rangeValue,
-    stops,
-    isApply,
-    departuretime,
-    duration,
-    setRangeValue,
-    setStops,
-    setDeparturetime,
-    setDuration,
-    setIsApply,
-  } = useFlightContext();
 
-  // const [rangeValue, setRangeValue] = useState(3483);
+function FlightsFilters() {
+  const [isBtn, setIsBtn] = useState(false);
+  const { handleApplyClick, checkboxValue, setCheckboxValue } =
+    useFlightContext();
 
-  // const [stops, setStops] = useState({
-  //   "non-stop": "",
-  //   "stop-one": "",
-  //   "stop-two": "",
-  //   "departuretime-earlymorning": false,
-  //   "departuretime-morning": false,
-  //   "departuretime-afternoon": false,
-  //   "departuretime-evening": false,
-  //   "departuretime-night": false,
-  //   "arrivaltime-earlymorning": false,
-  //   "arrivaltime-morning": false,
-  //   "arrivaltime-afternoon": false,
-  //   "arrivaltime-evening": false,
-  //   "arrivaltime-night": false,
-  //   "duration-hr": false,
-  //   "layover-duration": false,
-  // });
+  useEffect(() => {
+    handleBtn(checkboxValue);
+  }, [checkboxValue]);
 
-  // const handleCheckboxChange = (event) => {
-  //   const { id, checked } = event.target;
-  //   console.log(id);
-  //   // console.log(value);
-  //   setStops((prevValues) => ({
-  //     ...prevValues,
-  //     [id]: checked,
-  //   }));
-  // };
+  const handleCheckboxChange = (event) => {
+    const { name, value, checked } = event.target;
+    setCheckboxValue((prevValues) => ({
+      ...prevValues,
 
-  const handleCheckboxChange = (value) => {
-    // const { id, value, checked } = event.target;
-
-    setStops(value === stops ? null : value);
-
-    // setStops((prevValues) => ({
-    //   // Log the values in prevValues
-
-    //   // ...prevValues,
-    //   // [id]: checked ? value : "",
-
-    // }));
+      [name]: checked ? value : "",
+    }));
   };
-  const handleDepartureTimeChange = (value) => {
-    setDeparturetime(value === departuretime ? null : value);
-  };
-  const handleDurationChange = (value) => {
-    setDuration(value === duration ? null : value);
-  };
-  // const handleRangeChange = (event) => {
-  //   setRangeValue(parseInt(event.target.value, 10));
-  // };
+
+  // console.log("checkboxValue:", checkboxValue);
 
   const handleRangeChange = (event) => {
-    const newRangeValue = parseInt(event.target.value, 10);
-    console.log("New Range Value:", newRangeValue);
-    setRangeValue(newRangeValue);
+    const { name, value } = event.target;
+
+    setCheckboxValue((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
+    // handleBtn(checkboxValue);
   };
 
-  const handleApplyClick = () => {
-    setIsApply(true);
-  };
+  function handleBtn(obj) {
+    if (
+      obj.stops != "" ||
+      obj.departureTime != "" ||
+      obj.duration != "" ||
+      obj.ticketPrice != 2000
+    ) {
+      setIsBtn(true);
+    } else {
+      setIsBtn(false);
+    }
+  }
 
   return (
     <>
@@ -90,9 +58,11 @@ function FlightsFilters({}) {
           <p>
             <b>Flights Filter</b>
           </p>
-          <button className="filter-btn" onClick={handleApplyClick}>
-            Apply
-          </button>
+          {isBtn && (
+            <button className="filter-btn" onClick={handleApplyClick}>
+              Apply
+            </button>
+          )}
         </div>
 
         {/* 1st stops */}
@@ -108,48 +78,21 @@ function FlightsFilters({}) {
             </AccordionSummary>
             <AccordionDetails>
               <form>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="non-stop"
-                    name="non-stop"
-                    className="checkbox-input"
-                    value="0"
-                    checked={stops === "0"}
-                    onChange={() => handleCheckboxChange("0")}
-                  />
-                  <label htmlFor="non-stop" className="checkbox-label">
-                    0-stop
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    className="checkbox-input"
-                    id="stop-one"
-                    name="non-stop"
-                    value="1"
-                    checked={stops === "1"}
-                    onChange={() => handleCheckboxChange("1")}
-                  />
-                  <label htmlFor="stop-one" className="checkbox-label">
-                    1-stop
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    className="checkbox-input"
-                    id="stop-two"
-                    name="non-stop"
-                    value="2"
-                    checked={stops === "2"}
-                    onChange={() => handleCheckboxChange("2")}
-                  />
-                  <label htmlFor="stop-two" className="checkbox-label">
-                    2-stop
-                  </label>
-                </div>
+                {["0", "1", "2"].map((item, index) => (
+                  <div className="checkbox-container" key={index}>
+                    <input
+                      type="checkbox"
+                      name="stops"
+                      className="checkbox-input"
+                      value={item}
+                      checked={checkboxValue.stops === item ? true : false}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label htmlFor="non-stop" className="checkbox-label">
+                      {item}-stop
+                    </label>
+                  </div>
+                ))}
               </form>
             </AccordionDetails>
           </Accordion>
@@ -170,62 +113,36 @@ function FlightsFilters({}) {
             </AccordionSummary>
             <AccordionDetails>
               <form>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="departuretime-morning"
-                    name="morning"
-                    value="06:00-12:00"
-                    className="checkbox-input"
-                    checked={departuretime === "06:00-12:00"}
-                    onChange={() => handleDepartureTimeChange("06:00-12:00")}
-                  />
-                  <label htmlFor="morning" className="checkbox-label">
-                    Morning 06:00-12:00
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="departuretime-afternoon"
-                    name="afternoon"
-                    value="12:00-16:00"
-                    className="checkbox-input"
-                    checked={departuretime === "12:00-16:00"}
-                    onChange={() => handleDepartureTimeChange("12:00-16:00")}
-                  />
-                  <label htmlFor="afternoon" className="checkbox-label">
-                    Afternoon 12:00-16:00
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="departuretime-evening"
-                    name="evening"
-                    value="16:00-20:00"
-                    className="checkbox-input"
-                    checked={departuretime === "16:00-20:00"}
-                    onChange={() => handleDepartureTimeChange("16:00-20:00")}
-                  />
-                  <label htmlFor="evening" className="checkbox-label">
-                    Evening 16:00-20:00
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    className="checkbox-input"
-                    id="departuretime-night"
-                    name="night"
-                    value="20:00-06:00"
-                    checked={departuretime === "20:00-06:00"}
-                    onChange={() => handleDepartureTimeChange("20:00-06:00")}
-                  />
-                  <label htmlFor="night" className="checkbox-label">
-                    Night 20:00-06:00
-                  </label>
-                </div>
+                {[
+                  { Morning: "06:00-12:00" },
+                  { Afternoon: "12:00-16:00" },
+                  { Evening: "16:00-20:00" },
+                  { Night: "20:00-06:00" },
+                ].map((item, index) => {
+                  const key = Object.keys(item)[0];
+                  const value = item[key];
+
+                  return (
+                    <div className="checkbox-container" key={index}>
+                      <input
+                        type="checkbox"
+                        value={value}
+                        name="departureTime"
+                        className="checkbox-input"
+                        checked={
+                          checkboxValue.departureTime === value ? true : false
+                        }
+                        onChange={handleCheckboxChange}
+                      />
+                      <label
+                        htmlFor={key.toLowerCase()}
+                        className="checkbox-label"
+                      >
+                        {key} {value}
+                      </label>
+                    </div>
+                  );
+                })}
               </form>
             </AccordionDetails>
           </Accordion>
@@ -329,41 +246,6 @@ function FlightsFilters({}) {
         </div> */}
 
         {/* 4th */}
-        {/* <div>
-          <Accordion defaultExpanded={true}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className="filters-title">One-way price</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <form>
-                <label htmlFor="vol" className="range-title">
-                  Up to {new Intl.NumberFormat("en-IN").format(rangeValue)}
-                </label>
-                <br></br>
-                <input
-                  type="range"
-                  id="vol"
-                  name="vol"
-                  min="3000"
-                  max="6,834"
-                  step="1"
-                  value={rangeValue}
-                  onChange={handleRangeChange}
-                  className="range-input"
-                />
-
-                <div className="checkbox-label">
-                  <span>₹ 3000</span>
-                  <span style={{ marginLeft: "115px" }}>₹6,834</span>
-                </div>
-              </form>
-            </AccordionDetails>
-          </Accordion>
-        </div> */}
 
         <div>
           <Accordion defaultExpanded={true}>
@@ -377,17 +259,18 @@ function FlightsFilters({}) {
             <AccordionDetails>
               <form>
                 <label htmlFor="vol" className="range-title">
-                  Up to {new Intl.NumberFormat("en-IN").format(rangeValue)}
+                  Up to
+                  {new Intl.NumberFormat("en-IN").format(
+                    parseInt(checkboxValue.ticketPrice, 10)
+                  )}
                 </label>
                 <br></br>
                 <input
                   type="range"
-                  id="vol"
-                  name="vol"
+                  name="ticketPrice"
                   min="2000"
                   max="6000"
-                  step="1"
-                  value={rangeValue}
+                  value={checkboxValue.ticketPrice}
                   onChange={handleRangeChange}
                   className="range-input"
                 />
@@ -529,62 +412,22 @@ function FlightsFilters({}) {
             </AccordionSummary>
             <AccordionDetails>
               <form>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="duration-1"
-                    name="duration"
-                    value="1"
-                    className="checkbox-input"
-                    checked={duration === "1"}
-                    onChange={() => handleDurationChange("1")}
-                  />
-                  <label htmlFor="duration-1" className="checkbox-label">
-                    1 Hr
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="duration-2"
-                    name="duration"
-                    value="2"
-                    className="checkbox-input"
-                    checked={duration === "2"}
-                    onChange={() => handleDurationChange("2")}
-                  />
-                  <label htmlFor="duration-2" className="checkbox-label">
-                    2 Hr
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="duration-3"
-                    name="duration"
-                    value="3"
-                    className="checkbox-input"
-                    checked={duration === "3"}
-                    onChange={() => handleDurationChange("3")}
-                  />
-                  <label htmlFor="duration-3" className="checkbox-label">
-                    3 Hr
-                  </label>
-                </div>
-                <div className="checkbox-container">
-                  <input
-                    type="checkbox"
-                    id="duration-4"
-                    name="duration"
-                    value="4"
-                    className="checkbox-input"
-                    checked={duration === "4"}
-                    onChange={() => handleDurationChange("4")}
-                  />
-                  <label htmlFor="duration-4" className="checkbox-label">
-                    4 Hr
-                  </label>
-                </div>
+                {["1", "2", "3", "4"].map((item, index) => (
+                  <div className="checkbox-container" key={index}>
+                    <input
+                      type="checkbox"
+                      id="duration-1"
+                      name="duration"
+                      value={item}
+                      className="checkbox-input"
+                      checked={checkboxValue.duration === item ? true : false}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label htmlFor="duration-1" className="checkbox-label">
+                      {item} Hr
+                    </label>
+                  </div>
+                ))}
               </form>
             </AccordionDetails>
           </Accordion>

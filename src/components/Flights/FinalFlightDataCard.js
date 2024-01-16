@@ -7,55 +7,25 @@ import Uparrow from "../../Assests/Uparrow";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FinalFlightDataCard() {
-  const { rangeValue, stops, isApply, departuretime, duration } =
-    useFlightContext();
-  console.log("departuretime:", departuretime);
-  console.log("stops:", stops);
-  // console.log("checkboxValues", checkboxValues);
+  const { filteredObject, checkboxValue, searchData } = useFlightContext();
+  const [DepartureFilterData, setdepartureFilterData] = useState();
+  const [arrivalFilterData, setArrivalFilterData] = useState(null);
 
-  console.log(isApply);
+  const [leftClick, setLeftClick] = useState(false);
+  const [rightClick, setRightClick] = useState(false);
+  const [isDepatureFlightData, setisDepatureFlightData] = useState(null);
+  const [isArrivalFlightData, setisArrivalFlightData] = useState(null);
+  const [leftside, setLeftside] = useState("card-active");
 
-  const convertToApiFormat = (filter) => {
-    const { stops, departureTime, ticketPrice, duration } = filter;
+  // console.log(checkboxValue, "checkboxValue");
+  // Object.entries(checkboxValue)
+  // above part converts the checkboxValue object into an array of [key, value] pairs.
+  //.filter(([key, value]) => value (remove entries where the value is falsy (empty string, null, undefined, false, 0))
+  // Object.fromEntries(): Finally, this part converts the filtered array of [key, value] pairs back into an object
 
-    // Convert departureTime to the required format
-    if (typeof departureTime === "string" && departureTime.includes("-")) {
-      const [startTime, endTime] = departureTime.split("-");
-      const apiDepartureTime = {
-        $lte: endTime,
-        $gte: startTime,
-      };
-
-      const apiTicketPrice = {
-        $lte: ticketPrice,
-        $gte: 500,
-      };
-
-      return {
-        stops,
-        departureTime: apiDepartureTime,
-        ticketPrice: apiTicketPrice,
-        duration,
-      };
-    }
-  };
-
-  // console.log("checkboxValues", checkboxValues);
-  // console.log("Price", rangeValue);
-
-  // const filteringData = {
-  //   stops: checkboxValues["non-stop"],
-  //   departureTime: checkboxValues["departuretime-morning"],
-  //   duration: checkboxValues["duration-1"],
-  //   ticketPrice: rangeValue,
-  // };
-
-  // const ApiData = convertToApiFormat(filteringData);
-
-  // console.log(JSON.stringify(ApiData));
+  // console.log(,JSON.stringify(filteredObject));
 
   const navigate = useNavigate();
-  const searchData = JSON.parse(localStorage.getItem("SearchData"));
 
   const {
     data: departuredata,
@@ -79,46 +49,61 @@ function FinalFlightDataCard() {
     "GET"
   );
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const apiUrl = `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search={"source":"${
-  //         searchData.source
-  //       }","destination":"${searchData.destination}"}&day=${
-  //         searchData.dayDeparture
-  //       }&filter=${JSON.stringify(ApiData)}`;
-  //       const response = await fetch(apiUrl, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           projectID: "d0hy5azls1gu",
-  //         },
-  //       });
+  const fetchDepartureData = async () => {
+    try {
+      if (filteredObject && Object.keys(filteredObject).length > 0) {
+        const DepartureapiUrl = `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search={"source":"${
+          searchData.source
+        }","destination":"${searchData.destination}"}&day=${
+          searchData.dayDeparture
+        }&filter=${JSON.stringify(filteredObject)}`;
 
-  //       const result = await response.json();
-  //       console.log(result.data);
-  //     } catch (error) {
-  //       console.log("Error", error);
-  //     }
-  //   };
+        const response = await fetch(DepartureapiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            projectID: "d0hy5azls1gu",
+          },
+        });
 
-  //   if (isApply) {
-  //     fetchData();
-  //   }
-  // }, [isApply, searchData, ApiData]);
-
-  // console.log("arrivalData", arrivalData.flights);
-  // console.log("Depaturedata", departuredata);
-
-  const [leftClick, setLeftClick] = useState(false);
-  const [rightClick, setRightClick] = useState(false);
-  const [isDepatureFlightData, setisDepatureFlightData] = useState(null);
-  const [isArrivalFlightData, setisArrivalFlightData] = useState(null);
-  const [leftside, setLeftside] = useState("card-active");
-
-  const handleBookFlight = () => {
-    navigate("/reviewitinerary");
+        const result = await response.json();
+        setdepartureFilterData(result.data);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
+  // console.log(DepartureFilterData, "departureFilterData");
+
+  const fetchArrivalData = async () => {
+    try {
+      if (filteredObject && Object.keys(filteredObject).length > 0) {
+        const ArrivalapiUrl = `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search={"source":"${
+          searchData.destination
+        }","destination":"${searchData.source}"}&day=${
+          searchData.dayDeparture
+        }&filter=${JSON.stringify(filteredObject)}`;
+
+        const response = await fetch(ArrivalapiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            projectID: "d0hy5azls1gu",
+          },
+        });
+
+        const result = await response.json();
+        setArrivalFilterData(result.data);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDepartureData();
+    fetchArrivalData();
+  }, [filteredObject]);
 
   const handleLeftFlightClick = (e, flight) => {
     e.stopPropagation();
@@ -146,6 +131,25 @@ function FinalFlightDataCard() {
     setisArrivalFlightData(flight);
   };
 
+  const handleBookFlight = () => {
+    const departureId = leftClick
+      ? isDepatureFlightData._id
+      : departuredata?.flights[0]._id;
+
+    const arrivalId = rightClick
+      ? isArrivalFlightData._id
+      : arrivalData?.flights[0]._id;
+
+    localStorage.setItem("DepartureId", departureId);
+    localStorage.setItem("ArrivalId", arrivalId);
+
+    navigate("/reviewitinerary");
+  };
+
+  const handleResetFilter = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <div className="flightsdata">
@@ -157,69 +161,71 @@ function FinalFlightDataCard() {
                   <SearchFlightLogo />
                 </span>
                 <span className="flight-id">
-                  {isDepatureFlightData.flightID.split("-")[0]}
+                  {isDepatureFlightData?.flightID?.split("-")[0]}
                 </span>
               </div>
               <div className="left-div flight-time">
-                <span>{isDepatureFlightData.departureTime}</span>
-                <span className="place">{isDepatureFlightData.source}</span>
+                <span>{isDepatureFlightData?.departureTime}</span>
+                <span className="place">{isDepatureFlightData?.source}</span>
               </div>
               <div className="left-div">
                 <span className="flight-duration">
-                  {isDepatureFlightData.duration} hr
+                  {isDepatureFlightData?.duration} hr
                 </span>
                 <hr></hr>
                 <span className="flight-stop">
-                  {isDepatureFlightData.stops} stop
+                  {isDepatureFlightData?.stops} stop
                 </span>
               </div>
               <div className="left-div flight-time">
-                <span>{isDepatureFlightData.arrivalTime}</span>
+                <span>{isDepatureFlightData?.arrivalTime}</span>
                 <span className="place">
-                  {isDepatureFlightData.destination}
+                  {isDepatureFlightData?.destination}
                 </span>
               </div>
             </div>
-          ) : (
-            departuredata?.flights &&
-            departuredata?.flights.length > 0 && (
-              <div>
-                <div className="left">
-                  <div className="left-div logo">
-                    <span>
-                      <SearchFlightLogo />
-                    </span>
-                    <span className="flight-id">
-                      {departuredata.flights[0].flightID.split("-")[0]}
-                    </span>
-                  </div>
-                  <div className="left-div flight-time">
-                    <span>{departuredata.flights[0].departureTime}</span>
-                    <span className="place">
-                      {departuredata.flights[0].source}
-                    </span>
-                  </div>
-                  <div className="left-div">
-                    <span className="flight-duration">
-                      {departuredata.flights[0].duration} hr
-                    </span>
-                    <hr></hr>
-                    <span className="flight-stop">
-                      {departuredata.flights[0].stops} stop
-                    </span>
-                  </div>
-                  <div className="left-div flight-time">
-                    <span>{departuredata.flights[0].arrivalTime}</span>
-                    <span className="place">
-                      {departuredata.flights[0].destination}
-                    </span>
-                  </div>
+          ) : DepartureFilterData == null ||
+            DepartureFilterData?.flights.length > 0 ? (
+            <div>
+              <div className="left">
+                <div className="left-div logo">
+                  <span>
+                    <SearchFlightLogo />
+                  </span>
+                  <span className="flight-id">
+                    {departuredata?.flights[0]?.flightID?.split("-")[0]}
+                  </span>
+                </div>
+                <div className="left-div flight-time">
+                  <span>{departuredata?.flights[0]?.departureTime}</span>
+                  <span className="place">
+                    {departuredata?.flights[0]?.source}
+                  </span>
+                </div>
+                <div className="left-div">
+                  <span className="flight-duration">
+                    {departuredata?.flights[0]?.duration} hr
+                  </span>
+                  <hr></hr>
+                  <span className="flight-stop">
+                    {departuredata?.flights[0]?.stops} stop
+                  </span>
+                </div>
+                <div className="left-div flight-time">
+                  <span>{departuredata?.flights[0]?.arrivalTime}</span>
+                  <span className="place">
+                    {departuredata?.flights[0]?.destination}
+                  </span>
                 </div>
               </div>
-            )
+            </div>
+          ) : (
+            <div className="notfound-container">
+              <h3 className="notfound-title">We couldn't find flights</h3>
+            </div>
           )}
 
-          {/* <div className="right"> */}
+          {/*"right" click  */}
 
           {rightClick ? (
             <div className="right">
@@ -228,78 +234,82 @@ function FinalFlightDataCard() {
                   <SearchFlightLogo />
                 </span>
                 <span className="flight-id">
-                  {isArrivalFlightData.flightID.split("-")[0]}
+                  {isArrivalFlightData?.flightID?.split("-")[0]}
                 </span>
               </div>
               <div className="right-div flight-time">
-                <span>{isArrivalFlightData.departureTime}</span>
-                <span className="place">{isArrivalFlightData.source}</span>
+                <span>{isArrivalFlightData?.departureTime}</span>
+                <span className="place">{isArrivalFlightData?.source}</span>
               </div>
               <div className="right-div">
                 <span className="flight-duration">
-                  {isArrivalFlightData.duration} hr
+                  {isArrivalFlightData?.duration} hr
                 </span>
                 <hr></hr>
                 <span className="flight-stop">
-                  {isArrivalFlightData.stops} stop
+                  {isArrivalFlightData?.stops} stop
                 </span>
               </div>
               <div className="right-div flight-time">
-                <span>{isArrivalFlightData.arrivalTime}</span>
-                <span className="place">{isArrivalFlightData.destination}</span>
+                <span>{isArrivalFlightData?.arrivalTime}</span>
+                <span className="place">
+                  {isArrivalFlightData?.destination}
+                </span>
+              </div>
+            </div>
+          ) : arrivalFilterData == null ||
+            arrivalFilterData?.flights.length > 0 ? (
+            <div>
+              <div className="right">
+                <div className="right-div logo">
+                  <span>
+                    <SearchFlightLogo />
+                  </span>
+                  <span className="flight-id">
+                    {arrivalData?.flights[0]?.flightID?.split("-")[0]}
+                  </span>
+                </div>
+                <div className="right-div flight-time">
+                  <span>{arrivalData?.flights[0]?.departureTime}</span>
+                  <span className="place">
+                    {arrivalData?.flights[0]?.source}
+                  </span>
+                </div>
+                <div className="right-div">
+                  <span className="flight-duration">
+                    {arrivalData?.flights[0]?.duration} hr
+                  </span>
+                  <hr></hr>
+                  <span className="flight-stop">
+                    {arrivalData?.flights[0]?.stops} stop
+                  </span>
+                </div>
+                <div className="right-div flight-time">
+                  <span>{arrivalData?.flights[0]?.arrivalTime}</span>
+                  <span className="place">
+                    {arrivalData?.flights[0]?.destination}
+                  </span>
+                </div>
               </div>
             </div>
           ) : (
-            arrivalData?.flights &&
-            arrivalData?.flights.length > 0 && (
-              <div>
-                <div className="right">
-                  <div className="right-div logo">
-                    <span>
-                      <SearchFlightLogo />
-                    </span>
-                    <span className="flight-id">
-                      {arrivalData.flights[0].flightID.split("-")[0]}
-                    </span>
-                  </div>
-                  <div className="right-div flight-time">
-                    <span>{arrivalData.flights[0].departureTime}</span>
-                    <span className="place">
-                      {arrivalData.flights[0].source}
-                    </span>
-                  </div>
-                  <div className="right-div">
-                    <span className="flight-duration">
-                      {arrivalData.flights[0].duration} hr
-                    </span>
-                    <hr></hr>
-                    <span className="flight-stop">
-                      {arrivalData.flights[0].stops} stop
-                    </span>
-                  </div>
-                  <div className="right-div flight-time">
-                    <span>{arrivalData.flights[0].arrivalTime}</span>
-                    <span className="place">
-                      {arrivalData.flights[0].destination}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )
+            <div className="notfound-container">
+              <h3 className="notfound-title">We couldn't find flights</h3>
+            </div>
           )}
 
           <div className="flight-price left-div">
             {leftClick && rightClick ? (
               <span>
-                {isArrivalFlightData.ticketPrice +
-                  isDepatureFlightData.ticketPrice}
+                {isArrivalFlightData?.ticketPrice +
+                  isDepatureFlightData?.ticketPrice}
               </span>
             ) : (
               departuredata?.flights &&
               arrivalData?.flights && (
                 <span>
-                  {arrivalData.flights[0].ticketPrice +
-                    departuredata.flights[0].ticketPrice}
+                  {arrivalData.flights[0]?.ticketPrice +
+                    departuredata.flights[0]?.ticketPrice}
                 </span>
               )
             )}
@@ -349,7 +359,12 @@ function FinalFlightDataCard() {
 
       <div className="flight-data">
         <div className="leftside-flight-data">
-          {departuredata?.flights &&
+          {(filteredObject && Object.keys(filteredObject).length == 0) ||
+          (checkboxValue.stops == "" &&
+            checkboxValue.duration == "" &&
+            checkboxValue.departureTime == "" &&
+            checkboxValue.ticketPrice == 2000 &&
+            departuredata?.flights) ? (
             departuredata?.flights.map((flight, index) => (
               <div
                 key={index}
@@ -364,33 +379,99 @@ function FinalFlightDataCard() {
               >
                 <div className="logo">
                   <SearchFlightLogo />
-                  <p className="flight-id">{flight.flightID.split("-")[0]}</p>
+                  <p className="flight-id">{flight?.flightID?.split("-")[0]}</p>
                 </div>
                 <div className="middle-flight-data">
                   <div className="source-and-time">
-                    <span className="flight-time">{flight.departureTime}</span>
-                    <span className="place">{flight.source}</span>
+                    <span className="flight-time">{flight?.departureTime}</span>
+                    <span className="place">{flight?.source}</span>
                   </div>
                   <div>
                     <span className="flight-duration">
-                      {flight.duration}hr 00m
+                      {flight?.duration}hr 00m
                     </span>
                     <hr></hr>
-                    <span className="flight-stop">{flight.stops} stop</span>
+                    <span className="flight-stop">{flight?.stops} stop</span>
                   </div>
                   <div className="arrival-and-time">
-                    <span className="flight-time">{flight.arrivalTime}</span>
-                    <span className="place">{flight.destination}</span>
+                    <span className="flight-time">{flight?.arrivalTime}</span>
+                    <span className="place">{flight?.destination}</span>
                   </div>
                 </div>
-                <div className="flight-price">₹{flight.ticketPrice}</div>
+                <div className="flight-price">₹{flight?.ticketPrice}</div>
               </div>
-            ))}
+            ))
+          ) : DepartureFilterData == null ||
+            DepartureFilterData.flights.length == 0 ? (
+            <div className="notfound-container">
+              <h3 className="notfound-title">
+                We couldn't find flights to match your filters
+              </h3>
+              <p className="notfound-para">
+                Please reset your filters to see flights
+              </p>
+              <button className="notfound-btn" onClick={handleResetFilter}>
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            DepartureFilterData?.flights.map((filteredFlight, index) => (
+              <div
+                key={index}
+                className={
+                  index == 0
+                    ? "left-flight-data card-active"
+                    : "left-flight-data"
+                }
+                onClick={(e) => {
+                  handleLeftFlightClick(e, filteredFlight);
+                }}
+              >
+                <div className="logo">
+                  <SearchFlightLogo />
+                  <p className="flight-id">
+                    {filteredFlight?.flightID?.split("-")[0]}
+                  </p>
+                </div>
+                <div className="middle-flight-data">
+                  <div className="source-and-time">
+                    <span className="flight-time">
+                      {filteredFlight?.departureTime}
+                    </span>
+                    <span className="place">{filteredFlight?.source}</span>
+                  </div>
+                  <div>
+                    <span className="flight-duration">
+                      {filteredFlight?.duration}hr 00m
+                    </span>
+                    <hr></hr>
+                    <span className="flight-stop">
+                      {filteredFlight?.stops} stop
+                    </span>
+                  </div>
+                  <div className="arrival-and-time">
+                    <span className="flight-time">
+                      {filteredFlight?.arrivalTime}
+                    </span>
+                    <span className="place">{filteredFlight?.destination}</span>
+                  </div>
+                </div>
+                <div className="flight-price">
+                  ₹{filteredFlight?.ticketPrice}
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* rightSide */}
         <div className="rightside-flight-data">
-          {arrivalData?.flights &&
+          {(filteredObject && Object.keys(filteredObject).length == 0) ||
+          (checkboxValue.stops == "" &&
+            checkboxValue.duration == "" &&
+            checkboxValue.departureTime == "" &&
+            checkboxValue.ticketPrice == 2000 &&
+            arrivalData?.flights) ? (
             arrivalData?.flights.map((flight, index) => (
               <div
                 className={
@@ -406,28 +487,90 @@ function FinalFlightDataCard() {
               >
                 <div className="logo">
                   <SearchFlightLogo />
-                  <p className="flight-id">{flight.flightID.split("-")[0]}</p>
+                  <p className="flight-id">{flight?.flightID?.split("-")[0]}</p>
                 </div>
                 <div className="middle-flight-data">
                   <div className="source-and-time">
-                    <span className="flight-time">{flight.departureTime}</span>
-                    <span className="place">{flight.source}</span>
+                    <span className="flight-time">{flight?.departureTime}</span>
+                    <span className="place">{flight?.source}</span>
                   </div>
                   <div>
                     <span className="flight-duration">
-                      {flight.duration}hr 00m
+                      {flight?.duration}hr 00m
                     </span>
                     <hr></hr>
-                    <span className="flight-stop">{flight.stops} stop</span>
+                    <span className="flight-stop">{flight?.stops} stop</span>
                   </div>
                   <div className="arrival-and-time">
-                    <span className="flight-time">{flight.arrivalTime}</span>
-                    <span className="place">{flight.destination}</span>
+                    <span className="flight-time">{flight?.arrivalTime}</span>
+                    <span className="place">{flight?.destination}</span>
                   </div>
                 </div>
-                <div className="flight-price">₹{flight.ticketPrice}</div>
+                <div className="flight-price">₹{flight?.ticketPrice}</div>
               </div>
-            ))}
+            ))
+          ) : arrivalFilterData == null ||
+            arrivalFilterData.flights.length == 0 ? (
+            <div className="notfound-container">
+              <h3 className="notfound-title">
+                We couldn't find flights to match your filters
+              </h3>
+              <p className="notfound-para">
+                Please reset your filters to see flights
+              </p>
+              <button className="notfound-btn" onClick={handleResetFilter}>
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            arrivalFilterData?.flights.map((filteredFlight, index) => (
+              <div
+                className={
+                  index == 0
+                    ? "right-flight-data card-active"
+                    : "right-flight-data"
+                }
+                id="right-data"
+                key={index}
+                onClick={(e) => {
+                  handleRightFlightClick(e, filteredFlight);
+                }}
+              >
+                <div className="logo">
+                  <SearchFlightLogo />
+                  <p className="flight-id">
+                    {filteredFlight?.flightID?.split("-")[0]}
+                  </p>
+                </div>
+                <div className="middle-flight-data">
+                  <div className="source-and-time">
+                    <span className="flight-time">
+                      {filteredFlight?.departureTime}
+                    </span>
+                    <span className="place">{filteredFlight?.source}</span>
+                  </div>
+                  <div>
+                    <span className="flight-duration">
+                      {filteredFlight?.duration}hr 00m
+                    </span>
+                    <hr></hr>
+                    <span className="flight-stop">
+                      {filteredFlight?.stops} stop
+                    </span>
+                  </div>
+                  <div className="arrival-and-time">
+                    <span className="flight-time">
+                      {filteredFlight?.arrivalTime}
+                    </span>
+                    <span className="place">{filteredFlight?.destination}</span>
+                  </div>
+                </div>
+                <div className="flight-price">
+                  ₹{filteredFlight?.ticketPrice}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>

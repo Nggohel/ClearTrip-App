@@ -20,9 +20,32 @@ import Cancelticket from "../../Assests/Images/Flight/Cancelticket";
 import DateChange from "../../Assests/Images/Flight/DateChange";
 import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
 import DownArrow from "../../Assests/Images/DownArrow";
-import ChooseFlightseat from "./ChooseFlightseat";
+import useFetch from "../../Hooks/UseFetch";
+import { useFlightContext } from "../../Hooks/useFlightContext";
+
 function LeftFlightReviewItinerary() {
+  const { searchData } = useFlightContext();
+
+  const arrivalId = localStorage.getItem("ArrivalId");
+  const DepartureId = localStorage.getItem("DepartureId");
+
   const [showForm, setShowForm] = useState(false);
+
+  console.log(DepartureId, "departureId");
+  console.log(arrivalId, "arrivalId");
+  const { data: singleDepartureData } = useFetch(
+    `https://academics.newtonschool.co/api/v1/bookingportals/flight/${DepartureId}`,
+    "GET"
+  );
+
+  const { data: singleArrivalData } = useFetch(
+    `https://academics.newtonschool.co/api/v1/bookingportals/flight/${arrivalId}`,
+    "GET"
+  );
+
+  console.log(singleDepartureData?.departureTime, "singleDepartureData");
+  console.log(singleDepartureData?.destination, "singleDepartureData");
+  // console.log(, "::::local");
 
   const handleContinueClick = () => {
     setShowForm(true);
@@ -42,11 +65,18 @@ function LeftFlightReviewItinerary() {
             {/* title */}
             <div className="flight-itinerary-title">
               <div className="flight-location">
-                <span className="flight-location-span">Bangalore</span>
+                <span className="flight-location-span">
+                  {searchData.DepartureCity}
+                </span>
                 <ArrowItinerary />
-                <span className="flight-location-span">Mumbai</span>
+                <span className="flight-location-span">
+                  {searchData.ArrivalCity}
+                </span>
               </div>
-              <div>Wed,22 Nov 2023</div>
+              <div>
+                {searchData.dayDeparture} ,{searchData.FormattedStartDate}{" "}
+                {searchData.StartDateMonth} {searchData.StartDateYear}
+              </div>
             </div>
             {/* flight details 1*/}
             <div className="flight-review-details">
@@ -68,24 +98,35 @@ function LeftFlightReviewItinerary() {
               <div className="flight-time-port-details">
                 <div className="flight-port-details">
                   <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-                    21:05
+                    {singleDepartureData?.departureTime}
                   </span>
-                  <span style={{ fontSize: "20px" }}>BLR</span>
+                  <span style={{ fontSize: "20px" }}>
+                    {singleDepartureData?.source}
+                  </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    Kempegowda International Airport, Bangalore, Terminal 1
+                    International Airport,{searchData.DepartureCity}, Terminal 1
                   </span>
                 </div>
-                <div style={{ display: "flex", marginLeft: "5px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    marginLeft: "5px",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
                   <Clock />
-                  <span>1h 10m</span>
+                  <span>{singleDepartureData?.duration} Hr</span>
                 </div>
                 <div className="flight-port-details">
                   <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-                    22:30
+                    {singleDepartureData?.arrivalTime}
                   </span>
-                  <span style={{ fontSize: "20px" }}>IXE</span>
+                  <span style={{ fontSize: "20px" }}>
+                    {singleDepartureData?.destination}
+                  </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    Bajpe, Mangalore, Terminal
+                    {searchData.ArrivalCity}, Terminal
                   </span>
                 </div>
               </div>
@@ -93,13 +134,12 @@ function LeftFlightReviewItinerary() {
 
             {/* header layover */}
             <div className="layover-details">
-              <span className="layover-location">
-                Layover in Bajpe, Mangalore (IXE)
-              </span>
-              <span className="layover-time">Short layover 1h 15m</span>
+              <span className="layover-location">No Layover</span>
+              <span className="layover-time">Short layover 0h 00m</span>
             </div>
+
             {/* flight details 2 */}
-            <div className="flight-review-details">
+            {/* <div className="flight-review-details">
               <div className="flight-name-details">
                 <div>
                   <Flight6E />
@@ -139,7 +179,7 @@ function LeftFlightReviewItinerary() {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* flight details 3*/}
 
             <div className="flight-review-details">
@@ -161,24 +201,35 @@ function LeftFlightReviewItinerary() {
               <div className="flight-time-port-details">
                 <div className="flight-port-details">
                   <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-                    21:05
+                    {singleArrivalData?.departureTime}
                   </span>
-                  <span style={{ fontSize: "20px" }}>BLR</span>
+                  <span style={{ fontSize: "20px" }}>
+                    {singleArrivalData?.source}
+                  </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    Kempegowda International Airport, Bangalore, Terminal 1
+                    International Airport,{searchData.ArrivalCity}, Terminal 1
                   </span>
                 </div>
-                <div style={{ display: "flex", marginLeft: "5px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    marginLeft: "5px",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
                   <Clock />
-                  <span>1h 10m</span>
+                  <span>{singleArrivalData?.duration} Hr</span>
                 </div>
                 <div className="flight-port-details">
                   <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-                    22:30
+                    {singleArrivalData?.arrivalTime}
                   </span>
-                  <span style={{ fontSize: "20px" }}>IXE</span>
+                  <span style={{ fontSize: "20px" }}>
+                    {singleArrivalData?.destination}
+                  </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    Bajpe, Mangalore, Terminal
+                    {searchData.DepartureCity}, Terminal
                   </span>
                 </div>
               </div>
@@ -367,7 +418,7 @@ function LeftFlightReviewItinerary() {
             </div>
           </div>
         </div>
-        <ChooseFlightseat />
+
         {/* 2 */}
 
         {showForm && (
@@ -377,23 +428,23 @@ function LeftFlightReviewItinerary() {
               <div>
                 <h2>Add Contact details</h2>
                 <p style={{ fontSize: "12px" }}>
-                  E-tickets will be sent to this email address and phone number
+                  E-tickets will be sent to this email address
                 </p>
               </div>
             </div>
             <div className="additional-info-form">
-              <label htmlFor="phoneNumber">Mobile Number:</label>
+              <label htmlFor="phoneNumber">Name:</label>
               <div className="mobile-card">
-                <button className="number-btn">
+                {/* <button className="number-btn">
                   <div>+91</div>
                   <DownArrow />
-                </button>
+                </button> */}
 
                 <input
                   type="text"
                   id="phoneNumber"
                   className="mobile-number"
-                  placeholder="Mobile number"
+                  placeholder="Full Name"
                 />
               </div>
 

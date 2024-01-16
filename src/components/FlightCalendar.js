@@ -3,7 +3,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./../styles/MainSection.css";
 
-const FlightCalendar = ({ StartDay, EndDay }) => {
+const FlightCalendar = ({
+  StartDay,
+  EndDay,
+  FormatedStartDate,
+  startDateMonth,
+  startDateYear,
+}) => {
   const [startDate, setStartDate] = useState(new Date());
 
   const [endDate, setEndDate] = useState(new Date());
@@ -14,16 +20,48 @@ const FlightCalendar = ({ StartDay, EndDay }) => {
   maxDate.setMonth(currentDate.getMonth() + 9);
 
   useEffect(() => {
+    // start date
     const dayOfstart = startDate.toLocaleDateString(undefined, {
       weekday: "short",
     });
+
+    const FormatedstartDate = startDate.toLocaleDateString(undefined, {
+      day: "numeric",
+    });
+
+    const startDatemonth = startDate.toLocaleDateString(undefined, {
+      month: "short",
+    });
+    const startDateyear = startDate.toLocaleDateString(undefined, {
+      year: "numeric",
+    });
+    // end date
     const dayOfEnd = endDate.toLocaleDateString(undefined, {
       weekday: "short",
     });
+    const FormatedendDate = endDate.toLocaleDateString(undefined, {
+      day: "numeric",
+    });
 
-    StartDay(dayOfstart);
-    EndDay(dayOfEnd);
-  }, [startDate, endDate, EndDay, EndDay]);
+    const endDatemonth = endDate.toLocaleDateString(undefined, {
+      month: "short",
+    });
+    const endDateyear = endDate.toLocaleDateString(undefined, {
+      year: "numeric",
+    });
+
+    StartDay(dayOfstart, FormatedstartDate, startDatemonth, startDateyear);
+
+    EndDay(dayOfEnd, FormatedendDate, endDatemonth, endDateyear);
+  }, [
+    startDate,
+    endDate,
+    StartDay,
+    EndDay,
+    FormatedStartDate,
+    startDateMonth,
+    startDateYear,
+  ]);
 
   return (
     <div className="from-or-to-date">

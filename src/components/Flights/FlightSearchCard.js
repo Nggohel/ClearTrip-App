@@ -13,10 +13,18 @@ function FlightSearchCard({ icon }) {
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
   const [dayDeparture, setDayDeparture] = useState("");
   const [dayArrival, setDayArrival] = useState("");
+  const [FormattedStartDate, setFormattedStartDate] = useState("");
+  const [StartDateMonth, setStartDateMonth] = useState("");
+  const [StartDateYear, setStartDateYear] = useState("");
+  const [FormattedEndDate, setFormattedEndDate] = useState("");
+  const [EndDateMonth, setEndDateMonth] = useState("");
+  const [EndDateYear, setEndDateYear] = useState("");
   const [searchData, setSearchData] = useState({});
 
   let FromValue = wherefromValue.split("-");
   let ToValue = wheretoValue.split("-");
+  let DepartureCity = FromValue[1].split(",")[0].trim();
+  let ArrivalCity = ToValue[1].split(",")[0].trim();
 
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
@@ -26,8 +34,8 @@ function FlightSearchCard({ icon }) {
   };
 
   const handleSearchButton = () => {
-    console.log(FromValue[0]);
-    console.log(ToValue[0]);
+    console.log(DepartureCity);
+    
 
     localStorage.setItem(
       "SearchData",
@@ -36,6 +44,14 @@ function FlightSearchCard({ icon }) {
         destination: ToValue[0],
         dayDeparture: dayDeparture,
         dayArrival: dayArrival,
+        FormattedStartDate: FormattedStartDate,
+        StartDateMonth: StartDateMonth,
+        StartDateYear: StartDateYear,
+        FormattedEndDate: FormattedEndDate,
+        EndDateMonth: EndDateMonth,
+        EndDateYear: EndDateYear,
+        DepartureCity: DepartureCity,
+        ArrivalCity: ArrivalCity,
       })
     );
   };
@@ -106,11 +122,28 @@ function FlightSearchCard({ icon }) {
                 </div>
                 <div>
                   <FlightCalendar
-                    StartDay={(dayOfstart) => {
+                    StartDay={(
+                      dayOfstart,
+                      formattedStartDate,
+                      startDateMonth,
+                      startDateYear
+                    ) => {
+                      // setDayDeparture(dayOfstart);
                       setDayDeparture(dayOfstart);
+                      setFormattedStartDate(formattedStartDate);
+                      setStartDateMonth(startDateMonth);
+                      setStartDateYear(startDateYear);
                     }}
-                    EndDay={(dayOfEnd) => {
+                    EndDay={(
+                      dayOfEnd,
+                      formattedEndDate,
+                      endDateMonth,
+                      endDateYear
+                    ) => {
                       setDayArrival(dayOfEnd);
+                      setFormattedEndDate(formattedEndDate);
+                      setEndDateMonth(endDateMonth);
+                      setEndDateYear(endDateYear);
                     }}
                   />
                 </div>
