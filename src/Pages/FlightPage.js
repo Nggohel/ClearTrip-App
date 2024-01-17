@@ -14,11 +14,13 @@ import abuDhabi from "../Assests/Images/abuDhabi.jpg";
 import "./../styles/FlightPage.css";
 import Footer from "../components/Footer";
 import LoginPage from "../Pages/LoginPage";
+import { useState } from "react";
 
 function FlightPage() {
+  const [open, setOpen] = useState(true);
   return (
     <>
-    <LoginPage />
+      <LoginPage open={open} openChange={setOpen} />
       <NavBar />
       <div style={{ display: "flex" }}>
         <LeftSideSection />

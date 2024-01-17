@@ -8,6 +8,7 @@ import HotelSearchPage from "../Pages/HotelSearchPage";
 import HotelDetailsPage from "./Hotel/HotelDetailsPage";
 import HotelConfirmationPage from "../Pages/HotelConfirmationPage";
 import { FlightContextProvider } from "../Hooks/useFlightContext";
+import LoginPage from "../Pages/LoginPage";
 function App() {
   return (
     <FlightContextProvider>
@@ -16,6 +17,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<FlightPage />} />
+            <Route path="/loginpage" element={<LoginPage />} />
             <Route path="/search" element={<SearchFlight />} />
             <Route
               path="/reviewitinerary"

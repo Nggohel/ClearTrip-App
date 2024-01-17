@@ -13,9 +13,8 @@ export const FlightContextProvider = ({ children }) => {
     ticketPrice: 2000,
   });
 
-  const [departureId, setDepartureId] = useState(null);
-  const [arrivalId, setArrivalId] = useState(null);
-
+  const [singleApiDepartureData, setsingleApiDepartureData] = useState();
+  const [singleApiArrivalData, setsingleApiArrivalData] = useState();
   const [filteredObject, setFilteredObject] = useState({});
 
   const departureTimeFormate = (time) => {
@@ -57,11 +56,11 @@ export const FlightContextProvider = ({ children }) => {
     checkboxValue,
     setCheckboxValue,
     filteredObject,
-    departureId,
-    arrivalId,
-    setDepartureId,
-    setArrivalId,
     searchData,
+    singleApiDepartureData,
+    setsingleApiDepartureData,
+    singleApiArrivalData,
+    setsingleApiArrivalData,
   };
 
   return (

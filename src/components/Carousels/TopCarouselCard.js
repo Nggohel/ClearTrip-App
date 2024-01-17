@@ -25,7 +25,7 @@ function TopCarouselCard() {
     };
   }, [totalSlides, interval]);
   return (
-    <>
+    <React.Fragment>
       <Carousel
         showArrows={true}
         showStatus={false}
@@ -67,7 +67,7 @@ function TopCarouselCard() {
           <img className="" src={Slider6} alt="headerimage" />
         </div>
       </Carousel>
-    </>
+    </React.Fragment>
   );
 }
 

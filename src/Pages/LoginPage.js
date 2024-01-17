@@ -1,14 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import LoginCarousel from "../components/Carousels/LoginCarousel";
 import "../styles/LoginPage.css";
-const LoginPage = () => {
-  const [open, setOpen] = useState(true);
+import useFetch from "../Hooks/UseFetch";
+// 
+const LoginPage = ({open,openChange}) => {
+  // const [open, setOpen] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
     setIsLogin(true);
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const { data: signupData, fetchPostData } = useFetch();
+
+  const handleSignupApi = async () => {
+    fetchPostData(
+      `https://academics.newtonschool.co/api/v1/bookingportals/signup`,
+      "POST",
+      {
+        name: name,
+        email: email,
+        password: password,
+        appType: "bookingportals",
+      }
+    );
+    setName("");
+    setEmail("");
+    setPassword("");
+    setIsLogin(true);
+  };
+  console.log("Data", signupData);
+
+  const handleLoginApi = async () => {
+    fetchPostData(
+      `https://academics.newtonschool.co/api/v1/bookingportals/login`,
+      "POST",
+      {
+        email: email,
+        password: password,
+        appType: "bookingportals",
+      }
+    );
+    setName("");
+    setEmail("");
+    setPassword("");
+    openChange(false);
   };
 
   return (
@@ -16,7 +72,7 @@ const LoginPage = () => {
       <Modal
         open={open}
         center
-        onClose={() => setOpen(false)}
+        onClose={() => openChange(false)}
         classNames={{
           modal: "customModal",
         }}
@@ -24,6 +80,7 @@ const LoginPage = () => {
         <div style={{ display: "flex" }}>
           <LoginCarousel />
           <div className="login-container">
+            {/* true he toh name ki jarrot nahi he */}
             {isLogin ? (
               ""
             ) : (
@@ -33,6 +90,8 @@ const LoginPage = () => {
                   type="text"
                   className="input-name"
                   placeholder="Enter Your Name"
+                  value={name}
+                  onChange={handleNameChange}
                 ></input>
               </>
             )}
@@ -41,9 +100,27 @@ const LoginPage = () => {
               type="email"
               className="input-name"
               placeholder="Enter Your Email"
+              value={email}
+              onChange={handleEmailChange}
             ></input>
 
-            <button className="login-btn">Get start</button>
+            <label className="name-label">Password</label>
+            <input
+              type="password"
+              className="input-name"
+              placeholder="Enter Your Password"
+              value={password}
+              onChange={handlePasswordChange}
+            ></input>
+            <button
+              className="login-btn"
+              onClick={isLogin ? handleLoginApi : handleSignupApi}
+            >
+              {isLogin ? "Login" : "Get started"}
+            </button>
+
+            {/* link option */}
+            {/* true he toh yeh line dikhane ki jarrot nahi he */}
             {isLogin ? (
               ""
             ) : (

@@ -3,7 +3,9 @@ import ICICI from "../../Assests/Images/ICICI";
 import Offer from "../../Assests/Images/CT_offer.png";
 import HDFC from "../../Assests/Images/HDFC.svg";
 import Citi from "../../Assests/Images/Citi.svg";
+import { useFlightContext } from "../../Hooks/useFlightContext";
 function RightFlightReviewItinerary() {
+  const { singleApiDepartureData, singleApiArrivalData } = useFlightContext();
   return (
     <>
       <aside>
@@ -11,7 +13,9 @@ function RightFlightReviewItinerary() {
           <div className="main-rightside-div">
             <div className="billing-data">
               <div>
-                <p className="avaliable-seat">3 seat left</p>
+                <p className="avaliable-seat">
+                  {singleApiDepartureData?.availableSeats} seat left
+                </p>
               </div>
               <div className="bill-price">
                 <div style={{ fontSize: "16px", lineHeight: "20px" }}>
@@ -24,7 +28,8 @@ function RightFlightReviewItinerary() {
                     fontWeight: "700",
                   }}
                 >
-                  ₹8,481
+                  {singleApiDepartureData?.ticketPrice +
+                    singleApiArrivalData?.ticketPrice}
                 </div>
               </div>
               <div>
@@ -41,11 +46,16 @@ function RightFlightReviewItinerary() {
                   <p className="otherexpense-details">
                     Base fare (1 traveller)
                   </p>
-                  <p className="otherexpense-price">₹5,934</p>
+                  <p className="otherexpense-price">
+                    ₹{" "}
+                    {singleApiDepartureData?.ticketPrice +
+                      singleApiArrivalData?.ticketPrice -
+                      1934}
+                  </p>
                 </div>
                 <div className="otherexpense-data">
                   <p className="otherexpense-details">Taxes and fees</p>
-                  <p className="otherexpense-price">₹2,934</p>
+                  <p className="otherexpense-price">₹1,934</p>
                 </div>
                 <div className="otherexpense-data">
                   <p className="otherexpense-details">Add ons</p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowItinerary from "../../Assests/Images/ArrowItinerary";
 import AxisLogo from "../../Assests/Images/AxisLogo";
 import Rupees from "../../Assests/Images/AxisbankLogo/Rupees";
@@ -24,7 +24,13 @@ import useFetch from "../../Hooks/UseFetch";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function LeftFlightReviewItinerary() {
-  const { searchData } = useFlightContext();
+  const {
+    searchData,
+    singleApiDepartureData,
+    setsingleApiDepartureData,
+    singleApiArrivalData,
+    setsingleApiArrivalData,
+  } = useFlightContext();
 
   const arrivalId = localStorage.getItem("ArrivalId");
   const DepartureId = localStorage.getItem("DepartureId");
@@ -43,12 +49,18 @@ function LeftFlightReviewItinerary() {
     "GET"
   );
 
-  console.log(singleDepartureData?.departureTime, "singleDepartureData");
-  console.log(singleDepartureData?.destination, "singleDepartureData");
-  // console.log(, "::::local");
+  useEffect(() => {
+    setsingleApiDepartureData(singleDepartureData);
+    setsingleApiArrivalData(singleArrivalData);
+  }, [singleDepartureData, singleArrivalData]);
+
+  console.log(singleDepartureData, "singleDepartureData");
 
   const handleContinueClick = () => {
     setShowForm(true);
+  };
+  const handleConfirmation = () => {
+    
   };
 
   return (
@@ -461,7 +473,9 @@ function LeftFlightReviewItinerary() {
             </div>
 
             <div className="continue-second">
-              <button className="continue-btn">Continue</button>
+              <button id="contin-btn" className="continue-btn" onClick={handleConfirmation}>
+                Continue
+              </button>
             </div>
           </div>
         )}
