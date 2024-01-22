@@ -8,6 +8,9 @@ import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FinalFlightDataCard() {
   const { filteredObject, checkboxValue, searchData } = useFlightContext();
+
+  console.log(searchData, "final");
+
   const [DepartureFilterData, setdepartureFilterData] = useState();
   const [arrivalFilterData, setArrivalFilterData] = useState(null);
 
@@ -33,8 +36,8 @@ function FinalFlightDataCard() {
     isError,
   } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search=
-    {"source":"${searchData.source}","destination":"${searchData.destination}"}
-    &day=${searchData.dayDeparture}`,
+    {"source":"${searchData?.source}","destination":"${searchData?.destination}"}
+    &day=${searchData?.dayDeparture}`,
     "GET"
   );
 
@@ -44,8 +47,8 @@ function FinalFlightDataCard() {
     isError: arrivalIsError,
   } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search=
-    {"source":"${searchData.destination}","destination":"${searchData.source}"}
-    &day=${searchData.dayArrival}`,
+    {"source":"${searchData?.destination}","destination":"${searchData?.source}"}
+    &day=${searchData?.dayArrival}`,
     "GET"
   );
 
@@ -140,8 +143,8 @@ function FinalFlightDataCard() {
       ? isArrivalFlightData._id
       : arrivalData?.flights[0]._id;
 
-    localStorage.setItem("DepartureId", departureId);
     localStorage.setItem("ArrivalId", arrivalId);
+    localStorage.setItem("DepartureId", departureId);
 
     navigate("/reviewitinerary");
   };

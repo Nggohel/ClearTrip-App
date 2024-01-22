@@ -1,14 +1,31 @@
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import applogo from "../Assests/Images/AppLogo.png";
 import "../styles/NavBar.css";
 import LoginPage from "../Pages/LoginPage";
-import { useState } from "react";
-export default function NavBar() {
-  const [loginPopup, setloginPopUp] = useState(false);
+import MyAccount from "./Flights/MyAccount";
+import { useLoginContext } from "../Hooks/LoginContext";
 
-  const handleLoginandSignUp = () => {
-    setloginPopUp(true);
+export default function NavBar() {
+  const {
+    loginState,
+    setLoginState,
+    localStorageLoginData,
+    setLocalStorageLoginData,
+  } = useLoginContext();
+
+  const [loginPopup, setLoginPopUp] = useState(false);
+  const [logoutPopUp, setLogoutPopUp] = useState(false);
+
+
+
+  const handleLoginAndSignUp = () => {
+    setLoginPopUp(true);
+  };
+
+  const handleMyAccount = () => {
+    setLogoutPopUp(true);
   };
 
   return (
@@ -16,14 +33,17 @@ export default function NavBar() {
       <AppBar position="static">
         <div className="navbar">
           <img src={applogo} alt="App Logo" width="100" height="25" />
-          <button className="custom-button" onClick={handleLoginandSignUp}>
-            Login in / sign up
-          </button>
-          {/* <div>
-            <p>My account</p>
-          </div> */}
-
-          <LoginPage open={loginPopup} openChange={setloginPopUp} />
+          {loginState || localStorageLoginData !== null ? (
+            <p className="nav-para" onClick={handleMyAccount}>
+              My Account
+            </p>
+          ) : (
+            <button className="custom-button" onClick={handleLoginAndSignUp}>
+              Login in / sign up
+            </button>
+          )}
+          <MyAccount open={logoutPopUp} openChange={setLogoutPopUp} />
+          <LoginPage open={loginPopup} openChange={setLoginPopUp} />
         </div>
       </AppBar>
     </Box>

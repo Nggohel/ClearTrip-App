@@ -286,6 +286,23 @@
   border: none;
   width: 140px;
 }
+.continue-payment-btn {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0px 28px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #f77728;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  width: auto;
+}
+.continue-payment {
+  margin-left: 7.5rem;
+  display: flex;
+  gap: 20px;
+}
 .number-btn {
   min-width: 80px;
   line-height: 20px;
@@ -334,6 +351,12 @@
   border-width: 1px;
 }
 .email-card {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.password-card {
   margin-top: 20px;
   display: flex;
   flex-direction: column;

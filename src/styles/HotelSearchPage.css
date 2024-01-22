@@ -191,7 +191,10 @@
 }
 
 /* hotel-offer */
-
+.slick-slide .slick-active .slick-cloned {
+  width: 298px;
+  height: 357px;
+}
 .hotel-offer {
   width: 920px;
   height: 54px;
@@ -255,10 +258,11 @@
 }
 /*  hotel-cards */
 .hotel-container-cards {
+  width: 1224px;
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 cards in a row */
-  gap: 12px;
-  margin-left: 12px;
+  gap: 14px;
+  margin: 0 auto;
 }
 
 .hotel-cards {
@@ -272,8 +276,11 @@
 .hotel-deal-cards {
   display: flex;
   flex-direction: column;
-  width: 288px;
+  align-items: center;
+  justify-content: center;
+  width: 258px;
   height: 338px;
+  border: 1px solid black;
 }
 .hotel-details {
   margin-top: 8px;

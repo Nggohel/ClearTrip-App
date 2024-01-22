@@ -16,3 +16,9 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
+.nav-para {
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}

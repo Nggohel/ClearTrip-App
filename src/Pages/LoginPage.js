@@ -4,9 +4,10 @@ import "react-responsive-modal/styles.css";
 import LoginCarousel from "../components/Carousels/LoginCarousel";
 import "../styles/LoginPage.css";
 import useFetch from "../Hooks/UseFetch";
-// 
-const LoginPage = ({open,openChange}) => {
-  // const [open, setOpen] = useState(true);
+import { useLoginContext } from "../Hooks/LoginContext";
+
+const LoginPage = ({ open, openChange }) => {
+  const { setLoginState, setLocalStorageLoginData } = useLoginContext();
   const [isLogin, setIsLogin] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ const LoginPage = ({open,openChange}) => {
     setPassword(e.target.value);
   };
 
-  const { data: signupData, fetchPostData } = useFetch();
+  const { data: Data, fetchPostData } = useFetch();
 
   const handleSignupApi = async () => {
     fetchPostData(
@@ -47,9 +48,9 @@ const LoginPage = ({open,openChange}) => {
     setName("");
     setEmail("");
     setPassword("");
-    setIsLogin(true);
+    openChange(false);
+    setLoginState(true);
   };
-  console.log("Data", signupData);
 
   const handleLoginApi = async () => {
     fetchPostData(
@@ -65,7 +66,15 @@ const LoginPage = ({open,openChange}) => {
     setEmail("");
     setPassword("");
     openChange(false);
+    setLoginState(true);
   };
+
+  useEffect(() => {
+    if (Data != null || Data != undefined) {
+      setLocalStorageLoginData(Data);
+      localStorage.setItem("signup&loginData", JSON.stringify(Data));
+    }
+  }, [Data]);
 
   return (
     <>
@@ -79,6 +88,7 @@ const LoginPage = ({open,openChange}) => {
       >
         <div style={{ display: "flex" }}>
           <LoginCarousel />
+
           <div className="login-container">
             {/* true he toh name ki jarrot nahi he */}
             {isLogin ? (

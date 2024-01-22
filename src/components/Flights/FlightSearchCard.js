@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./../../styles/MainSection.css";
 import Departureplan from "../../Assests/Images/Flight/Departureplan";
@@ -6,9 +6,10 @@ import Trasition from "../../Assests/Images/Flight/Trasition";
 import { useState } from "react";
 import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
 import FlightCalendar from "../FlightCalendar";
-export const srcValue = React.createContext();
+import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FlightSearchCard({ icon }) {
+  const { searchData, setSearchData } = useFlightContext();
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
   const [dayDeparture, setDayDeparture] = useState("");
@@ -19,12 +20,11 @@ function FlightSearchCard({ icon }) {
   const [FormattedEndDate, setFormattedEndDate] = useState("");
   const [EndDateMonth, setEndDateMonth] = useState("");
   const [EndDateYear, setEndDateYear] = useState("");
-  const [searchData, setSearchData] = useState({});
 
-  let FromValue = wherefromValue.split("-");
-  let ToValue = wheretoValue.split("-");
-  let DepartureCity = FromValue[1].split(",")[0].trim();
-  let ArrivalCity = ToValue[1].split(",")[0].trim();
+  let FromValue = wherefromValue?.split("-");
+  let ToValue = wheretoValue?.split("-");
+  let DepartureCity = FromValue[1]?.split(",")[0].trim();
+  let ArrivalCity = ToValue[1]?.split(",")[0].trim();
 
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
@@ -34,9 +34,6 @@ function FlightSearchCard({ icon }) {
   };
 
   const handleSearchButton = () => {
-    console.log(DepartureCity);
-    
-
     localStorage.setItem(
       "SearchData",
       JSON.stringify({
@@ -55,6 +52,11 @@ function FlightSearchCard({ icon }) {
       })
     );
   };
+
+  // useEffect(() => {
+  //   console.log("Context Data:", searchData);
+
+  // }, []);
 
   return (
     <>
@@ -149,7 +151,7 @@ function FlightSearchCard({ icon }) {
                 </div>
               </div>
             </div>
-            <Link to="/search">
+            <Link to="/flightsearch">
               <button className="search-btn" onClick={handleSearchButton}>
                 Search flights
               </button>

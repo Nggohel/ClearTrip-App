@@ -22,6 +22,7 @@ import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
 import DownArrow from "../../Assests/Images/DownArrow";
 import useFetch from "../../Hooks/UseFetch";
 import { useFlightContext } from "../../Hooks/useFlightContext";
+import { Link } from "react-router-dom";
 
 function LeftFlightReviewItinerary() {
   const {
@@ -31,11 +32,18 @@ function LeftFlightReviewItinerary() {
     singleApiArrivalData,
     setsingleApiArrivalData,
   } = useFlightContext();
-
+  const getLoginAndsingUpData = JSON.parse(
+    localStorage.getItem("signup&loginData")
+  );
+  console.log(getLoginAndsingUpData);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const arrivalId = localStorage.getItem("ArrivalId");
   const DepartureId = localStorage.getItem("DepartureId");
 
   const [showForm, setShowForm] = useState(false);
+  const [showpayment, setShowPayment] = useState(false);
 
   console.log(DepartureId, "departureId");
   console.log(arrivalId, "arrivalId");
@@ -58,9 +66,31 @@ function LeftFlightReviewItinerary() {
 
   const handleContinueClick = () => {
     setShowForm(true);
+    if (getLoginAndsingUpData != null) {
+      setName(
+        getLoginAndsingUpData?.data.name ||
+          getLoginAndsingUpData?.data?.user?.name
+      );
+      setEmail(
+        getLoginAndsingUpData?.data.email ||
+          getLoginAndsingUpData?.data?.user?.email
+      );
+    }
   };
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   const handleConfirmation = () => {
-    
+    setShowPayment(true);
   };
 
   return (
@@ -420,8 +450,6 @@ function LeftFlightReviewItinerary() {
               </div>
             </div>
 
-            {/* flipkart */}
-
             {/* btn */}
             <div className="continue">
               <button className="continue-btn" onClick={handleContinueClick}>
@@ -447,16 +475,13 @@ function LeftFlightReviewItinerary() {
             <div className="additional-info-form">
               <label htmlFor="phoneNumber">Name:</label>
               <div className="mobile-card">
-                {/* <button className="number-btn">
-                  <div>+91</div>
-                  <DownArrow />
-                </button> */}
-
                 <input
                   type="text"
                   id="phoneNumber"
                   className="mobile-number"
                   placeholder="Full Name"
+                  value={name}
+                  onChange={handleNameChange}
                 />
               </div>
 
@@ -464,19 +489,55 @@ function LeftFlightReviewItinerary() {
                 <label htmlFor="name">Email address</label>
                 <input
                   type="email"
-                  id="name"
+                  id="email"
                   name="name"
                   className="email"
                   placeholder="Email address"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
+              {getLoginAndsingUpData?.data.email ||
+              getLoginAndsingUpData?.data?.user?.email ? (
+                ""
+              ) : (
+                <div className="password-card">
+                  <label htmlFor="name">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="name"
+                    className="email"
+                    placeholder="Password Here"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="continue-second">
-              <button id="contin-btn" className="continue-btn" onClick={handleConfirmation}>
+              <button
+                id="contin-btn"
+                className="continue-btn"
+                onClick={handleConfirmation}
+              >
                 Continue
               </button>
             </div>
+          </div>
+        )}
+
+        {showpayment && (
+          <div className="continue-payment">
+            <Link to="/flightsearch">
+              <button className="continue-btn">Cancel</button>
+            </Link>
+            <Link to="/bookingconfirmation">
+              <button className="continue-payment-btn">
+                Continue to Payment
+              </button>
+            </Link>
           </div>
         )}
       </div>

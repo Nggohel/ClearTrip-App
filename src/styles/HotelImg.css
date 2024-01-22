@@ -10,8 +10,8 @@
 .hotel-img {
   object-fit: cover;
   border-radius: 8px;
-  width: 100%;
-  height: 100%;
+  width: 297px;
+  height: 240px;
 }
 #hotelCarousel {
   border-radius: 5px !important;

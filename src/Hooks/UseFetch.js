@@ -45,7 +45,7 @@ const useFetch = (initialUrl = "", method = "GET", bodyData = {}) => {
       });
 
       const result = await response.json();
-      setData(result.data);
+      setData(result);
     } catch (error) {
       setIsError(true);
     }

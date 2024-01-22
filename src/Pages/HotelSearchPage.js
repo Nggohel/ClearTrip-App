@@ -14,8 +14,8 @@ import { Link } from "react-router-dom";
 import useFetch from "../Hooks/UseFetch";
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-
 import MultiSelect from "../utils/MultiSelect";
+import ExploreDealCarousel from "../components/Hotel/ExploreDealCarousel";
 
 function HotelSearchPage() {
   // const [optionSelected, setSelected] = useState(null);
@@ -402,7 +402,7 @@ function HotelSearchPage() {
                 </div>
               </div>
               <div className="explore-deal-carousel">
-                <DealofthedayCarousel data={data?.hotels} slidesToShow={4} />
+                <ExploreDealCarousel data={data?.hotels} slidesToShow={4} />
               </div>
             </div>
           </div>

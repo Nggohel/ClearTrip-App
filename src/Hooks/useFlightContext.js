@@ -6,6 +6,7 @@ export const FlightContextProvider = ({ children }) => {
   const [searchData, setSearchData] = useState(
     JSON.parse(localStorage.getItem("SearchData"))
   );
+
   const [checkboxValue, setCheckboxValue] = useState({
     stops: "",
     departureTime: "",
