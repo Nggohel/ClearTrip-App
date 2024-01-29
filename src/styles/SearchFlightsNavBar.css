@@ -28,28 +28,46 @@
   height: 65px;
   width: 1140px;
   padding: 12px;
-  margin: 0px 70px;
+  margin: 0px 70px 20px 70px;
   display: flex;
   justify-content: space-around;
 }
 .flights-search-box {
   border: 1px solid lightgray;
-  width: 140px;
-  height: 40px;
+  width: 170px;
+  height: 52px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
 }
-
+.searchflight-input {
+  border: 0px;
+  outline: none;
+  font-size: 16px;
+  color: #1a1a1a;
+  font-weight: 500;
+  width: 120px;
+}
 .flights-search-button {
   width: 140px;
-  height: 40px;
+  height: 50px;
   background-color: black;
   color: white;
   font-weight: 600;
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
+}
+.flightsearch-box-date {
+  border: 1px solid lightgray;
+  width: 235px;
+  height: 52px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

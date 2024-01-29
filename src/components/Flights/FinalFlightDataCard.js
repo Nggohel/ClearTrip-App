@@ -7,9 +7,16 @@ import Uparrow from "../../Assests/Uparrow";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FinalFlightDataCard() {
-  const { filteredObject, checkboxValue, searchData } = useFlightContext();
+  const { filteredObject, checkboxValue, searchData, searchNavData } =
+    useFlightContext();
 
-  console.log(searchData, "final");
+  // console.log(searchNavData, "NavBar Data");
+
+  const Source = searchNavData?.source || searchData?.source;
+  const Destination = searchNavData?.destination || searchData?.destination;
+  const DayDeparture = searchNavData?.dayDeparture || searchData?.dayDeparture;
+  // const Source = searchData?.source || searchNavData?.source;
+  // const Source = searchData?.source || searchNavData?.source;
 
   const [DepartureFilterData, setdepartureFilterData] = useState();
   const [arrivalFilterData, setArrivalFilterData] = useState(null);
@@ -36,10 +43,11 @@ function FinalFlightDataCard() {
     isError,
   } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/?search=
-    {"source":"${searchData?.source}","destination":"${searchData?.destination}"}
-    &day=${searchData?.dayDeparture}`,
+    {"source":"${Source}","destination":"${Destination}"}
+    &day=${DayDeparture}`,
     "GET"
   );
+  console.log("coming Data", departuredata);
 
   const {
     data: arrivalData,

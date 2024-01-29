@@ -6,6 +6,9 @@ export const FlightContextProvider = ({ children }) => {
   const [searchData, setSearchData] = useState(
     JSON.parse(localStorage.getItem("SearchData"))
   );
+  const [searchNavData, setSearchNavData] = useState(
+    JSON.parse(localStorage.getItem("FlightNavSearch"))
+  );
 
   const [checkboxValue, setCheckboxValue] = useState({
     stops: "",
@@ -63,6 +66,8 @@ export const FlightContextProvider = ({ children }) => {
     setsingleApiDepartureData,
     singleApiArrivalData,
     setsingleApiArrivalData,
+    searchNavData,
+    setSearchNavData,
   };
 
   return (
