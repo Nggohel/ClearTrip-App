@@ -103,9 +103,9 @@ function LeftFlightReviewItinerary() {
     const response = await fetch(`${Url.Payment_Api}/order`, {
       method: "POST",
       body: JSON.stringify({
-        amount: 500,
+        amount,
         currency,
-        receipt: "1234",
+        receipt: receiptId,
       }),
       headers: {
         "Content-Type": "application/json",
