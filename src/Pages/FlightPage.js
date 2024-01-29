@@ -21,7 +21,7 @@ function FlightPage() {
   // console.log("checkLogin", checkLogin);
   return (
     <>
-      {checkLogin.status ? "" : <LoginPage open={open} openChange={setOpen} />}
+      {checkLogin?.status ? "" : <LoginPage open={open} openChange={setOpen} />}
       <NavBar />
       <div style={{ display: "flex" }}>
         <LeftSideSection />
