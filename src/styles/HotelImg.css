@@ -22,6 +22,8 @@
 .image-container {
   width: 600px;
   height: 408px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 .singlehotel-all-images {
   width: 600px;

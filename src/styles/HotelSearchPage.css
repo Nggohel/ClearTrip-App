@@ -538,3 +538,13 @@
 .explore-deal-carousel {
   margin-left: 25px;
 }
+
+.css-1nrlq1o-MuiFormControl-root {
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  color: #1a1a1a;
+  border-radius: 20px;
+  width: 185px;
+  font-weight: 600;
+  height: 40px;
+}

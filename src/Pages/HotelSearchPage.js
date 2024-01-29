@@ -1,3 +1,9 @@
+import { useEffect, useState, lazy, Suspense } from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import HotelSearchNavBar from "../components/Hotel/HotelSearchNavBar";
 import search_logo from "../Assests/Images/Hotel-filterLogo/search_logo.svg";
 import moreoption from "../Assests/Images/Hotel-filterLogo/more_option_logo.svg";
@@ -12,58 +18,20 @@ import "../styles/HotelSearchPage.css";
 import DealofthedayCarousel from "../components/Hotel/DealofthedayCarousel";
 import { Link } from "react-router-dom";
 import useFetch from "../Hooks/UseFetch";
-import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import MultiSelect from "../utils/MultiSelect";
 import ExploreDealCarousel from "../components/Hotel/ExploreDealCarousel";
-
+import Skeleton from "@mui/material/Skeleton";
+const HotelCardsContainer = lazy(() => import("../components/Hotel/HotelCard"));
 function HotelSearchPage() {
-  // const [optionSelected, setSelected] = useState(null);
-  const [optionSelected1, setSelected1] = useState([]);
-  const [optionSelected2, setSelected2] = useState([]);
-  const [optionSelected3, setSelected3] = useState([]);
-  const [optionSelected4, setSelected4] = useState([]);
-  const [optionSelected5, setSelected5] = useState([]);
-  const [optionSelected6, setSelected6] = useState([]);
+  const [sortBy, setsortBy] = useState(0);
+  const [filter, setfilter] = useState("");
+  const [ratingFilter, setratingFilter] = useState("");
 
-  const options = [
-    { value: 0, label: "Recommended" },
-    { value: 1, label: "Top-rated" },
-    { value: 2, label: "Price: High to Low" },
-    { value: 3, label: "Price: Low to High" },
-  ];
+  // const SortData = async (value) => {
 
-  const dealOption = [
-    { value: 0, label: "Top-5" },
-    { value: 1, label: "Top-4" },
-    { value: 2, label: "Top-3" },
-  ];
-
-  const StarCategoryOption = [
-    { value: 0, label: "5-star" },
-    { value: 1, label: "4-star" },
-    { value: 2, label: "3-star" },
-  ];
-
-  const GuestratingOption = [
-    { value: 0, label: "4.5 & above" },
-    { value: 1, label: "4 & above" },
-    { value: 2, label: "3.5 & above" },
-    { value: 3, label: "3 & above" },
-  ];
-  const localityOption = [
-    { value: 0, label: "Vasco Da Gama" },
-    { value: 1, label: "Baga" },
-    { value: 2, label: "Vagator" },
-    { value: 3, label: "Anjuna" },
-  ];
-  const priceOption = [
-    { value: 0, label: "500 - 1000" },
-    { value: 1, label: "1000 - 2000" },
-    { value: 2, label: "2000 - 3000" },
-    { value: 3, label: "3000 - 4000" },
-    { value: 4, label: "4000 - 5000" },
-  ];
+  //   console.log("api data", SortedPriceData);
+  // };
 
   const [explorebestdeals, setexplorebestdeals] = useState(true);
   const [dealoftheday, setdealoftheday] = useState(true);
@@ -73,52 +41,98 @@ function HotelSearchPage() {
     localStorage.getItem("SearchHotelData")
   );
 
-  // console.log(stored HotelLocation.source);
-
-  const { data, isLoading, isError } = useFetch(
+  const {
+    data,
+    isLoading: dataLoading,
+    isError,
+  } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
     "${storedHotelLocation.source}"}`,
     "GET"
   );
 
-  // console.log("Hotel", data);
+  //  handleChange for Sorted value
 
-  //  handleChange for filters value
-  const handleChange1 = (selected) => {
-    setSelected1(selected);
-    console.log("Selected values for MultiSelect 1:", optionSelected1);
+  const handleChange = (event) => {
+    if (ratingFilter != "" || filter != "") {
+      setfilter("");
+      setratingFilter("");
+    }
+    setsortBy(event.target.value);
   };
 
-  const handleChange2 = (selected) => {
-    setSelected2(selected);
-    console.log("Deal", selected);
+  const fetchSortedData = async (sortBy) => {
+    let urlWithSort = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
+      "${storedHotelLocation.source}"}`;
+
+    if (sortBy == "toprated") {
+      urlWithSort += `&sort={"rating":-1}`;
+    } else {
+      urlWithSort += `&sort={"avgCostPerNight":${sortBy}}`;
+    }
+    fetchData(urlWithSort, "GET");
   };
 
-  const handleChange3 = (selected) => {
-    setSelected3(selected);
-    console.log("star", selected);
+  const {
+    data: SortedPriceData,
+    fetchData,
+    isLoading: sortedDataLoading,
+  } = useFetch();
+
+  useEffect(() => {
+    fetchSortedData(sortBy);
+  }, [sortBy]);
+
+  const handleFilterChange = (event) => {
+    if (ratingFilter != "") {
+      setratingFilter("");
+    }
+    setfilter(event.target.value);
+  };
+  const handleFilterRatingChange = (event) => {
+    if (filter != "") {
+      setfilter("");
+    }
+    setratingFilter(event.target.value);
   };
 
-  const handleChange4 = (selected) => {
-    setSelected4(selected);
+  // Rating and Price filter
+
+  const fetchfilterData = async (filter, ratingFilter) => {
+    let urlWithFilter = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
+      "${storedHotelLocation.source}"}`;
+
+    if (filter == 10) {
+      urlWithFilter += `&filter={"avgCostPerNight":{ "$lte": 2500, "$gte": 0 }}`;
+    } else if (filter == 20) {
+      urlWithFilter += `&filter={"avgCostPerNight":{ "$lte": 5000, "$gte": 2500 }}`;
+    } else if (filter == 30) {
+      urlWithFilter += `&filter={"avgCostPerNight":{ "$lte": 10000, "$gte": 5000 }}`;
+    } else if (ratingFilter == 5) {
+      urlWithFilter += `&filter={"rating":{ "$lte": 5, "$gte": 4.5 }}`;
+    } else if (ratingFilter == 4) {
+      urlWithFilter += `&filter={"rating":{ "$lte": 5, "$gte": 4 }}`;
+    } else if (ratingFilter == 3) {
+      urlWithFilter += `&filter={"rating":{ "$lte": 5, "$gte": 3.5 }}`;
+    } else if (ratingFilter == 2) {
+      urlWithFilter += `&filter={"rating":{ "$lte": 5, "$gte": 3 }}`;
+    } else {
+      urlWithFilter += `&filter={"avgCostPerNight":{ "$lte": 10000, "$gte": 0 },"rating":{ "$lte": 5, "$gte":0 }}`;
+    }
+
+    fetchData(urlWithFilter, "GET");
   };
 
-  const handleChange5 = (selected) => {
-    setSelected5(selected);
-  };
+  useEffect(() => {
+    fetchfilterData(filter, ratingFilter);
+  }, [filter, ratingFilter]);
 
-  const handleChange6 = (selected) => {
-    setSelected6(selected);
-  };
-
-  // optional chaning
-
-  console.log(optionSelected3);
+  console.log("apidata", SortedPriceData);
 
   return (
     <>
       <nav>
-        <HotelSearchNavBar searchData={true} />
+        <HotelSearchNavBar searchData={true} Apidata={SortedPriceData} />
 
         {/* hotel Offer Component  */}
 
@@ -184,6 +198,7 @@ function HotelSearchPage() {
             </div>
           </div>
         </div>
+
         {/* make comp of hotel filter */}
         <div className="hotel-filters">
           <div className="hotel-filters-title">
@@ -191,75 +206,54 @@ function HotelSearchPage() {
           </div>
           <div className="hotel-filters-cards">
             <div className="filters-cards">
-              <div>
-                <MultiSelect
-                  key="example_id"
-                  options={options}
-                  onChange={handleChange1}
-                  value={optionSelected1}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Sort by: Recommended"
-                />
-              </div>
+              {/* sortBy */}
 
-              <div>
-                <MultiSelect
-                  key="example"
-                  options={dealOption}
-                  onChange={handleChange2}
-                  value={optionSelected2}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Deals"
-                />
-              </div>
-              <div>
-                <MultiSelect
-                  key="example_id"
-                  options={StarCategoryOption}
-                  onChange={handleChange3}
-                  value={optionSelected3}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Star category"
-                />
-              </div>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">SortBy</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sortBy}
+                  label="sortBy"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={0}>Recommended</MenuItem>
+                  <MenuItem value={"toprated"}>Top-rated</MenuItem>
+                  <MenuItem value={1}>Price: Low to High</MenuItem>
+                  <MenuItem value={-1}>Price: High to Low</MenuItem>
+                </Select>
+              </FormControl>
 
-              <div>
-                <MultiSelect
-                  key="example_id"
-                  options={GuestratingOption}
-                  onChange={handleChange4}
-                  value={optionSelected4}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Guest rating"
-                />
-              </div>
-
-              <div>
-                <MultiSelect
-                  key="example_id"
-                  options={localityOption}
-                  onChange={handleChange5}
-                  value={optionSelected5}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Locality"
-                />
-              </div>
-              <div>
-                <MultiSelect
-                  key="example_id"
-                  options={priceOption}
-                  onChange={handleChange6}
-                  value={optionSelected6}
-                  isSelectAll={true}
-                  menuPlacement={"bottom"}
-                  placeholder="Price"
-                />
-              </div>
+              {/* filter */}
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">Price</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={filter}
+                  label="Price"
+                  onChange={handleFilterChange}
+                >
+                  <MenuItem value={10}>0 - 2500</MenuItem>
+                  <MenuItem value={20}>2500 - 5,000</MenuItem>
+                  <MenuItem value={30}>5,000 - 10,000</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">Rating</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={ratingFilter}
+                  label="Rating"
+                  onChange={handleFilterRatingChange}
+                >
+                  <MenuItem value={5}>4.5 & above</MenuItem>
+                  <MenuItem value={4}>4 & above</MenuItem>
+                  <MenuItem value={3}>3.5 & above</MenuItem>
+                  <MenuItem value={2}>3 & above</MenuItem>
+                </Select>
+              </FormControl>
             </div>
           </div>
           <div className="filter-search">
@@ -275,7 +269,7 @@ function HotelSearchPage() {
         {/* cards total */}
         <div className="total-hotel-title">
           <p>
-            <b>1731 </b>
+            <b>{SortedPriceData?.hotels.length} </b>
             <span
               style={{
                 color: "rgb(160, 160, 160)",
@@ -283,19 +277,32 @@ function HotelSearchPage() {
                 fontSize: "14px",
               }}
             >
-              of 1731 hotels in Goa
+              of {SortedPriceData?.hotels.length} hotels in{" "}
+              {SortedPriceData?.hotels[0]?.location}
             </span>
           </p>
         </div>
 
         {/* search hotel data cards(map laga hua he ayha)  */}
 
-        <div className="hotel-container-cards">
-          {data?.hotels &&
-            data?.hotels.slice(0, 8).map((hotel, index) => (
+        <Suspense fallback={<div>Please Wait.. isLoading...</div>}>
+          <HotelCardsContainer
+            hotels={SortedPriceData?.hotels}
+            start={0}
+            end={8}
+          />
+        </Suspense>
+
+        {/* <div className="hotel-container-cards">
+          {SortedPriceData?.hotels &&
+            SortedPriceData.hotels.slice(0, 8).map((hotel, index) => (
               <div className="hotel-cards" key={index}>
                 <div>
-                  <HotelImg hotelImageUrl={hotel?.images} />
+                  <HotelImg
+                    hotelImageUrl={hotel?.images}
+                    Index={index}
+                    sortedDataLoading={sortedDataLoading}
+                  />
                 </div>
                 <Link
                   to="/allhoteldetails"
@@ -308,7 +315,7 @@ function HotelSearchPage() {
                         src={Ratinglogo}
                         style={{ height: "12px", width: "18px" }}
                       />
-                      <h4 className="rating-of-hotel">4.5/5</h4>
+                      <h4 className="rating-of-hotel">{hotel.rating}/5</h4>
                     </div>
                   </div>
                   <div className="typeof-hotel">
@@ -318,7 +325,7 @@ function HotelSearchPage() {
                   <div className="hotel-price-details">
                     <div className="price-tax">
                       <h3 className="hotel-price">
-                        {hotel.rooms[0]?.costDetails.baseCost}
+                        {Math.floor(hotel.avgCostPerNight)}
                       </h3>
                       <p className="hotel-tax">
                         + {hotel.rooms[0]?.costDetails.taxesAndFees} tax
@@ -327,11 +334,12 @@ function HotelSearchPage() {
                     </div>
                     <div className="discount-offers">
                       <p className="actul-price">
-                        {hotel.rooms[0]?.costPerNight}
+                        {Math.floor(
+                          hotel.avgCostPerNight +
+                            (hotel.avgCostPerNight * 20) / 100
+                        )}
                       </p>
-                      <p className="percentage-off">
-                        {hotel.rooms[0]?.costDetails.discount} % off
-                      </p>
+                      <p className="percentage-off">20 % off</p>
                       <p className="option-of-bank">
                         + Additional bank discounts
                       </p>
@@ -340,12 +348,12 @@ function HotelSearchPage() {
                 </Link>
               </div>
             ))}
-        </div>
+        </div> */}
 
         <div style={{ height: "30px", width: "100%" }}></div>
 
         {/* explore best deals */}
-        {explorebestdeals ? (
+        {/* {explorebestdeals ? (
           <div className="explore-deal-container">
             <div className="explore-deal-basecontainer">
               <h3 className="explore-deal-title">Explore best deals</h3>
@@ -408,17 +416,17 @@ function HotelSearchPage() {
           </div>
         ) : (
           ""
-        )}
+        )} */}
 
         <div style={{ height: "30px", width: "100%" }}></div>
 
         {/* Second Api call */}
-        <div className="hotel-container-cards">
-          {data?.hotels &&
-            data?.hotels.slice(8, 16).map((hotel, index) => (
+        {/* <div className="hotel-container-cards">
+          {SortedPriceData?.hotels &&
+            SortedPriceData?.hotels.slice(8, 16).map((hotel, index) => (
               <div className="hotel-cards" key={index}>
                 <div>
-                  <HotelImg hotelImageUrl={hotel?.images} />
+                  <HotelImg hotelImageUrl={hotel?.images} Index={index + 8} />
                 </div>
                 <Link
                   to="/allhoteldetails"
@@ -431,7 +439,7 @@ function HotelSearchPage() {
                         src={Ratinglogo}
                         style={{ height: "12px", width: "18px" }}
                       />
-                      <h4 className="rating-of-hotel">4.5/5</h4>
+                      <h4 className="rating-of-hotel">{hotel.rating}/5</h4>
                     </div>
                   </div>
                   <div className="typeof-hotel">
@@ -441,7 +449,7 @@ function HotelSearchPage() {
                   <div className="hotel-price-details">
                     <div className="price-tax">
                       <h3 className="hotel-price">
-                        {hotel.rooms[0]?.costDetails.baseCost}
+                        {Math.floor(hotel.avgCostPerNight)}
                       </h3>
                       <p className="hotel-tax">
                         + {hotel.rooms[0]?.costDetails.taxesAndFees} tax
@@ -450,11 +458,12 @@ function HotelSearchPage() {
                     </div>
                     <div className="discount-offers">
                       <p className="actul-price">
-                        {hotel.rooms[0]?.costPerNight}
+                        {Math.floor(
+                          hotel.avgCostPerNight +
+                            (hotel.avgCostPerNight * 20) / 100
+                        )}
                       </p>
-                      <p className="percentage-off">
-                        {hotel.rooms[0]?.costDetails.discount} % off
-                      </p>
+                      <p className="percentage-off">20 % off</p>
                       <p className="option-of-bank">
                         + Additional bank discounts
                       </p>
@@ -463,12 +472,18 @@ function HotelSearchPage() {
                 </Link>
               </div>
             ))}
-        </div>
-
+        </div> */}
+        <Suspense fallback={<div>Please..Wait..isLoading....</div>}>
+          <HotelCardsContainer
+            hotels={SortedPriceData?.hotels}
+            start={8}
+            end={16}
+          />
+        </Suspense>
         <div style={{ height: "30px", width: "100%" }}></div>
 
         {/* deal of the day */}
-        {dealoftheday ? (
+        {/* {dealoftheday ? (
           <div className="deal-of-day-container">
             <div className="deal-of-day-details">
               <div className="deal-of-day-title">
@@ -493,17 +508,17 @@ function HotelSearchPage() {
           </div>
         ) : (
           ""
-        )}
+        )} */}
 
         <div style={{ height: "30px", width: "100%" }}></div>
 
         {/* Third Api call*/}
-        <div className="hotel-container-cards">
-          {data?.hotels &&
-            data?.hotels.slice(16).map((hotel, index) => (
+        {/* <div className="hotel-container-cards">
+          {SortedPriceData?.hotels &&
+            SortedPriceData?.hotels.slice(16).map((hotel, index) => (
               <div className="hotel-cards" key={index}>
                 <div>
-                  <HotelImg hotelImageUrl={hotel?.images} />
+                  <HotelImg hotelImageUrl={hotel?.images} Index={index} />
                 </div>
                 <Link
                   to="/allhoteldetails"
@@ -516,7 +531,7 @@ function HotelSearchPage() {
                         src={Ratinglogo}
                         style={{ height: "12px", width: "18px" }}
                       />
-                      <h4 className="rating-of-hotel">4.5/5</h4>
+                      <h4 className="rating-of-hotel">{hotel.rating}/5</h4>
                     </div>
                   </div>
                   <div className="typeof-hotel">
@@ -526,7 +541,7 @@ function HotelSearchPage() {
                   <div className="hotel-price-details">
                     <div className="price-tax">
                       <h3 className="hotel-price">
-                        {hotel.rooms[0]?.costDetails.baseCost}
+                        {Math.floor(hotel.avgCostPerNight)}
                       </h3>
                       <p className="hotel-tax">
                         + {hotel.rooms[0]?.costDetails.taxesAndFees} tax
@@ -535,11 +550,12 @@ function HotelSearchPage() {
                     </div>
                     <div className="discount-offers">
                       <p className="actul-price">
-                        {hotel.rooms[0]?.costPerNight}
+                        {Math.floor(
+                          hotel.avgCostPerNight +
+                            (hotel.avgCostPerNight * 20) / 100
+                        )}
                       </p>
-                      <p className="percentage-off">
-                        {hotel.rooms[0]?.costDetails.discount} % off
-                      </p>
+                      <p className="percentage-off">20 % off</p>
                       <p className="option-of-bank">
                         + Additional bank discounts
                       </p>
@@ -548,12 +564,18 @@ function HotelSearchPage() {
                 </Link>
               </div>
             ))}
-        </div>
+        </div> */}
+        <Suspense fallback={<div>Please..Wait..isLoading....</div>}>
+          <HotelCardsContainer
+            hotels={SortedPriceData?.hotels}
+            start={16}
+            end={20}
+          />
+        </Suspense>
 
         <div style={{ height: "20px", width: "100%" }}></div>
       </main>
 
-      {/* {isSortBy ? <ReactMultiSelect /> : ""} */}
       <Footer />
     </>
   );

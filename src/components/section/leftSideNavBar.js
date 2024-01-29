@@ -1,43 +1,52 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import FightLogo from "../../Assests/Images/Fightlogo";
 import FillBusLogo from "../../Assests/Images/FillBusLogo";
 import Hotel from "../../Assests/Images/FillHotelLogo";
 import MytripLogo from "../../Assests/Images/MytripLogo";
 import SupportLogo from "../../Assests/Images/SupportLogo";
 import "./../../styles/leftSideSection.css";
+import { PiAirplaneTiltLight } from "react-icons/pi";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 function leftSideNavBar() {
-  const navigate = useNavigate();
-
-  const handleFlightPage = () => {
-    navigate("/");
-  };
-  const handleHotelPage = () => {
-    navigate("/hotel");
-  };
   return (
     <>
       <aside>
         <div className="left-aside">
-          <div className="left-aside-bar" onClick={handleFlightPage}>
-            <FightLogo />
-            <span>Flights</span>
-          </div>
-          <div className="left-aside-bar" onClick={handleHotelPage}>
-            <Hotel />
-            <span>Hotel</span>
-          </div>
-          <div className="left-aside-bar">
-            <FillBusLogo />
-            <span>Bus</span>
-          </div>
-          <div className="left-aside-bar">
-            <MytripLogo />
-            <span>Mytrip</span>
-          </div>
-          <div className="left-aside-bar">
-            <SupportLogo />
-            <span>Support</span>
-          </div>
+          <ul>
+            <li className="nav-list">
+              <NavLink
+                to="/"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : "pending"
+                }
+              >
+                {({ isActive }) => (
+                  <span className="left-navbar">
+                    {isActive ? (
+                      <FightLogo />
+                    ) : (
+                      <PiAirplaneTiltLight className="tallIcon" />
+                    )}{" "}
+                    Flight
+                  </span>
+                )}
+              </NavLink>
+            </li>
+            <li className="nav-list">
+              <NavLink
+                to="/hotel"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : "pending"
+                }
+              >
+                {({ isActive }) => (
+                  <span className="left-navbar">
+                    {isActive ? <Hotel /> : <HiOutlineBuildingOffice2 />} Hotel
+                  </span>
+                )}
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </aside>
     </>

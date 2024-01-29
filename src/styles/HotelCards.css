@@ -137,3 +137,55 @@
   text-decoration: none;
   cursor: auto;
 }
+
+.hotel-price-tax {
+  display: flex;
+}
+
+.MuiPopper-root .MuiTooltip-tooltip {
+  background-color: black;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+.popup-main-container {
+  width: 250px;
+  height: 200px;
+  background: fixed;
+  background-color: black !important;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px;
+  border-radius: 4px;
+}
+.popup-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.popup-para {
+  font-size: 14px;
+  font-weight: 500;
+}
+.popup-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+#dotted-line {
+  border-top: 1px dotted white;
+  width: 100%;
+  margin: 5px 0;
+}
+.popup-discount {
+  font-size: 14px;
+  font-weight: 600;
+  color: green;
+}

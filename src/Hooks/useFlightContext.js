@@ -58,6 +58,7 @@ export const FlightContextProvider = ({ children }) => {
     setCheckboxValue,
     filteredObject,
     searchData,
+    setSearchData,
     singleApiDepartureData,
     setsingleApiDepartureData,
     singleApiArrivalData,

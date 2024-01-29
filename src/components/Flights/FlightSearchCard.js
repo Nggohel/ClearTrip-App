@@ -9,7 +9,7 @@ import FlightCalendar from "../FlightCalendar";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FlightSearchCard({ icon }) {
-  const { searchData, setSearchData } = useFlightContext();
+  const { setSearchData } = useFlightContext();
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
   const [dayDeparture, setDayDeparture] = useState("");
@@ -34,6 +34,21 @@ function FlightSearchCard({ icon }) {
   };
 
   const handleSearchButton = () => {
+    setSearchData({
+      source: FromValue[0],
+      destination: ToValue[0],
+      dayDeparture: dayDeparture,
+      dayArrival: dayArrival,
+      FormattedStartDate: FormattedStartDate,
+      StartDateMonth: StartDateMonth,
+      StartDateYear: StartDateYear,
+      FormattedEndDate: FormattedEndDate,
+      EndDateMonth: EndDateMonth,
+      EndDateYear: EndDateYear,
+      DepartureCity: DepartureCity,
+      ArrivalCity: ArrivalCity,
+    });
+
     localStorage.setItem(
       "SearchData",
       JSON.stringify({

@@ -1,11 +1,11 @@
 .middle-section {
-  width: 796px;
+  width: 780px;
   height: 700px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
-  padding: 0px 20px;
+  padding: 0px 0px 0px 29px;
   margin-top: 16px;
 }
 

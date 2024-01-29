@@ -7,8 +7,6 @@ import { useLoginContext } from "../../Hooks/LoginContext";
 const MyAccount = ({ open, openChange }) => {
   const { localStorageLoginData } = useLoginContext();
 
-  console.log(localStorageLoginData);
-
   const getLoginAndsingUpData = JSON.parse(
     localStorage.getItem("signup&loginData")
   );

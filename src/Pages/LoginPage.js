@@ -71,6 +71,7 @@ const LoginPage = ({ open, openChange }) => {
 
   useEffect(() => {
     if (Data != null || Data != undefined) {
+      console.log("login", Data);
       setLocalStorageLoginData(Data);
       localStorage.setItem("signup&loginData", JSON.stringify(Data));
     }

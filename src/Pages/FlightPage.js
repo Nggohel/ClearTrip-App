@@ -15,12 +15,13 @@ import "./../styles/FlightPage.css";
 import Footer from "../components/Footer";
 import LoginPage from "../Pages/LoginPage";
 import { useState } from "react";
-
 function FlightPage() {
   const [open, setOpen] = useState(true);
+  const checkLogin = JSON.parse(localStorage.getItem("signup&loginData"));
+  // console.log("checkLogin", checkLogin);
   return (
     <>
-      <LoginPage open={open} openChange={setOpen} />
+      {checkLogin.status ? "" : <LoginPage open={open} openChange={setOpen} />}
       <NavBar />
       <div style={{ display: "flex" }}>
         <LeftSideSection />

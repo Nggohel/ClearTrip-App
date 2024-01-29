@@ -4,9 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import hotelImg from "../../Assests/HotelOffer/image_of_hotel.jpg";
 import "./../../styles/HotelImg.css";
 
-function SingleHotelImage() {
+function SingleHotelImage({ ImageUrL }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const Url = ImageUrL?.slice(0, 3);
   return (
     <>
       <Carousel
@@ -23,19 +23,22 @@ function SingleHotelImage() {
         // onChange={(index) => setCurrentIndex(index)}
         className="singlehotel-all-images"
       >
-        {/* {hotelImageUrl.map((url, index) => (
-          <div key={index} className="hotel-img-card">
-            <a>
-              <img
-                className="hotel-img"
-                id={`hotelCarousel${index}`}
-                src={url}
-                alt={`hotelimage${index}`}
-                loading="lazy"
-              />
-            </a>
-          </div>
-        ))} */}
+        {Url
+          ? Url.map((url, index) => (
+              <div key={index} className="image-container">
+                <a>
+                  <img
+                    className="single-hotel-image"
+                    id={`hotelCarousel${index}`}
+                    src={url}
+                    alt={`singlehotelimage${index}`}
+                    loading="lazy"
+                  />
+                </a>
+              </div>
+            ))
+          : "PLease Wait Loading"}
+        {/* 
         <div className="image-container">
           <img
             className="single-hotel-image"
@@ -43,15 +46,7 @@ function SingleHotelImage() {
             src={hotelImg}
             alt="headerimage"
           />
-        </div>
-        <div className="image-container">
-          <img
-            className="single-hotel-image"
-            id="hotelCarousel"
-            src={hotelImg}
-            alt="headerimage"
-          />
-        </div>
+        </div> */}
       </Carousel>
     </>
   );

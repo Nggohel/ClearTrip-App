@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import hotelImg from "../../Assests/HotelOffer/image_of_hotel.jpg";
 import "./../../styles/HotelImg.css";
+import { hotelImgs } from "../../Data/Image";
+import { Link } from "react-router-dom";
 
-function HotelImg({ hotelImageUrl }) {
-  // const [getImageURL, setgetImageURL] = useState(hotelImageUrl);
+function HotelImg({ hotel, Index }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // console.log(getImageURL);
+  const Images = hotelImgs[Index];
+
+  const handleClick = () => {
+    localStorage.setItem("selectedHotelId", hotel?._id);
+  };
+
   return (
     <>
       <Carousel
@@ -22,31 +27,22 @@ function HotelImg({ hotelImageUrl }) {
         showIndicators={true}
         selectedItem={currentIndex}
         useKeyboardArrows={true}
-        // onChange={(index) => setCurrentIndex(index)}
         className="hotels-images"
       >
-        {/* Skelaton lagana he  */}
-        {hotelImageUrl.map((url, index) => (
-          <div key={index} className="hotel-img-card">
-            <a>
-              <img
-                className="hotel-img"
-                id={`hotelCarousel${index}`}
-                src={url}
-                alt={`hotelimage${index}`}
-                loading="lazy"
-              />
-            </a>
-          </div>
+        {Images?.map((image, index) => (
+          <Link to={`/allhoteldetails/${hotel._id}`} onClick={handleClick}>
+            <div key={index} className="hotel-img-card">
+              <a>
+                <img
+                  className="hotel-img"
+                  id={`hotelCarousel${index}`}
+                  src={image}
+                  alt={`hotelimage${index}`}
+                />
+              </a>
+            </div>
+          </Link>
         ))}
-        {/* <div>
-          <img
-            className=""
-            id="hotelCarousel"
-            src={hotelImg}
-            alt="headerimage"
-          />
-        </div> */}
       </Carousel>
     </>
   );

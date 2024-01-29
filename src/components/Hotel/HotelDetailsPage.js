@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import HotelSearchNavBar from "./HotelSearchNavBar";
 import "../../styles/HotelDetails.css";
 import Ratinglogo from "../../Assests/ratingLogo/Ratinglogo.svg";
@@ -26,7 +27,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import RoomImageCarousel from "../Carousels/RoomImageCarousel";
 import img1 from "../../Assests/Images/Rooms/image-1.jpg";
 import Footer from "../Footer";
-import { Link } from "react-router-dom";
+import useFetch from "../../Hooks/UseFetch";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,13 +56,24 @@ CustomTabPanel.propTypes = {
 };
 
 function HotelDetailsPage() {
+  let { hotelId } = useParams();
+
   const [value, setValue] = useState(0);
+
   const [hotelImgNav, setHotelImgNav] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  // data get from Api using HotelID
 
+  const { data: SingleHotelData } = useFetch(
+    `https://academics.newtonschool.co/api/v1/bookingportals/hotel/${hotelId}`,
+    "GET"
+  );
+  console.log("Data from SingleData api", SingleHotelData);
+
+  // for nav Switching
   useEffect(() => {
     const handleScroll = () => {
       const scrollContainer = document.getElementById("scrollContainer");
@@ -78,13 +90,9 @@ function HotelDetailsPage() {
     };
   }, []);
 
-  // console.log("scrollHeight" + document.documentElement.scrollHeight);
-  // console.log("innerHeight" + window.innerHeight);
-  // console.log("scrollTop" + document.documentElement.scrollTop);
-
   return (
     <>
-      <div style={{ position: "fixed" }}>
+      <div style={{ position: "fixed", padding: "0px 50px" }}>
         {hotelImgNav ? (
           <div className="single-hotel-nav">
             <div className="hotelnav-container">
@@ -102,17 +110,8 @@ function HotelDetailsPage() {
           <HotelSearchNavBar searchData={true} />
         )}
 
-        <Box
-        // sx={{
-        //   width: "100%",
-        //   marginTop: "20px",
-        //   marginLeft: "20px",
-        // }}
-        >
-          <Box
-          // className="tab-titles"
-          // sx={{ borderBottom: 1, borderColor: "black" }}
-          >
+        <Box>
+          <Box>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -158,57 +157,61 @@ function HotelDetailsPage() {
                   <section id="general" className="general">
                     <div className="general-container">
                       <div>
-                        <h3 className="hotel-name">
-                          Planet Hollywood Beach Resort Goa
-                        </h3>
+                        <h3 className="hotel-name">{SingleHotelData?.name}</h3>
                         <div
                           style={{ marginTop: "4px", marginBottom: "4px" }}
                         ></div>
                         <p className="hotel-details-para">
-                          5-star Hotel · Utorda South Goa, Goa
+                          5-star Hotel · {SingleHotelData?.location}
                         </p>
                       </div>
                       <div
                         style={{ marginTop: "8px", marginBottom: "8px" }}
                       ></div>
                       <div style={{ display: "flex" }}>
-                        <h2 className="hotel-details-rating">4.5/5</h2>
-                        <div className="hoteldetails-rating-details">
-                          <img
-                            src={Ratinglogo}
-                            style={{ height: "16px", width: "25px" }}
-                          />
-                          <img
-                            src={fullratinglogo}
-                            style={{
-                              height: "16px",
-                              width: "16px",
-                              marginLeft: "4px",
-                            }}
-                          />
-                          <img
-                            src={fullratinglogo}
-                            style={{ height: "16px", width: "16px" }}
-                          />
-                          <img
-                            src={fullratinglogo}
-                            style={{ height: "16px", width: "16px" }}
-                          />
-                          <img
-                            src={fullratinglogo}
-                            style={{ height: "16px", width: "16px" }}
-                          />
-                          <img
-                            src={Halfratinglogo}
-                            style={{ height: "16px", width: "16px" }}
-                          />
-                        </div>
-                        <div className="total-customer-rating">
-                          <p className="total-reviews">(2,092 reviews)</p>
-                          <img
-                            src={expand_logo}
-                            style={{ height: "24px", width: "24px" }}
-                          />
+                        <h2 className="hotel-details-rating">
+                          {SingleHotelData?.rating}/5
+                        </h2>
+                        <div style={{ display: "flex" }}>
+                          <div className="hoteldetails-rating-details">
+                            <img
+                              src={Ratinglogo}
+                              style={{ height: "16px", width: "25px" }}
+                            />
+                            <img
+                              src={fullratinglogo}
+                              style={{
+                                height: "16px",
+                                width: "16px",
+                                marginLeft: "4px",
+                              }}
+                            />
+                            <img
+                              src={fullratinglogo}
+                              style={{ height: "16px", width: "16px" }}
+                            />
+                            <img
+                              src={fullratinglogo}
+                              style={{ height: "16px", width: "16px" }}
+                            />
+                            <img
+                              src={fullratinglogo}
+                              style={{ height: "16px", width: "16px" }}
+                            />
+                            <img
+                              src={Halfratinglogo}
+                              style={{ height: "16px", width: "16px" }}
+                            />
+                          </div>
+                          <div className="total-customer-rating">
+                            <p className="total-review">
+                              ({SingleHotelData?.rating * 100 + 43} reviews)
+                            </p>
+                            <img
+                              src={expand_logo}
+                              style={{ height: "24px", width: "24px" }}
+                            />
+                          </div>
                         </div>
                         <div
                           style={{ paddingBottom: "12px", paddingTop: "12px" }}
@@ -240,27 +243,11 @@ function HotelDetailsPage() {
                     <div className="amenities-container">
                       <h1 className="amenities-title">Amenities</h1>
                       <div className="typesof-amenities">
-                        <div className="type-amenities">
-                          <span className="amenities-logo">
-                            <Wifi />
-                          </span>
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
-                        <div className="type-amenities">
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
-                        <div className="type-amenities">
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
-                        <div className="type-amenities">
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
-                        <div className="type-amenities">
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
-                        <div className="type-amenities">
-                          <p className="amenities-name">WiFi services</p>
-                        </div>
+                        {SingleHotelData?.amenities.map((amenity, index) => (
+                          <div className="type-amenities" key={index}>
+                            <p className="amenities-name">{amenity}</p>
+                          </div>
+                        ))}
                       </div>
                       <button className="see-all-amenities">
                         <h4 className="amenities-btn-title">
@@ -285,28 +272,40 @@ function HotelDetailsPage() {
                         </div>
                         <div className="property-rule">
                           <p className="rule">
-                            Check-in: After 02:00 PM, Check-out: 11:00 AM
+                            {SingleHotelData?.houseRules?.guestProfile
+                              ?.unmarriedCouplesAllowed
+                              ? "Couples are Allowed"
+                              : "Unmarried are Couples Allowed"}
                           </p>
                         </div>
                         <div className="property-rule">
                           <p className="rule">
-                            Check-in: After 02:00 PM, Check-out: 11:00 AM
+                            {SingleHotelData?.houseRules?.idProofRelated
+                              ?.localIdsAllowed
+                              ? `Local Ids Allowed But only ${SingleHotelData?.houseRules?.idProofRelated?.idProofsAccepted[0]}`
+                              : `Local Ids Not Allowed`}
                           </p>
                         </div>
                         <div className="property-rule">
                           <p className="rule">
-                            Check-in: After 02:00 PM, Check-out: 11:00 AM
+                            {SingleHotelData?.houseRules?.restrictions
+                              ?.petsAllowed
+                              ? "Pets are Allowed"
+                              : "Pets are Not Allowed"}
                           </p>
                         </div>
                         <div className="property-rule">
                           <p className="rule">
-                            Check-in: After 02:00 PM, Check-out: 11:00 AM
+                            {SingleHotelData?.houseRules?.restrictions
+                              ?.smokingAllowed
+                              ? "Smoking Is Allowed"
+                              : "Smoking Is Not Allowed"}
                           </p>
                         </div>
                       </div>
                       <button className="see-all-propertyrules">
                         <h4 className="propertyrules-btn-title">
-                          See all amenities
+                          See all rule
                         </h4>
                       </button>
                     </div>
@@ -321,26 +320,27 @@ function HotelDetailsPage() {
                     <div className="about-property-container">
                       <h1 className="aboutproperty-title"> About property</h1>
                       <p className="aboutproperty-para">
-                        Regenta Central Imperial Candolim, Goa, is a beautiful
-                        and affordable property spread in 56770 Sq. ft nestled
-                        amidst the hub centre of the beach city. Occupying a
-                        prime location, this venue becomes easily accessible via
-                        public and private transportation. Drop-in for a quick
-                        weekend getaway, corporate retreat, or impromptu family
-                        get-togethers and experience a memorable event. It is
-                        ideal for hosting your business meetings, conferences,
-                        seminars, corporate engagements, luncheons, hi-teas, in
-                        addition to social affairs. Regenta Central Imperial
-                        Candolim, Goa, offers luxurious rooms for accommodation
-                        for guests who arrive from different cities. It can
-                        comfortably accommodate a small gathering for your
-                        functions. The banquet has an on-site team of decorators
-                        who take care of all your requests and deliver them
-                        effortlessly. Relish upon delicious vegetarian and
-                        non-vegetarian cuisines curated by the in-house chefs'
-                        team present here. Hold your memorable events at Regenta
-                        Central Imperial Candolim, Goa, to make them an
-                        everlasting success
+                        {SingleHotelData?.name}, {SingleHotelData?.location}, is
+                        a beautiful and affordable property spread in 56770 Sq.
+                        ft nestled amidst the hub centre of the beach city.
+                        Occupying a prime location, this venue becomes easily
+                        accessible via public and private transportation.
+                        Drop-in for a quick weekend getaway, corporate retreat,
+                        or impromptu family get-togethers and experience a
+                        memorable event. It is ideal for hosting your business
+                        meetings, conferences, seminars, corporate engagements,
+                        luncheons, hi-teas, in addition to social affairs.
+                        Regenta Central Imperial Candolim, Goa, offers luxurious
+                        rooms for accommodation for guests who arrive from
+                        different cities. It can comfortably accommodate a small
+                        gathering for your functions. The banquet has an on-site
+                        team of decorators who take care of all your requests
+                        and deliver them effortlessly. Relish upon delicious
+                        vegetarian and non-vegetarian cuisines curated by the
+                        in-house chefs' team present here. Hold your memorable
+                        events at {SingleHotelData?.name},
+                        {SingleHotelData?.location}, to make them an everlasting
+                        success
                       </p>
                       <button className="aboutproperty-btn">
                         <h4 className="btn-contain">Read more</h4>
@@ -350,7 +350,8 @@ function HotelDetailsPage() {
                 </div>
                 <div className="rightside-container">
                   <section id="images" className="hotel-images">
-                    <SingleHotelImage />
+                    <SingleHotelImage ImageUrL={SingleHotelData?.images} />
+                   
                   </section>
 
                   <section id="rooms" className="rooms">
@@ -358,13 +359,20 @@ function HotelDetailsPage() {
                       <div style={{ display: "flex" }}>
                         <div className="rooms-price-details">
                           <div className="room-details">
-                            <h2 className="room-cost">₹11,292</h2>
+                            <h2 className="room-cost">
+                              {Math.floor(SingleHotelData?.avgCostPerNight)}
+                            </h2>
                             <p className="room-tax">+ ₹2,139 tax</p>
                             <p className="room-pernight">/ night</p>
                           </div>
                           <div className="room-other-details">
-                            <h2 className="room-actul-cost">₹13,984</h2>
-                            <p className="room-offer-data">19% off</p>
+                            <h2 className="room-actul-cost">
+                              {Math.floor(
+                                SingleHotelData?.avgCostPerNight +
+                                  (SingleHotelData?.avgCostPerNight * 20) / 100
+                              )}
+                            </h2>
+                            <p className="room-offer-data">20% off</p>
                             <p className="room-emi-option">
                               No cost EMI from ₹4,477
                             </p>
@@ -403,7 +411,7 @@ function HotelDetailsPage() {
                   <h1 className="location-title">Location</h1>
                   <div className="location-map">
                     <iframe
-                      src="https://maps.google.com/maps?&q=Vasco Da Gama, Goa&output=embed"
+                      src={`https://maps.google.com/maps?&q=${SingleHotelData?.name}, ${SingleHotelData?.location}&output=embed`}
                       style={{
                         height: "100%",
                         width: "100%",
@@ -425,7 +433,9 @@ function HotelDetailsPage() {
                       <div>
                         <div className="all-rating">
                           <h2 className="all-rating-title">4.5/5</h2>
-                          <p className="total-rating">(5,731 reviews)</p>
+                          <p className="total-rating">
+                            ({SingleHotelData?.rating * 100 + 43} reviews)
+                          </p>
                         </div>
                         <div className="rating-circle">
                           <img
@@ -666,7 +676,6 @@ function HotelDetailsPage() {
                     <div className="room-image">
                       <RoomImageCarousel />
                     </div>
-
                     <div className="services-details">
                       <h2 className="roomdetails-title">
                         Club Room with Balcony

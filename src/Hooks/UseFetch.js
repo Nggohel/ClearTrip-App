@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 const useFetch = (initialUrl = "", method = "GET", bodyData = {}) => {
-  //
   const [url, setUrl] = useState(initialUrl);
   const [data, setData] = useState();
   const [body, setBody] = useState(bodyData);
@@ -23,11 +22,11 @@ const useFetch = (initialUrl = "", method = "GET", bodyData = {}) => {
 
       const result = await response.json();
       setData(result.data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setIsError(true);
     }
-
-    setIsLoading(false);
   };
 
   const fetchPostData = async (url, method, data) => {
@@ -52,11 +51,12 @@ const useFetch = (initialUrl = "", method = "GET", bodyData = {}) => {
 
     setIsLoading(false);
   };
+
   useEffect(() => {
     url != "" && fetchData(url, method);
   }, []);
 
-  return { data, isLoading, isError, fetchPostData };
+  return { data, isLoading, isError, fetchPostData, fetchData };
 };
 
 export default useFetch;

@@ -22,8 +22,8 @@ import mediCancelDTSvg from "../../Assests/Images/mediCancelDTSvg.svg";
 import DownArrow from "../../Assests/Images/DownArrow";
 import useFetch from "../../Hooks/UseFetch";
 import { useFlightContext } from "../../Hooks/useFlightContext";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Url } from "../../Data/Url";
 function LeftFlightReviewItinerary() {
   const {
     searchData,
@@ -32,21 +32,20 @@ function LeftFlightReviewItinerary() {
     singleApiArrivalData,
     setsingleApiArrivalData,
   } = useFlightContext();
+
   const getLoginAndsingUpData = JSON.parse(
     localStorage.getItem("signup&loginData")
   );
-  console.log(getLoginAndsingUpData);
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const arrivalId = localStorage.getItem("ArrivalId");
   const DepartureId = localStorage.getItem("DepartureId");
-
   const [showForm, setShowForm] = useState(false);
   const [showpayment, setShowPayment] = useState(false);
 
-  console.log(DepartureId, "departureId");
-  console.log(arrivalId, "arrivalId");
   const { data: singleDepartureData } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/${DepartureId}`,
     "GET"
@@ -62,7 +61,7 @@ function LeftFlightReviewItinerary() {
     setsingleApiArrivalData(singleArrivalData);
   }, [singleDepartureData, singleArrivalData]);
 
-  console.log(singleDepartureData, "singleDepartureData");
+  // console.log(singleDepartureData, "singleDepartureData");
 
   const handleContinueClick = () => {
     setShowForm(true);
@@ -77,6 +76,7 @@ function LeftFlightReviewItinerary() {
       );
     }
   };
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -91,6 +91,82 @@ function LeftFlightReviewItinerary() {
 
   const handleConfirmation = () => {
     setShowPayment(true);
+  };
+
+  const amount =
+    (singleDepartureData?.ticketPrice + singleArrivalData?.ticketPrice) * 100;
+
+  const currency = "INR";
+  const receiptId = arrivalId;
+
+  const handlePayment = async (e) => {
+    const response = await fetch(`${Url.Payment_Api}/order`, {
+      method: "POST",
+      body: JSON.stringify({
+        amount: 500,
+        currency,
+        receipt: "1234",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const order = await response.json();
+    console.log(order);
+
+    var options = {
+      key: "rzp_test_SJWXgAHBZeNPoG", // Enter the Key ID generated from the Dashboard
+      amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency,
+      name: "NGsolution", //your business name
+      description: "Payment For Booking",
+      image: "https://example.com/your_logo",
+      order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      handler: async function (response) {
+        const body = {
+          ...response,
+        };
+
+        const validateRes = await fetch(`${Url.Payment_Api}/order/validate`, {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const jsonRes = await validateRes.json();
+        console.log(jsonRes);
+        if (jsonRes?.msg == "success") {
+          jsonRes.amount = amount;
+          localStorage.setItem("PaymentStatus", JSON.stringify(jsonRes));
+
+          navigate("/bookingconfirmation");
+        }
+      },
+      prefill: {
+        name: name, //your customer's name
+        email: "Ngsolution@gmail.com",
+        contact: "9991717222", //Provide the customer's phone number for better conversion rates
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#ff7d26",
+      },
+    };
+    var rzp1 = new window.Razorpay(options);
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+    rzp1.open();
+    e.preventDefault();
   };
 
   return (
@@ -533,11 +609,11 @@ function LeftFlightReviewItinerary() {
             <Link to="/flightsearch">
               <button className="continue-btn">Cancel</button>
             </Link>
-            <Link to="/bookingconfirmation">
-              <button className="continue-payment-btn">
-                Continue to Payment
-              </button>
-            </Link>
+            {/* <Link to="/bookingconfirmation"> */}
+            <button className="continue-payment-btn" onClick={handlePayment}>
+              Continue to Payment
+            </button>
+            {/* </Link> */}
           </div>
         )}
       </div>

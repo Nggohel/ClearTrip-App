@@ -1,5 +1,5 @@
 .left-aside {
-  /* margin-top: 30px; */
+  margin-top: 55px;
   margin-left: 35px;
   width: 12rem;
   height: 32rem;
@@ -8,24 +8,39 @@
   align-items: flex-start;
 }
 
-.left-aside-bar {
-  margin-top: 37px;
-  padding: 5px;
-  padding-right: 5rem;
+.active {
+  color: #36c !important;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+/* parent to child check kiya he*/
+.active .left-navbar {
+  background-color: rgb(183, 204, 245);
+}
+.left-navbar {
+  width: 202px;
+  height: 40px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  border-radius: 8px;
 }
-.left-aside-bar span {
-  color: black;
-  margin-left: 10px;
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-.left-aside-bar:hover {
-  background: lightblue;
+.left-navbar:hover {
+  background: rgb(202, 232, 242);
   border-radius: 5px;
-}
-.left-aside-bar span:hover {
   color: blue;
+}
+
+.nav-list {
+  list-style: none;
+}
+.pending {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.tallIcon {
+  height: 25px;
+  width: 25px;
 }
