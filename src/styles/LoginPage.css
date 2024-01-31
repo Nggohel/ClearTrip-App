@@ -12,12 +12,13 @@
 }
 .customLogoutModal {
   margin-top: 40px;
-  margin-left: 1140px;
-  width: 200px;
-  height: 80px;
+  margin-left: 1075px;
+  width: 220px;
+  height: auto;
   border-radius: 5px;
   background-color: none;
 }
+
 .name-label {
   line-height: 20px;
   font-size: 14px;
@@ -74,4 +75,18 @@
   font-weight: 500;
   font-size: 14px;
   text-decoration: underline;
+  left: 0;
+}
+.name {
+}
+.myacc-email {
+  display: flex;
+  color: grey;
+  font-size: 16px;
+  font-weight: 400;
+}
+button.react-responsive-modal-closeButton {
+  top: 8px;
+  right: 8px;
+  border: 0px;
 }

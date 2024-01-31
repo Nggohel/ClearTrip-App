@@ -7,9 +7,10 @@ import { useLoginContext } from "../../Hooks/LoginContext";
 const MyAccount = ({ open, openChange }) => {
   const { localStorageLoginData } = useLoginContext();
 
-  const getLoginAndsingUpData = JSON.parse(
-    localStorage.getItem("signup&loginData")
-  );
+  console.log("LoginData", localStorageLoginData);
+  // const getLoginAndsingUpData = JSON.parse(
+  //   localStorage.getItem("signup&loginData")
+  // );
 
   const handleLogout = () => {
     localStorage.removeItem("signup&loginData");
@@ -30,13 +31,22 @@ const MyAccount = ({ open, openChange }) => {
           modal: "customLogoutModal",
         }}
       >
-        <div>
-          <h3>
+        <div style={{}}>
+          <div style={{ marginTop: "50px" }}></div>
+          <h4>
+            <span className="name">Name: </span>
             {localStorageLoginData?.data?.name
               ? localStorageLoginData?.data?.name
               : localStorageLoginData?.data?.user.name}
-          </h3>
-          <hr></hr>
+          </h4>
+
+          <h4 className="myacc-email">
+            Email:
+            {localStorageLoginData?.data?.email
+              ? localStorageLoginData?.data?.email
+              : localStorageLoginData?.data?.user.email}
+          </h4>
+          <div style={{ marginTop: "50px" }}></div>
           <h5 className="logout" onClick={handleLogout}>
             LogOut
           </h5>

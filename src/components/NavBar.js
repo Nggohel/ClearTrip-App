@@ -6,6 +6,7 @@ import "../styles/NavBar.css";
 import LoginPage from "../Pages/LoginPage";
 import MyAccount from "./Flights/MyAccount";
 import { useLoginContext } from "../Hooks/LoginContext";
+import AvtaarLogo from "../Assests/Images/AvtaarLogo";
 
 export default function NavBar() {
   const {
@@ -17,8 +18,6 @@ export default function NavBar() {
 
   const [loginPopup, setLoginPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
-
-
 
   const handleLoginAndSignUp = () => {
     setLoginPopUp(true);
@@ -34,9 +33,12 @@ export default function NavBar() {
         <div className="navbar">
           <img src={applogo} alt="App Logo" width="100" height="25" />
           {loginState || localStorageLoginData !== null ? (
-            <p className="nav-para" onClick={handleMyAccount}>
-              My Account
-            </p>
+            <>
+              <AvtaarLogo />
+              <p className="nav-para" onClick={handleMyAccount}>
+                My Account
+              </p>
+            </>
           ) : (
             <button className="custom-button" onClick={handleLoginAndSignUp}>
               Login in / sign up

@@ -184,16 +184,16 @@ function LeftFlightReviewItinerary() {
             <div className="flight-itinerary-title">
               <div className="flight-location">
                 <span className="flight-location-span">
-                  {searchData.DepartureCity}
+                  {searchData?.DepartureCity}
                 </span>
                 <ArrowItinerary />
                 <span className="flight-location-span">
-                  {searchData.ArrivalCity}
+                  {searchData?.ArrivalCity}
                 </span>
               </div>
               <div>
-                {searchData.dayDeparture} ,{searchData.FormattedStartDate}{" "}
-                {searchData.StartDateMonth} {searchData.StartDateYear}
+                {searchData?.dayDeparture} ,{searchData?.FormattedStartDate}{" "}
+                {searchData?.StartDateMonth} {searchData?.StartDateYear}
               </div>
             </div>
             {/* flight details 1*/}
@@ -222,7 +222,8 @@ function LeftFlightReviewItinerary() {
                     {singleDepartureData?.source}
                   </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    International Airport,{searchData.DepartureCity}, Terminal 1
+                    International Airport,{searchData?.DepartureCity}, Terminal
+                    1
                   </span>
                 </div>
                 <div
@@ -244,7 +245,7 @@ function LeftFlightReviewItinerary() {
                     {singleDepartureData?.destination}
                   </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    {searchData.ArrivalCity}, Terminal
+                    {searchData?.ArrivalCity}, Terminal
                   </span>
                 </div>
               </div>
@@ -325,7 +326,7 @@ function LeftFlightReviewItinerary() {
                     {singleArrivalData?.source}
                   </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    International Airport,{searchData.ArrivalCity}, Terminal 1
+                    International Airport,{searchData?.ArrivalCity}, Terminal 1
                   </span>
                 </div>
                 <div
@@ -347,7 +348,7 @@ function LeftFlightReviewItinerary() {
                     {singleArrivalData?.destination}
                   </span>
                   <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    {searchData.DepartureCity}, Terminal
+                    {searchData?.DepartureCity}, Terminal
                   </span>
                 </div>
               </div>

@@ -10,17 +10,29 @@ const FlightCalendar = ({
   startDateMonth,
   startDateYear,
 }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const FlightData = JSON.parse(localStorage.getItem("SearchData"));
 
-  const [endDate, setEndDate] = useState(new Date());
+  const defaultStartDate = new Date(
+    `${FlightData?.dayDeparture}, ${FlightData?.StartDateMonth} ${FlightData?.FormattedStartDate} ${FlightData?.StartDateYear}`
+  );
+  const defaultEndDate = new Date(
+    `${FlightData?.dayArrival}, ${FlightData?.EndDateMonth} ${FlightData?.FormattedEndDate} ${FlightData?.EndDateYear}`
+  );
+
+  const StoreStartDate = FlightData ? defaultStartDate : new Date();
+  const StoreEndDate = FlightData ? defaultEndDate : new Date();
+
+  const [startDate, setStartDate] = useState(StoreStartDate);
+
+  const [endDate, setEndDate] = useState(StoreEndDate);
 
   const currentDate = new Date();
 
   const maxDate = new Date();
+
   maxDate.setMonth(currentDate.getMonth() + 9);
 
   useEffect(() => {
-    // start date
     const dayOfstart = startDate.toLocaleDateString(undefined, {
       weekday: "short",
     });
@@ -32,13 +44,17 @@ const FlightCalendar = ({
     const startDatemonth = startDate.toLocaleDateString(undefined, {
       month: "short",
     });
+
     const startDateyear = startDate.toLocaleDateString(undefined, {
       year: "numeric",
     });
+
     // end date
+
     const dayOfEnd = endDate.toLocaleDateString(undefined, {
       weekday: "short",
     });
+
     const FormatedendDate = endDate.toLocaleDateString(undefined, {
       day: "numeric",
     });
@@ -46,6 +62,7 @@ const FlightCalendar = ({
     const endDatemonth = endDate.toLocaleDateString(undefined, {
       month: "short",
     });
+
     const endDateyear = endDate.toLocaleDateString(undefined, {
       year: "numeric",
     });

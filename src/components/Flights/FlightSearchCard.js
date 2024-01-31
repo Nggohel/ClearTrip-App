@@ -9,7 +9,6 @@ import FlightCalendar from "../FlightCalendar";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FlightSearchCard({ icon }) {
-  
   const { setSearchData } = useFlightContext();
   const [wherefromValue, SetWherefromvalue] = useState("BLR-Bangalore,In");
   const [wheretoValue, SetWheretoValue] = useState("BOM-Mumbai,In");
@@ -146,7 +145,6 @@ function FlightSearchCard({ icon }) {
                       startDateMonth,
                       startDateYear
                     ) => {
-                      // setDayDeparture(dayOfstart);
                       setDayDeparture(dayOfstart);
                       setFormattedStartDate(formattedStartDate);
                       setStartDateMonth(startDateMonth);

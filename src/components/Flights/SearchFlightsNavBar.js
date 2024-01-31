@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Hotel } from "@mui/icons-material";
+import MyAccount from "./MyAccount";
+import LoginPage from "../../Pages/LoginPage";
 import SearchFlightLogo from "./../../Assests/Images/SearchFlightLogo";
 import AppLogo from "./../../Assests/Images/AppLogo.png";
 import SupportLogo from "./../../Assests/Images/SupportLogo";
@@ -7,29 +9,44 @@ import AvtaarLogo from "./../../Assests/Images/AvtaarLogo";
 import "./../../styles/SearchFlightsNavBar.css";
 import FlightCalendar from "../FlightCalendar";
 import { useFlightContext } from "../../Hooks/useFlightContext";
+import { Link } from "react-router-dom";
 
 function SearchFlightsNavBar() {
-  const { setSearchNavData } = useFlightContext();
+  const { setSearchNavData, setSearchData, loginState, localStorageLoginData } =
+    useFlightContext();
+
+  const [wheretoValue, SetWheretoValue] = useState("");
+  const [wherefromValue, SetWherefromvalue] = useState("");
+  const [dayDeparture, setDayDeparture] = useState("");
+  const [dayArrival, setDayArrival] = useState("");
+  const [FormattedStartDate, setFormattedStartDate] = useState("");
+  const [StartDateMonth, setStartDateMonth] = useState("");
+  const [StartDateYear, setStartDateYear] = useState("");
+  const [FormattedEndDate, setFormattedEndDate] = useState("");
+  const [EndDateMonth, setEndDateMonth] = useState("");
+  const [EndDateYear, setEndDateYear] = useState("");
+  const [loginPopup, setLoginPopUp] = useState(false);
+  const [logoutPopUp, setLogoutPopUp] = useState(false);
+
   const FlightData = JSON.parse(localStorage.getItem("SearchData"));
 
-  const [wheretoValue, SetWheretoValue] = useState(FlightData?.ArrivalCity);
-  const [wherefromValue, SetWherefromvalue] = useState(
-    FlightData?.DepartureCity
-  );
-  const [dayDeparture, setDayDeparture] = useState(FlightData?.dayDeparture);
-  const [dayArrival, setDayArrival] = useState(FlightData?.dayArrival);
-  const [FormattedStartDate, setFormattedStartDate] = useState(
-    FlightData?.FormattedStartDate
-  );
-  const [StartDateMonth, setStartDateMonth] = useState(
-    FlightData?.StartDateMonth
-  );
-  const [StartDateYear, setStartDateYear] = useState(FlightData?.StartDateYear);
-  const [FormattedEndDate, setFormattedEndDate] = useState(
-    FlightData?.FormattedEndDate
-  );
-  const [EndDateMonth, setEndDateMonth] = useState(FlightData?.EndDateMonth);
-  const [EndDateYear, setEndDateYear] = useState(FlightData?.EndDateYear);
+  const handleLoginAndSignUp = () => {
+    setLoginPopUp(true);
+  };
+
+  const handleMyAccount = () => {
+    setLogoutPopUp(true);
+  };
+
+  const DepatureValue = FlightData?.source + "-" + FlightData?.DepartureCity;
+  const ArrivalValue = FlightData?.destination + "-" + FlightData?.ArrivalCity;
+
+  useEffect(() => {
+    if (FlightData) {
+      SetWherefromvalue(FlightData?.DepartureCity);
+      SetWheretoValue(FlightData?.ArrivalCity);
+    }
+  }, []);
 
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
@@ -38,15 +55,22 @@ function SearchFlightsNavBar() {
     SetWheretoValue(e.target.value);
   };
 
-  let NavBarFromValue = wherefromValue?.split("-");
-  let NavBarToValue = wheretoValue?.split("-");
-  let NavBarDepartureCity = NavBarFromValue[1]?.split(",")[0].trim();
-  let NavBarArrivalCity = NavBarToValue[1]?.split(",")[0].trim();
+  let FromValue =
+    wherefromValue == FlightData?.DepartureCity
+      ? DepatureValue?.split("-")
+      : wherefromValue?.split("-");
+
+  let ToValue =
+    wheretoValue == FlightData?.ArrivalCity
+      ? ArrivalValue?.split("-")
+      : wheretoValue?.split("-");
+  let DepartureCity = FromValue[1]?.split(",")[0].trim();
+  let ArrivalCity = ToValue[1]?.split(",")[0].trim();
 
   const handleNavFlightSearch = () => {
-    setSearchNavData({
-      source: NavBarFromValue[0],
-      destination: NavBarToValue[0],
+    setSearchData({
+      source: FromValue[0],
+      destination: ToValue[0],
       dayDeparture: dayDeparture,
       dayArrival: dayArrival,
       FormattedStartDate: FormattedStartDate,
@@ -55,15 +79,15 @@ function SearchFlightsNavBar() {
       FormattedEndDate: FormattedEndDate,
       EndDateMonth: EndDateMonth,
       EndDateYear: EndDateYear,
-      DepartureCity: NavBarDepartureCity,
-      ArrivalCity: NavBarArrivalCity,
+      DepartureCity: DepartureCity,
+      ArrivalCity: ArrivalCity,
     });
 
     localStorage.setItem(
-      "FlightNavSearch",
+      "SearchData",
       JSON.stringify({
-        source: NavBarFromValue[0],
-        destination: NavBarToValue[0],
+        source: FromValue[0],
+        destination: ToValue[0],
         dayDeparture: dayDeparture,
         dayArrival: dayArrival,
         FormattedStartDate: FormattedStartDate,
@@ -72,11 +96,11 @@ function SearchFlightsNavBar() {
         FormattedEndDate: FormattedEndDate,
         EndDateMonth: EndDateMonth,
         EndDateYear: EndDateYear,
-        DepartureCity: NavBarDepartureCity,
-        ArrivalCity: NavBarArrivalCity,
+        DepartureCity: DepartureCity,
+        ArrivalCity: ArrivalCity,
       })
     );
-    
+
     window.location.reload();
   };
 
@@ -84,20 +108,37 @@ function SearchFlightsNavBar() {
     <>
       <div className="search-flights-navbar">
         <div className="leftside-searchflights-navbar">
-          <img src={AppLogo} />
-          <SearchFlightLogo />
-          <Hotel style={{ color: "darkgray" }} />
+          <Link to="/">
+            <img src={AppLogo} />
+          </Link>
+          <Link to="/">
+            <SearchFlightLogo />
+          </Link>
+          <Link to="/hotel">
+            <Hotel style={{ color: "darkgray" }} />
+          </Link>
         </div>
         <div className="rightside-searchflights-navbar">
-          <div>INR Rs.</div>
+          <SupportLogo />
           <div>
-            <SupportLogo />
+            <a href="https://www.cleartrip.com/accounts/trips">Support</a>
           </div>
-          <div>Support</div>
-          <div>
-            <AvtaarLogo />
-          </div>
-          <div>Log in</div>
+
+          {loginState || localStorageLoginData !== null ? (
+            <>
+              <AvtaarLogo />
+
+              <p className="nav-para" onClick={handleMyAccount}>
+                My Account
+              </p>
+            </>
+          ) : (
+            <button className="custom-button" onClick={handleLoginAndSignUp}>
+              Login in / sign up
+            </button>
+          )}
+          <MyAccount open={logoutPopUp} openChange={setLogoutPopUp} />
+          <LoginPage open={loginPopup} openChange={setLoginPopUp} />
         </div>
       </div>
       <div className="flights-search-boxs">
@@ -140,7 +181,6 @@ function SearchFlightsNavBar() {
               startDateMonth,
               startDateYear
             ) => {
-              // setDayDeparture(dayOfstart);
               setDayDeparture(dayOfstart);
               setFormattedStartDate(formattedStartDate);
               setStartDateMonth(startDateMonth);
