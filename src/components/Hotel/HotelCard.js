@@ -11,7 +11,7 @@ function HotelCard({ hotel, index }) {
         <HotelImg hotel={hotel} Index={index} />
       </div>
       <Link
-        to={`/allhoteldetails/${hotel._id}`}
+        to={`/allhoteldetails/${hotel?._id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="hotel-details">

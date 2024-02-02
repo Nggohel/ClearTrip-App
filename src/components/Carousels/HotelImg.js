@@ -30,7 +30,7 @@ function HotelImg({ hotel, Index }) {
         className="hotels-images"
       >
         {Images?.map((image, index) => (
-          <Link to={`/allhoteldetails/${hotel._id}`} onClick={handleClick}>
+          <Link to={`/allhoteldetails/${hotel?._id}`} onClick={handleClick}>
             <div key={index} className="hotel-img-card">
               <a>
                 <img

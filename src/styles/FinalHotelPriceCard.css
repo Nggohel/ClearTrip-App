@@ -1,0 +1,60 @@
+.mainhotel-rightside-div {
+  background: rgb(255, 255, 255);
+  z-index: 79;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  width: 291px;
+  height: 304px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+}
+.hotel-billing-data {
+  display: flex;
+  height: 55px;
+  padding: 0px 16px;
+}
+.roomexpense-details {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(26, 26, 26);
+  text-decoration: none;
+}
+.hotel-emi {
+  width: 291px;
+  height: 100px;
+  background-color: rgb(255, 241, 236);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid #e6e6e6;
+  padding: 20px;
+}
+
+.pricecard-line {
+  margin-bottom: 12px;
+  margin-top: 12px;
+  border-bottom: 1px dashed rgb(231, 231, 231);
+}
+
+.roomexpense-total {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: rgb(26, 26, 26);
+}
+
+.roomexpense-totalPrice {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: rgb(26, 26, 26);
+}
+.hotelmain-offer-div {
+  margin-top: 20px;
+  width: 293px;
+  height: 849px;
+  padding-bottom: 16px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}

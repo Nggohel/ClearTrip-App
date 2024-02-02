@@ -1,19 +1,53 @@
 import { useEffect, useState } from "react";
 import "../../styles/HotelSearchPage.css";
 import applogo from "../../Assests/Images/AppLogo.png";
+import AvtaarLogo from "../../Assests/Images/AvtaarLogo";
 import Location from "../../Assests/Location";
 import FlightCalendar from "../../components/FlightCalendar";
+import MyAccount from "../Flights/MyAccount";
+import LoginPage from "../../Pages/LoginPage";
+import { useFlightContext } from "../../Hooks/useFlightContext";
+function HotelSearchNavBar({ searchData, btnCss, Apidata, updatedHotelData }) {
+  const { loginState, localStorageLoginData } = useFlightContext();
 
-function HotelSearchNavBar({ searchData, btnCss, Apidata }) {
-  console.log("Apidata", Apidata);
-
+  const StoreCity = JSON.parse(localStorage.getItem("SearchHotelData"));
+  console.log(StoreCity);
   const [searchState, setSearchState] = useState(true);
   const [dayStart, setDayStart] = useState("");
   const [dayEnd, setDayEnd] = useState("");
-  const city = Apidata?.hotels[0]?.location.split(",")[0].trim();
+  const [city, setCity] = useState(StoreCity?.source);
+  const [btnState, setBtnState] = useState(false);
+  const [loginPopup, setLoginPopUp] = useState(false);
+  const [logoutPopUp, setLogoutPopUp] = useState(false);
+
   useEffect(() => {
     setSearchState(searchData);
   }, [searchData]);
+
+  const handleLoginAndSignUp = () => {
+    setLoginPopUp(true);
+  };
+
+  const handleMyAccount = () => {
+    setLogoutPopUp(true);
+  };
+
+  const handleCityChange = (e) => {
+    const newCity = e.target.value;
+    setBtnState(true);
+    setCity(newCity);
+    localStorage.setItem(
+      "SearchHotelData",
+      JSON.stringify({
+        source: newCity,
+        dayCome: dayStart,
+      })
+    );
+  };
+
+  const handleUpdateBtn = () => {
+    updatedHotelData(true);
+  };
 
   return (
     <>
@@ -24,19 +58,17 @@ function HotelSearchNavBar({ searchData, btnCss, Apidata }) {
             <div className="search-data-one">
               <Location />
               <p className="search-data-para">
-                {city ? (
-                  city
-                ) : (
-                  <input
-                    type="text"
-                    className="choose-person-input"
-                    placeholder="City"
-                    list="room-person-list"
-                  />
-                )}
-                <datalist id="room-person-list" style={{}}>
+                <input
+                  type="text"
+                  className="choose-person-input"
+                  placeholder="City"
+                  value={city}
+                  list="Location"
+                  onChange={handleCityChange}
+                />
+                <datalist id="Location" style={{}}>
                   <option className="datalist-option" value="Goa" />
-                  <option value="Banglore" />
+                  <option value="Bangalore" />
                   <option value="Kolkata" />
                 </datalist>
               </p>
@@ -64,13 +96,44 @@ function HotelSearchNavBar({ searchData, btnCss, Apidata }) {
                 <option value="2 Room, 4 Adults" />
               </datalist>
             </div>
+            {btnState ? (
+              <button className="update-btn" onClick={handleUpdateBtn}>
+                Update
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         ) : (
           ""
         )}
-        <button className={`custom-button  ${btnCss}`}>
-          Login in / sign up
-        </button>
+
+        {loginState || localStorageLoginData !== null ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+            }}
+          >
+            <div>
+              <AvtaarLogo />
+            </div>
+            <div className="nav-para" onClick={handleMyAccount}>
+              My Account
+            </div>
+          </div>
+        ) : (
+          <button
+            className={`custom-button  ${btnCss}`}
+            onClick={handleLoginAndSignUp}
+          >
+            Login in / sign up
+          </button>
+        )}
+        <MyAccount open={logoutPopUp} openChange={setLogoutPopUp} />
+        <LoginPage open={loginPopup} openChange={setLoginPopUp} />
       </div>
     </>
   );

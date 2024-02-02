@@ -11,6 +11,7 @@ import { FlightContextProvider } from "../Hooks/useFlightContext";
 import LoginPage from "../Pages/LoginPage";
 import ConfirmationPage from "./Flights/ConfirmationPage";
 import { LoginContextProvider } from "../Hooks/LoginContext";
+import BookingSucessfullPage from "./Hotel/BookingSucessfullPage";
 function App() {
   return (
     <FlightContextProvider>
@@ -36,8 +37,12 @@ function App() {
                 element={<HotelDetailsPage />}
               />
               <Route
-                path="/hotelconfirmationpage"
+                path="/hotelconfirmationpage/:BookingId"
                 element={<HotelConfirmationPage />}
+              />
+              <Route
+                path="/hotelbookingsucessfull"
+                element={<BookingSucessfullPage />}
               />
             </Routes>
           </Router>

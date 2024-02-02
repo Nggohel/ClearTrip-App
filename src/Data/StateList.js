@@ -1,0 +1,123 @@
+export const StateList = [
+  {
+    name: "Rajiv Gandhi International Airport",
+    city: "Hyderabad",
+    country: "India",
+    iata_code: "HYD",
+  },
+
+  {
+    name: "Sardar Vallabhbhai Patel International Airport",
+    city: "Ahmedabad",
+    country: "India",
+    iata_code: "AMD",
+  },
+  {
+    name: "Goa International Airport",
+    city: "Goa",
+    country: "India",
+    iata_code: "GOI",
+  },
+  {
+    name: "Pune Airport",
+    city: "Pune",
+    country: "India",
+    iata_code: "PNQ",
+  },
+  {
+    name: "Lokpriya Gopinath Bordoloi International Airport",
+    city: "Guwahati",
+    country: "India",
+    iata_code: "GAU",
+  },
+  {
+    name: "Jaipur International Airport",
+    city: "Jaipur",
+    country: "India",
+    iata_code: "JAI",
+  },
+  {
+    name: "Dr. Babasaheb Ambedkar International Airport",
+    city: "Nagpur",
+    country: "India",
+    iata_code: "NAG",
+  },
+  {
+    name: "Indira Gandhi International Airport",
+    city: "Delhi",
+    country: "India",
+    iata_code: "DEL",
+  },
+  {
+    name: "Chhatrapati Shivaji Maharaj International Airport",
+    city: "Mumbai",
+    country: "India",
+    iata_code: "BOM",
+  },
+  {
+    name: "Kempegowda International Airport",
+    city: "Bengaluru",
+    country: "India",
+    iata_code: "BLR",
+  },
+  {
+    name: "Netaji Subhas Chandra Bose International Airport",
+    city: "Kolkata",
+    country: "India",
+    iata_code: "CCU",
+  },
+  {
+    name: "Chennai International Airport",
+    city: "Chennai",
+    country: "India",
+    iata_code: "MAA",
+  },
+  {
+    name: "Cochin International Airport",
+    city: "Kochi",
+    country: "India",
+    iata_code: "COK",
+  },
+  {
+    name: "Chandigarh International Airport",
+    city: "Chandigarh",
+    country: "India",
+    iata_code: "IXC",
+  },
+  {
+    name: "Biju Patnaik International Airport",
+    city: "Bhubaneswar",
+    country: "India",
+    iata_code: "BBI",
+  },
+  {
+    name: "Coimbatore International Airport",
+    city: "Coimbatore",
+    country: "India",
+    iata_code: "CJB",
+  },
+  {
+    name: "Lucknow International Airport",
+    city: "Lucknow",
+    country: "India",
+    iata_code: "LKO",
+  },
+  {
+    name: "Lucknow International Airport",
+    city: "Lucknow",
+    country: "India",
+    iata_code: "LKO",
+  },
+  {
+    name: "Mangalore International Airport",
+    city: "Mangalore",
+    country: "India",
+    iata_code: "IXE",
+  },
+  {
+    name: "Amritsar International Airport",
+    city: "Amritsar",
+    country: "India",
+    iata_code: "ATQ",
+  },
+];

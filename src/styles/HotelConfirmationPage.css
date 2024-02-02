@@ -5,7 +5,7 @@
   width: 753px;
   height: 275px;
   margin-bottom: 40px;
-  margin-top: 24px;
+  margin-top: 5px;
   border-radius: 12px;
   border: 1.5px solid rgb(231, 231, 231);
   box-shadow: rgba(26, 26, 26, 0.08) 0px -4px 16px;
@@ -486,6 +486,13 @@
   line-height: 20px;
   color: rgb(255, 255, 255);
   cursor: pointer;
-  margin: 80px 0px;
+  margin: 40px 0px;
   margin-left: 7.5rem;
+}
+
+.Name-input {
+  outline: none;
+  border: 0px;
+  font-size: 16px;
+  margin: 15px;
 }

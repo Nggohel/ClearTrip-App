@@ -28,6 +28,8 @@ function HotelSearchPage() {
   const [filter, setfilter] = useState("");
   const [ratingFilter, setratingFilter] = useState("");
 
+  const [updateHotel, setUpdateHotel] = useState(false);
+
   // const SortData = async (value) => {
 
   //   console.log("api data", SortedPriceData);
@@ -47,7 +49,7 @@ function HotelSearchPage() {
     isError,
   } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
-    "${storedHotelLocation.source}"}`,
+    "${storedHotelLocation?.source}"}`,
     "GET"
   );
 
@@ -63,7 +65,7 @@ function HotelSearchPage() {
 
   const fetchSortedData = async (sortBy) => {
     let urlWithSort = `https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":
-      "${storedHotelLocation.source}"}`;
+      "${storedHotelLocation?.source}"}`;
 
     if (sortBy == "toprated") {
       urlWithSort += `&sort={"rating":-1}`;
@@ -127,12 +129,23 @@ function HotelSearchPage() {
     fetchfilterData(filter, ratingFilter);
   }, [filter, ratingFilter]);
 
+  useEffect(() => {
+    if (updateHotel) {
+      fetchfilterData(filter, ratingFilter);
+      setUpdateHotel(false);
+    }
+  }, [updateHotel]);
+
   console.log("apidata", SortedPriceData);
 
   return (
     <>
       <nav>
-        <HotelSearchNavBar searchData={true} Apidata={SortedPriceData} />
+        <HotelSearchNavBar
+          updatedHotelData={setUpdateHotel}
+          searchData={true}
+          Apidata={SortedPriceData}
+        />
 
         {/* hotel Offer Component  */}
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 import CalenderLogo from "../../Assests/Images/Flight/CalenderLogo";
 import FlightCalendar from "../FlightCalendar";
 import { useFlightContext } from "../../Hooks/useFlightContext";
+import { StateList } from "../../Data/StateList";
 
 function FlightSearchCard({ icon }) {
   const { setSearchData } = useFlightContext();
@@ -99,7 +100,7 @@ function FlightSearchCard({ icon }) {
                 placeholder="Where from?"
                 value={wherefromValue}
                 className="search-input"
-                list="browser"
+                list="AirportList"
                 style={{ border: "0px", outline: "none" }}
                 onChange={handleWhereFromLocation}
               />
@@ -117,17 +118,17 @@ function FlightSearchCard({ icon }) {
                 className="search-input"
                 style={{ border: "0px", outline: "none" }}
                 onChange={handleWhereToLocation}
-                list="browser"
+                list="AirportList"
               />
-              <datalist id="browser" style={{ marginLeft: "-55px" }}>
-                <option
-                  className="datalist-option"
-                  value="BLR-Bangalore, IN - Kempegowda International Airport (BLR)"
-                />
-                <option value="BOM-Mumbai, IN - Chatrapati Shivaji Airport (BOM)" />
-                <option value="DEL-New Delhi, IN - Indira Gandhi Airport (DEL)" />
-                <option value="CCU-Kolkata, IN - Netaji Subhas Chandra Bose Airport (CCU)" />
-                <option value="GOI-Goa, IN - Dabolim Airport (GOI)" />
+              <datalist id="AirportList" style={{ marginLeft: "-55px" }}>
+                {StateList &&
+                  StateList?.map((city, index) => (
+                    <option
+                      key={index}
+                      className="datalist-option"
+                      value={`${city.iata_code}-${city.city},IN - ${city.name}`}
+                    />
+                  ))}
               </datalist>
             </div>
           </div>

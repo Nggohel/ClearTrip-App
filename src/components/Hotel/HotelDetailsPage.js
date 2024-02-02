@@ -90,18 +90,44 @@ function HotelDetailsPage() {
     };
   }, []);
 
+  const RoomOnlyPrice = Math.floor(SingleHotelData?.avgCostPerNight);
+
+  const RoomwithBreckfastPrice = Math.floor(
+    SingleHotelData?.avgCostPerNight +
+      (SingleHotelData?.avgCostPerNight * 8) / 100
+  );
+  const RoomwithAllMealPrice = Math.floor(
+    SingleHotelData?.avgCostPerNight +
+      (SingleHotelData?.avgCostPerNight * 10) / 100
+  );
+
+  const handleRoomonly = () => {
+    localStorage.setItem("RoomBookingData", RoomOnlyPrice);
+  };
+  const handleRoomwithAllMeal = () => {
+    localStorage.setItem("RoomBookingData", RoomwithAllMealPrice);
+  };
+  const handleRoomwithBreckfast = () => {
+    localStorage.setItem("RoomBookingData", RoomwithBreckfastPrice);
+  };
+
+  // Store Data
+
+  console.log("DataFromId", SingleHotelData);
   return (
     <>
       <div style={{ position: "fixed", padding: "0px 50px" }}>
         {hotelImgNav ? (
           <div className="single-hotel-nav">
             <div className="hotelnav-container">
-              <img src={img1} className="hotelnav-image" />
+              <img
+                src={SingleHotelData?.images[0]}
+                className="hotelnav-image"
+              />
               <div>
-                <p className="hotelnav-title">The HQ</p>
+                <p className="hotelnav-title">{SingleHotelData?.name}</p>
                 <p className="hotelother-details">
-                  Vasco Da Gama, Goa | Sun, 07 Jan - Mon, 08 Jan | 1 Room, 2
-                  Adults
+                  {SingleHotelData?.location} | 5-star Hotel | 1 Room, 2 Adults
                 </p>
               </div>
             </div>
@@ -129,9 +155,20 @@ function HotelDetailsPage() {
               {hotelImgNav ? (
                 <div className="tab-room-container">
                   <div className="tab-room-price">
-                    <p className="tabroom-baseprice">₹3,700</p>
-                    <h2 className="tabroom-actulprice">₹2,997</h2>
-                    <p className="tabroom-pernight">/ night + ₹400 tax</p>
+                    <p className="tabroom-baseprice">
+                      {Math.floor(
+                        SingleHotelData?.avgCostPerNight +
+                          (SingleHotelData?.avgCostPerNight * 20) / 100
+                      )}
+                    </p>
+                    <h2 className="tabroom-actulprice">
+                      {Math.floor(SingleHotelData?.avgCostPerNight)}
+                    </h2>
+                    <p className="tabroom-pernight">
+                      / night + ₹
+                      {Math.floor((SingleHotelData?.avgCostPerNight * 4) / 100)}
+                      tax
+                    </p>
                   </div>
                   <button className="tab-room-btn">
                     <a href="#roomOption" id="room-btn-para">
@@ -351,7 +388,6 @@ function HotelDetailsPage() {
                 <div className="rightside-container">
                   <section id="images" className="hotel-images">
                     <SingleHotelImage ImageUrL={SingleHotelData?.images} />
-                   
                   </section>
 
                   <section id="rooms" className="rooms">
@@ -362,7 +398,13 @@ function HotelDetailsPage() {
                             <h2 className="room-cost">
                               {Math.floor(SingleHotelData?.avgCostPerNight)}
                             </h2>
-                            <p className="room-tax">+ ₹2,139 tax</p>
+                            <p className="room-tax">
+                              + ₹
+                              {Math.floor(
+                                (SingleHotelData?.avgCostPerNight * 4) / 100
+                              )}
+                              tax
+                            </p>
                             <p className="room-pernight">/ night</p>
                           </div>
                           <div className="room-other-details">
@@ -661,15 +703,6 @@ function HotelDetailsPage() {
                       </div>
                     </div>
                   </div>
-                  {/* add bank offer here  */}
-                  {/* <div className="bank-offer">
-                    <OfferCarousel
-                      icon={<ICICI />}
-                      offer={"Flat 12% off"}
-                      bankCard={"ICICICC"}
-                      card={"with ICICI Credit Cards"}
-                    />
-                  </div> */}
 
                   <div className="roomdetails-container">
                     {/* add image */}
@@ -731,19 +764,36 @@ function HotelDetailsPage() {
                         </div>
                       </div> */}
                       <div className="roomoption-prices">
-                        <h2 className="roomoption-baseprice">₹5,779</h2>
-                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <h2 className="roomoption-baseprice">
+                          {RoomOnlyPrice}
+                        </h2>
+                        <p className="roomoption-tax">
+                          + ₹{Math.floor((RoomOnlyPrice * 4) / 100)}
+                          tax
+                        </p>
                         <p className="roomoption-pernight">/ night</p>
                       </div>
                       <div className="roomoption-discount">
-                        <p className="roomoption-actulprice">₹7,999</p>
-                        <p className="roomoption-percentageoff">28 %</p>
+                        <p className="roomoption-actulprice">
+                          {Math.floor(
+                            SingleHotelData?.avgCostPerNight +
+                              (SingleHotelData?.avgCostPerNight * 20) / 100
+                          )}
+                        </p>
+                        <p className="roomoption-percentageoff">20 %</p>
                         <p className="roomoption-emioffer">
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <Link to="/hotelconfirmationpage">
-                        <button className="roomoption-bookbtn">Book</button>
+                      <Link
+                        to={`/hotelconfirmationpage/${SingleHotelData?._id}`}
+                      >
+                        <button
+                          className="roomoption-bookbtn"
+                          onClick={handleRoomonly}
+                        >
+                          Book
+                        </button>
                       </Link>
                     </div>
                     <div className="option-container">
@@ -771,19 +821,37 @@ function HotelDetailsPage() {
                         </div>
                       </div> */}
                       <div className="roomoption-prices">
-                        <h2 className="roomoption-baseprice">₹5,779</h2>
-                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <h2 className="roomoption-baseprice">
+                          ₹{RoomwithBreckfastPrice}
+                        </h2>
+                        <p className="roomoption-tax">
+                          + ₹{Math.floor((RoomwithBreckfastPrice * 4) / 100)}
+                          tax
+                        </p>
                         <p className="roomoption-pernight">/ night</p>
                       </div>
                       <div className="roomoption-discount">
-                        <p className="roomoption-actulprice">₹7,999</p>
+                        <p className="roomoption-actulprice">
+                          ₹{" "}
+                          {Math.floor(
+                            SingleHotelData?.avgCostPerNight +
+                              (SingleHotelData?.avgCostPerNight * 28) / 100
+                          )}
+                        </p>
                         <p className="roomoption-percentageoff">28 %</p>
                         <p className="roomoption-emioffer">
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <Link to="/hotelconfirmationpage">
-                        <button className="roomoption-bookbtn">Book</button>
+                      <Link
+                        to={`/hotelconfirmationpage/${SingleHotelData?._id}`}
+                      >
+                        <button
+                          className="roomoption-bookbtn"
+                          onClick={handleRoomwithBreckfast}
+                        >
+                          Book
+                        </button>
                       </Link>
                     </div>
                     <div className="option-container">
@@ -812,19 +880,37 @@ function HotelDetailsPage() {
                         </div>
                       </div> */}
                       <div className="roomoption-prices">
-                        <h2 className="roomoption-baseprice">₹5,779</h2>
-                        <p className="roomoption-tax">+ ₹816 tax</p>
+                        <h2 className="roomoption-baseprice">
+                          ₹{RoomwithAllMealPrice}
+                        </h2>
+                        <p className="roomoption-tax">
+                          + ₹{Math.floor((RoomwithAllMealPrice * 4) / 100)}
+                          tax
+                        </p>
                         <p className="roomoption-pernight">/ night</p>
                       </div>
                       <div className="roomoption-discount">
-                        <p className="roomoption-actulprice">₹7,999</p>
-                        <p className="roomoption-percentageoff">28 %</p>
+                        <p className="roomoption-actulprice">
+                          ₹
+                          {Math.floor(
+                            SingleHotelData?.avgCostPerNight +
+                              (SingleHotelData?.avgCostPerNight * 30) / 100
+                          )}
+                        </p>
+                        <p className="roomoption-percentageoff">30 %</p>
                         <p className="roomoption-emioffer">
                           No cost EMI from ₹2,198
                         </p>
                       </div>
-                      <Link to="/hotelconfirmationpage">
-                        <button className="roomoption-bookbtn">Book</button>
+                      <Link
+                        to={`/hotelconfirmationpage/${SingleHotelData?._id}`}
+                      >
+                        <button
+                          className="roomoption-bookbtn"
+                          onClick={handleRoomwithAllMeal}
+                        >
+                          Book
+                        </button>
                       </Link>
                     </div>
                   </div>

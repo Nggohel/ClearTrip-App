@@ -557,3 +557,15 @@
   font-weight: 600;
   height: 40px;
 }
+.update-btn {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0px 28px;
+  height: 45px;
+  cursor: pointer;
+  background-color: #f77728;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  margin: 4px;
+}
