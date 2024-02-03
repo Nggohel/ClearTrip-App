@@ -128,7 +128,15 @@ function HotelConfirmationPage() {
   );
 
   useEffect(() => {
-    localStorage.setItem("hotelName", HotelConfirmationData);
+    if (HotelConfirmationData) {
+      localStorage.setItem(
+        "hotelName",
+        JSON.stringify({
+          name: HotelConfirmationData?.name,
+          location: HotelConfirmationData?.location,
+        })
+      );
+    }
   }, []);
 
   return (

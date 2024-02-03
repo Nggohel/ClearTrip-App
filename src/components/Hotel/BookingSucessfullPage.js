@@ -3,10 +3,14 @@ import "../../styles/FlightReviewItinerary.css";
 function BookingSucessfullPage() {
   const navigate = useNavigate();
   let Data = JSON.parse(localStorage.getItem("SearchData"));
- 
+
+  let hoteldata = JSON.parse(localStorage.getItem("SearchHotelData"));
+  let hotelName = JSON.parse(localStorage.getItem("hotelName"));
+
+  // console.log("hoteldata",);
+
   const PaymentRes = JSON.parse(localStorage.getItem("PaymentStatus"));
 
-  
   const handleGobackHome = () => {
     localStorage.removeItem("PaymentStatus");
     localStorage.removeItem("ArrivalId");
@@ -39,8 +43,8 @@ function BookingSucessfullPage() {
             Successfull...
           </p>
           <p>
-            Your Booking From : {Data?.DepartureCity} To : {Data?.ArrivalCity}{" "}
-            is Confirm....
+            Your Booking At {hotelName.name},{hotelName?.location} is
+            Confirm....
           </p>
         </h2>
         <h3 style={{ textAlign: "center" }}>
