@@ -43,15 +43,15 @@ function BookingSucessfullPage() {
             Successfull...
           </p>
           <p>
-            Your Booking At {hotelName.name},{hotelName?.location} is
+            Your Booking At {hotelName?.name},{hotelName?.location} is
             Confirm....
           </p>
         </h2>
         <h3 style={{ textAlign: "center" }}>
-          Here your Order ID : {PaymentRes.orderId}
+          Here your Order ID : {PaymentRes?.orderId}
         </h3>
         <h3 style={{ textAlign: "center" }}>
-          Here your Payment ID : {PaymentRes.paymentId}
+          Here your Payment ID : {PaymentRes?.paymentId}
         </h3>
         <br></br>
       </div>
