@@ -38,11 +38,22 @@ function FlightPage() {
       </div>
       <h2 className="popular-destination">Popular destination</h2>
       <div className="flightpage-popular-destination">
-        <img src={goa} />
-        <img src={delhi} />
-        <img src={banglore} />
-        <img src={varanasi} />
-        <img src={abuDhabi} />
+        <a href="https://www.cleartrip.com/hotels/results?city=Goa&state=Goa&country=IN&dest_code=37264&adults1=2&children1=0&num_rooms=1&adults=2&childs=0&chk_in=09/02/2024&chk_out=10/02/2024">
+          <img src={goa} />
+        </a>
+        <a href="https://www.cleartrip.com/hotels/results?city=New+Delhi&state=Delhi&country=IN&area=&poi=&hotelId=&hotelName=&SearchTag=&dest_code=35485&chk_in=09/02/2024&chk_out=10/02/2024&adults1=2&children1=0&num_rooms=1">
+          <img src={delhi} />
+        </a>
+
+        <a href="https://www.cleartrip.com/hotels/results?city=Bangalore&state=Karnataka&country=IN&area=&poi=&hotelId=&hotelName=&SearchTag=&dest_code=32550&chk_in=09/02/2024&chk_out=10/02/2024&adults1=2&children1=0&num_rooms=1">
+          <img src={banglore} />
+        </a>
+        <a href="https://www.cleartrip.com/hotels/results?city=varanasi&state=Uttar+Pradesh&country=IN&area=&poi=&hotelId=&hotelName=&SearchTag=&dest_code=32550&chk_in=09/02/2024&chk_out=10/02/2024&adults1=2&children1=0&num_rooms=1">
+          <img src={varanasi} />
+        </a>
+        <a href="https://www.cleartrip.com/hotels/results?city=varanasi&state=Uttar+Pradesh&country=IN&area=&poi=&hotelId=&hotelName=&SearchTag=&dest_code=32550&chk_in=09/02/2024&chk_out=10/02/2024&adults1=2&children1=0&num_rooms=1">
+          <img src={abuDhabi} />
+        </a>
       </div>
       <div className="flightpage-homepage-details">
         <div>

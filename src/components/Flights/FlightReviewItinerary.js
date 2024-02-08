@@ -9,7 +9,8 @@ import RightFlightReviewItinerary from "./RightFlightReviewItinerary";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 
 function FlightReviewItinerary() {
-  const { loginState, localStorageLoginData } = useFlightContext();
+  const { loginState, localStorageLoginData, loader, setloader } =
+    useFlightContext();
   const [loginPopup, setLoginPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
 
@@ -43,10 +44,16 @@ function FlightReviewItinerary() {
       </div>
       <hr className="hr-line"></hr>
 
-      <div style={{ display: "flex", gap: "34px" }}>
-        <LeftFlightReviewItinerary />
-        <RightFlightReviewItinerary />
-      </div>
+      {loader ? (
+        <div style={{ display: "flex", gap: "34px" }}>
+          <LeftFlightReviewItinerary />
+          <RightFlightReviewItinerary />
+        </div>
+      ) : (
+        <div style={{ marginLeft: "200px", marginTop: "20px" }}>
+          <h1>Data is Loading...</h1>
+        </div>
+      )}
     </>
   );
 }

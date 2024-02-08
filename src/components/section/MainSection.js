@@ -1,10 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./../../styles/MainSection.css";
 import FlightSearchCard from "./../Flights/FlightSearchCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Arrow from "../../Assests/Images/Arrow";
+import { useFlightContext } from "../../Hooks/useFlightContext";
+
 function MainSection() {
+  const { setSearchData } = useFlightContext();
+  const handleFlightSearch = () => {
+    // setSearchData({
+    //   source: "BLR",
+    //   destination: "CUU",
+    //   dayDeparture: "Mon",
+    //   dayArrival: "Mon",
+    //   DepartureCity: "Bangalore",
+    //   ArrivalCity: "Mumbai",
+    // });
+    // localStorage.setItem(
+    //   "SearchData",
+    //   JSON.stringify({
+    //     source: BLR,
+    //     destination: CUU,
+    //     dayDeparture: Mon,
+    //     dayArrival: Mon,
+    //     DepartureCity: Bangalore,
+    //     ArrivalCity: Mumbai,
+    //   })
+    // );
+  };
+
   return (
     <>
       <div className="middle-section">
@@ -16,42 +42,44 @@ function MainSection() {
         <div>
           <h1 className="popular-search">Popular Search</h1>
           <div className="cards">
-            <div className="cards-data">
+            {/* <Link to="/flightsearch"> */}
+            <div className="cards-data" onClick={handleFlightSearch}>
               <div className="card-innerdata">
-                <span>Banglor to Goa</span>
+                <span>Bangalore to Mumbai</span>
                 <br></br>
                 <span style={{ color: "gray", fontSize: "12px" }}>
-                  wed,8 Nov - Sat, 11 Nov
+                  Next Week
+                </span>
+              </div>
+              <Arrow />
+            </div>
+            {/* </Link> */}
+            <div className="cards-data">
+              <div className="card-innerdata">
+                <span>Bangalore to Delhi</span>
+                <br></br>
+                <span style={{ color: "gray", fontSize: "12px" }}>
+                  Next Week
                 </span>
               </div>
               <Arrow />
             </div>
             <div className="cards-data">
               <div className="card-innerdata">
-                <span>Banglor to Goa</span>
+                <span>Bangalore to Goa </span>
                 <br></br>
                 <span style={{ color: "gray", fontSize: "12px" }}>
-                  wed,8 Nov - Sat, 11 Nov
+                  Next Week
                 </span>
               </div>
               <Arrow />
             </div>
             <div className="cards-data">
               <div className="card-innerdata">
-                <span>Banglor to Goa</span>
+                <span>Mumbai to Bangalore</span>
                 <br></br>
                 <span style={{ color: "gray", fontSize: "12px" }}>
-                  wed,8 Nov - Sat, 11 Nov
-                </span>
-              </div>
-              <Arrow />
-            </div>
-            <div className="cards-data">
-              <div className="card-innerdata">
-                <span>Banglor to Goa</span>
-                <br></br>
-                <span style={{ color: "gray", fontSize: "12px" }}>
-                  wed,8 Nov - Sat, 11 Nov
+                  Next Week
                 </span>
               </div>
               <Arrow />

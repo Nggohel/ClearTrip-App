@@ -59,14 +59,32 @@ export default function FlightReviewAccordion() {
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography>Cancellation refund policy</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        {/* <AccordionDetails>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
             lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
-        </AccordionDetails>
+        </AccordionDetails> */}
+        <div className="cancel-details-card">
+          <div className="cancle-between">
+            <p className="cancle-between-para">Cancel between</p>
+            <p className="cancle-between-para">Amount refundable</p>
+          </div>
+          <div className="canceldetails-inrang-card">
+            <div className="canceldetails-inrang-div">
+              <div className="canceldetails-time">
+                <p className="canceldetails-time-para">07 Jan, 14:00 IST</p>
+                <p className="canceldetails-time-para">09 Jan, 14:00 IST</p>
+              </div>
+              <div className="canceldetails-inrang"></div>
+              <div className="">
+                <p className="canceldetails-range">No Refund</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </Accordion>
       <Accordion
         expanded={expanded === "panel3"}
@@ -75,14 +93,32 @@ export default function FlightReviewAccordion() {
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography>Date change policy</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        {/* <AccordionDetails>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
             lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
-        </AccordionDetails>
+        </AccordionDetails> */}
+        <div className="cancel-details-card">
+              <div className="cancle-between">
+                <p className="cancle-between-para">Cancel between</p>
+                <p className="cancle-between-para">Amount refundable</p>
+              </div>
+              <div className="canceldetails-inrang-card">
+                <div className="canceldetails-inrang-div">
+                  <div className="canceldetails-time">
+                    <p className="canceldetails-time-para">07 Jan, 14:00 IST</p>
+                    <p className="canceldetails-time-para">09 Jan, 14:00 IST</p>
+                  </div>
+                  <div className="canceldetails-inrang"></div>
+                  <div className="">
+                    <p className="canceldetails-range">No Refund</p>
+                  </div>
+                </div>
+              </div>
+            </div>
       </Accordion>
     </div>
   );

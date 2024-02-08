@@ -168,11 +168,15 @@ input.react-datepicker-ignore-onclickoutside {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
 }
 
 .card-innerdata {
   font-size: 14px;
   font-weight: 600;
+  color: #1a1a1a;
 }
 
 .choose-date {

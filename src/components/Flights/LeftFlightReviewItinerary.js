@@ -24,6 +24,9 @@ import useFetch from "../../Hooks/UseFetch";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Url } from "../../Data/Url";
+import { Skeleton } from "@mui/material";
+import { faL } from "@fortawesome/free-solid-svg-icons";
+
 function LeftFlightReviewItinerary() {
   const {
     searchData,
@@ -31,6 +34,8 @@ function LeftFlightReviewItinerary() {
     setsingleApiDepartureData,
     singleApiArrivalData,
     setsingleApiArrivalData,
+    loader,
+    setloader,
   } = useFlightContext();
 
   const getLoginAndsingUpData = JSON.parse(
@@ -93,13 +98,15 @@ function LeftFlightReviewItinerary() {
     setShowPayment(true);
   };
 
-  const amount =
-    (singleDepartureData?.ticketPrice + singleArrivalData?.ticketPrice) * 100;
-
-  const currency = "INR";
-  const receiptId = arrivalId;
-
   const handlePayment = async (e) => {
+    setloader(false);
+    const amount =
+      (singleDepartureData?.ticketPrice + singleArrivalData?.ticketPrice) * 100;
+
+    const currency = "INR";
+
+    const receiptId = arrivalId;
+
     const response = await fetch(`${Url.Payment_Api}/order`, {
       method: "POST",
       body: JSON.stringify({
@@ -111,9 +118,15 @@ function LeftFlightReviewItinerary() {
         "Content-Type": "application/json",
       },
     });
-    const order = await response.json();
-    console.log(order);
 
+    // if (response) {
+    //   <Skeleton variant="rectangular" width={210} height={118} />;
+    // }
+
+    const order = await response.json();
+    if (order !== null || order !== "") {
+      setloader(true);
+    }
     var options = {
       key: "rzp_test_SJWXgAHBZeNPoG", // Enter the Key ID generated from the Dashboard
       amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -478,7 +491,11 @@ function LeftFlightReviewItinerary() {
             {/* HR */}
 
             <hr
-              style={{ width: "791px", marginLeft: "7.5rem", height: "0.5px" }}
+              style={{
+                width: "791px",
+                marginLeft: "7.5rem",
+                height: "0.5px",
+              }}
             ></hr>
 
             {/* Medical */}

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/FlightReviewItinerary.css";
 function BookingSucessfullPage() {
   const navigate = useNavigate();
+  
   let Data = JSON.parse(localStorage.getItem("SearchData"));
 
   let hoteldata = JSON.parse(localStorage.getItem("SearchHotelData"));

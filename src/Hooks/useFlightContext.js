@@ -53,7 +53,8 @@ export const FlightContextProvider = ({ children }) => {
 
     setFilteredObject(newFilteredObject);
   };
-
+  const [loader, setloader] = useState(true);
+  
   const contextValue = {
     handleApplyClick,
     checkboxValue,
@@ -65,6 +66,8 @@ export const FlightContextProvider = ({ children }) => {
     setsingleApiDepartureData,
     singleApiArrivalData,
     setsingleApiArrivalData,
+    loader,
+    setloader,
   };
   // searchNavData,
   // setSearchNavData,
