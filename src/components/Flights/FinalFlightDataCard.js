@@ -344,8 +344,11 @@ function FinalFlightDataCard() {
         <div className="flight-heading">
           <div className="left-flightsheadings">
             <span>Airlines</span>
-            <span>Departure</span>
+          </div>
+          <div className="left-flightsheadings">
+            <span>Departure Time</span>
             <span>Duration</span>
+            <span>Arrival Time</span>
           </div>
           <div className="right-flightsheadings">
             Price
@@ -355,8 +358,11 @@ function FinalFlightDataCard() {
         <div className="flight-heading">
           <div className="left-flightsheadings">
             <span>Airlines</span>
-            <span>Departure</span>
+          </div>
+          <div className="left-flightsheadings">
+            <span>Departure Time</span>
             <span>Duration</span>
+            <span>Arrival Time</span>
           </div>
           <div className="right-flightsheadings">
             Price

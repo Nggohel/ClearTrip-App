@@ -3,7 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./../../styles/OfferCarousel.css";
-
+import ICICI from "../../Assests/Images/ICICI";
+import AuBank from "../../Assests/BankLogo/AUBank";
+import IDFC from "../../Assests/BankLogo/IDFC";
+import UPI from "../../Assests/BankLogo/UPI";
 function OfferCarousel({ icon, offer, bankCard, card }) {
   const [settings] = useState({
     className: "center",
@@ -20,12 +23,14 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
         <div>
           <div className="offers-card">
             <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
+              <div className="offer-icon">
+                <AuBank />
+              </div>
               <div className="offers-data">
-                {offer}
+                Flat 12% off
                 <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
+                  <div className="bank-card">AuBankCC</div>
+                  <div className="card-offer">with AuBank Credit Cards</div>
                 </div>
               </div>
             </div>
@@ -34,12 +39,14 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
         <div>
           <div className="offers-card">
             <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
+              <div className="offer-icon">
+                <IDFC />
+              </div>
               <div className="offers-data">
-                {offer}
+                Flat 12% off
                 <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
+                  <div className="bank-card">IDFCCC</div>
+                  <div className="card-offer">with IDFC Credit Cards</div>
                 </div>
               </div>
             </div>
@@ -48,26 +55,14 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
         <div>
           <div className="offers-card">
             <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
-              <div className="offers-data">
-                {offer}
-                <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
-                </div>
+              <div className="offer-icon">
+                <UPI />
               </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="offers-card">
-            <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
               <div className="offers-data">
-                {offer}
+                Flat 12% off
                 <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
+                  <div className="bank-card">UPI</div>
+                  <div className="card-offer">with UPI Offers</div>
                 </div>
               </div>
             </div>
@@ -77,12 +72,14 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
         <div>
           <div className="offers-card">
             <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
+              <div className="offer-icon">
+                <ICICI />
+              </div>
               <div className="offers-data">
-                {offer}
+                Flat 12% off
                 <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
+                  <div className="bank-card">ICICICC</div>
+                  <div className="card-offer">with ICICI Credit Cards</div>
                 </div>
               </div>
             </div>
@@ -91,12 +88,63 @@ function OfferCarousel({ icon, offer, bankCard, card }) {
         <div>
           <div className="offers-card">
             <div className="offer-card">
-              <div className="offer-icon">{icon}</div>
+              <div className="offer-icon">
+                <AuBank />
+              </div>
               <div className="offers-data">
-                {offer}
+                Flat 12% off
                 <div className="credit-offers">
-                  <div className="bank-card">{bankCard}</div>
-                  <div className="card-offer">{card}</div>
+                  <div className="bank-card">AuBankCC</div>
+                  <div className="card-offer">with AuBank Credit Cards</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="offers-card">
+            <div className="offer-card">
+              <div className="offer-icon">
+                <IDFC />
+              </div>
+              <div className="offers-data">
+                Flat 12% off
+                <div className="credit-offers">
+                  <div className="bank-card">IDFCCC</div>
+                  <div className="card-offer">with IDFC Credit Cards</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="offers-card">
+            <div className="offer-card">
+              <div className="offer-icon">
+                <UPI />
+              </div>
+              <div className="offers-data">
+                Flat 12% off
+                <div className="credit-offers">
+                  <div className="bank-card">UPI</div>
+                  <div className="card-offer">with UPI Offers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="offers-card">
+            <div className="offer-card">
+              <div className="offer-icon">
+                <ICICI />
+              </div>
+              <div className="offers-data">
+                Flat 12% off
+                <div className="credit-offers">
+                  <div className="bank-card">ICICICC</div>
+                  <div className="card-offer">with ICICI Credit Cards</div>
                 </div>
               </div>
             </div>

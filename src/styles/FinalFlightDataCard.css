@@ -64,8 +64,12 @@
   font-size: 12px;
   border-radius: 5px;
 }
+.left-flightsheadings {
+  display: flex;
+  gap: 5px;
+}
 .left-flightsheadings span {
-  padding: 5px;
+  padding: 10px;
 }
 .right-flightsheadings {
   color: #36c;

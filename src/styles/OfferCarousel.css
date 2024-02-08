@@ -19,10 +19,9 @@ button.slick-arrow.slick-next {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  /* border: 1px solid palevioletred; */
+  gap: 5px;
 }
 .offer-icon {
-  /* margin: 5px; */
   margin-top: 20px;
   margin-left: 10px;
 }
@@ -31,7 +30,6 @@ button.slick-arrow.slick-next {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border: 1px solid black; */
   font-size: 13px;
   font-weight: 500;
 }
