@@ -107,9 +107,7 @@ function FlightsFilters() {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className="filters-title">
-                Departure time from BLR
-              </Typography>
+              <Typography className="filters-title">Departure time</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <form>

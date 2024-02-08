@@ -24,8 +24,16 @@ export const FlightContextProvider = ({ children }) => {
     if (typeof time === "string" && time.includes("-")) {
       const [startTime, endTime] = time.split("-");
       const apiDepartureTime = {
-        $lte: endTime,
         $gte: startTime,
+      };
+      return apiDepartureTime;
+    }
+  };
+  const arrivalTimeFormate = (time) => {
+    if (typeof time === "string" && time.includes("-")) {
+      const [startTime, endTime] = time.split("-");
+      const apiDepartureTime = {
+        $lte: endTime,
       };
       return apiDepartureTime;
     }
@@ -33,8 +41,8 @@ export const FlightContextProvider = ({ children }) => {
 
   const ticketPriceFormate = (price) => {
     const apiTicketPrice = {
-      $lte: 6000,
-      $gte: price,
+      $lte: price,
+      $gte: 6000,
     };
     return apiTicketPrice;
   };
@@ -43,6 +51,7 @@ export const FlightContextProvider = ({ children }) => {
     const param = {
       stops: checkboxValue.stops,
       departureTime: departureTimeFormate(checkboxValue.departureTime),
+      arrivalTime: arrivalTimeFormate(checkboxValue.departureTime),
       ticketPrice: ticketPriceFormate(checkboxValue.ticketPrice),
       duration: checkboxValue.duration,
     };
