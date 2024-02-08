@@ -24,8 +24,8 @@ export const FlightContextProvider = ({ children }) => {
     if (typeof time === "string" && time.includes("-")) {
       const [startTime, endTime] = time.split("-");
       const apiDepartureTime = {
-        $lte: endTime,
-        $gte: startTime,
+        $lte: startTime,
+        $gte: endTime,
       };
       return apiDepartureTime;
     }
@@ -33,8 +33,8 @@ export const FlightContextProvider = ({ children }) => {
 
   const ticketPriceFormate = (price) => {
     const apiTicketPrice = {
-      $lte: 6000,
-      $gte: price,
+      $lte: price,
+      $gte: 2000,
     };
     return apiTicketPrice;
   };
@@ -54,7 +54,7 @@ export const FlightContextProvider = ({ children }) => {
     setFilteredObject(newFilteredObject);
   };
   const [loader, setloader] = useState(true);
-  
+
   const contextValue = {
     handleApplyClick,
     checkboxValue,
