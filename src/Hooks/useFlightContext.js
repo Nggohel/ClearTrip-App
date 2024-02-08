@@ -24,8 +24,8 @@ export const FlightContextProvider = ({ children }) => {
     if (typeof time === "string" && time.includes("-")) {
       const [startTime, endTime] = time.split("-");
       const apiDepartureTime = {
-        $lte: startTime,
-        $gte: endTime,
+        $lte: endTime,
+        $gte: startTime,
       };
       return apiDepartureTime;
     }
@@ -33,8 +33,8 @@ export const FlightContextProvider = ({ children }) => {
 
   const ticketPriceFormate = (price) => {
     const apiTicketPrice = {
-      $lte: price,
-      $gte: 2000,
+      $lte: 6000,
+      $gte: price,
     };
     return apiTicketPrice;
   };
