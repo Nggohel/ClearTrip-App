@@ -28,7 +28,9 @@ function FlightReviewItinerary() {
         <div className="review">
           {loginState || localStorageLoginData !== null ? (
             <>
-              <AvtaarLogo />
+              <div>
+                <AvtaarLogo />
+              </div>
               <p className="nav-para" onClick={handleMyAccount}>
                 My Account
               </p>

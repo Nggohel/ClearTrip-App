@@ -34,7 +34,9 @@ export default function NavBar() {
           <img src={applogo} alt="App Logo" width="100" height="25" />
           {loginState || localStorageLoginData !== null ? (
             <>
-              <AvtaarLogo />
+              <div>
+                <AvtaarLogo />
+              </div>
               <p className="nav-para" onClick={handleMyAccount}>
                 My Account
               </p>

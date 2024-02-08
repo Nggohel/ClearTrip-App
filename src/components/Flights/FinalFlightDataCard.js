@@ -32,7 +32,7 @@ function FinalFlightDataCard() {
   //.filter(([key, value]) => value (remove entries where the value is falsy (empty string, null, undefined, false, 0))
   // Object.fromEntries(): Finally, this part converts the filtered array of [key, value] pairs back into an object
 
-  // console.log(,JSON.stringify(filteredObject));
+  console.log("String", JSON.stringify(filteredObject));
 
   const navigate = useNavigate();
 
@@ -83,7 +83,7 @@ function FinalFlightDataCard() {
       console.log("Error", error);
     }
   };
-  // console.log(DepartureFilterData, "departureFilterData");
+  console.log(DepartureFilterData, "departureFilterData");
 
   const fetchArrivalData = async () => {
     try {

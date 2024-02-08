@@ -40,10 +40,14 @@ export const FlightContextProvider = ({ children }) => {
   };
 
   const ticketPriceFormate = (price) => {
-    const apiTicketPrice = {
-      $lte: price,
-      $gte: 6000,
-    };
+    const apiTicketPrice = {};
+    if (price === 2000) {
+      apiTicketPrice["$lte"] = 6000;
+    } else {
+      apiTicketPrice["$lte"] = price;
+    }
+    apiTicketPrice["$gte"] = 2000;
+
     return apiTicketPrice;
   };
 
@@ -60,6 +64,7 @@ export const FlightContextProvider = ({ children }) => {
       Object.entries(param).filter(([key, value]) => value)
     );
 
+    console.log(newFilteredObject, "newFilteredObject");
     setFilteredObject(newFilteredObject);
   };
   const [loader, setloader] = useState(true);
