@@ -6,6 +6,7 @@ export const FlightContextProvider = ({ children }) => {
   const [searchData, setSearchData] = useState(
     JSON.parse(localStorage.getItem("SearchData"))
   );
+
   // const [searchNavData, setSearchNavData] = useState(
   // );
 
@@ -29,6 +30,7 @@ export const FlightContextProvider = ({ children }) => {
       return apiDepartureTime;
     }
   };
+
   const arrivalTimeFormate = (time) => {
     if (typeof time === "string" && time.includes("-")) {
       const [startTime, endTime] = time.split("-");
@@ -67,6 +69,7 @@ export const FlightContextProvider = ({ children }) => {
     console.log(newFilteredObject, "newFilteredObject");
     setFilteredObject(newFilteredObject);
   };
+
   const [loader, setloader] = useState(true);
 
   const contextValue = {
@@ -83,8 +86,6 @@ export const FlightContextProvider = ({ children }) => {
     loader,
     setloader,
   };
-  // searchNavData,
-  // setSearchNavData,
 
   return (
     <FlightContext.Provider value={contextValue}>

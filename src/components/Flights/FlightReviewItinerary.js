@@ -26,7 +26,7 @@ function FlightReviewItinerary() {
       <div className="review-navbar">
         <img src={applogo} alt="App Logo" width="100" height="30" />
         <div className="review">
-          {loginState || localStorageLoginData !== null ? (
+          {loginState && localStorageLoginData !== null ? (
             <>
               <div>
                 <AvtaarLogo />

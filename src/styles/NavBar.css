@@ -22,3 +22,10 @@
   font-weight: 500;
   cursor: pointer;
 }
+.navbar {
+  height: 60px;
+}
+
+.toaster-visible .navbar {
+  height: 100px;
+}

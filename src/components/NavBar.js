@@ -18,7 +18,7 @@ export default function NavBar() {
 
   const [loginPopup, setLoginPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
-
+  const [toasterVisible, setToasterVisible] = useState(false);
   const handleLoginAndSignUp = () => {
     setLoginPopUp(true);
   };
@@ -29,10 +29,13 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        className={toasterVisible ? "toaster-visible" : ""}
+      >
         <div className="navbar">
           <img src={applogo} alt="App Logo" width="100" height="25" />
-          {loginState || localStorageLoginData !== null ? (
+          {loginState && localStorageLoginData?.status == "success" ? (
             <>
               <div>
                 <AvtaarLogo />

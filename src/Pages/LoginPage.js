@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import LoginCarousel from "../components/Carousels/LoginCarousel";
 import "../styles/LoginPage.css";
 import useFetch from "../Hooks/UseFetch";
 import { useLoginContext } from "../Hooks/LoginContext";
+import Toaster from "../utils/Toaster";
 
 const LoginPage = ({ open, openChange }) => {
   const { setLoginState, setLocalStorageLoginData } = useLoginContext();
@@ -12,6 +13,10 @@ const LoginPage = ({ open, openChange }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [toaster, setToaster] = useState({
+    status: "",
+    message: "",
+  });
 
   const handleLogin = () => {
     setIsLogin(true);
@@ -21,61 +26,99 @@ const LoginPage = ({ open, openChange }) => {
   };
 
   const handleNameChange = (e) => {
+    setToaster({
+      status: "",
+      message: "",
+    });
     setName(e.target.value);
   };
 
   const handleEmailChange = (e) => {
+    setToaster({
+      status: "",
+      message: "",
+    });
     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
+    setToaster({
+      status: "",
+      message: "",
+    });
     setPassword(e.target.value);
   };
 
   const { data: Data, fetchPostData } = useFetch();
 
+  const derivedValue = useMemo(() => {
+    return toaster;
+  }, [name, email, password]);
+
   const handleSignupApi = async () => {
-    fetchPostData(
-      `https://academics.newtonschool.co/api/v1/bookingportals/signup`,
-      "POST",
-      {
-        name: name,
-        email: email,
-        password: password,
-        appType: "bookingportals",
-      }
-    );
-    setName("");
-    setEmail("");
-    setPassword("");
-    openChange(false);
-    setLoginState(true);
+    if (name == "" || email == "" || password == "") {
+      setToaster({
+        status: "warning",
+        message: "Please Fill The Required Fields",
+      });
+      // openChange(true);
+    } else {
+      fetchPostData(
+        `https://academics.newtonschool.co/api/v1/bookingportals/signup`,
+        "POST",
+        {
+          name: name,
+          email: email,
+          password: password,
+          appType: "bookingportals",
+        }
+      );
+    }
   };
 
   const handleLoginApi = async () => {
-    fetchPostData(
-      `https://academics.newtonschool.co/api/v1/bookingportals/login`,
-      "POST",
-      {
-        email: email,
-        password: password,
-        appType: "bookingportals",
-      }
-    );
-    setName("");
-    setEmail("");
-    setPassword("");
-    openChange(false);
-    setLoginState(true);
+    if (email == "" || password == "") {
+      setToaster({
+        status: "warning",
+        message: "Please Fill The Required Fields",
+      });
+      // openChange(true);
+    } else {
+      fetchPostData(
+        `https://academics.newtonschool.co/api/v1/bookingportals/login`,
+        "POST",
+        {
+          email: email,
+          password: password,
+          appType: "bookingportals",
+        }
+      );
+    }
   };
+
+  console.log("api Data", Data);
 
   useEffect(() => {
     if (Data != null || Data != undefined) {
-      console.log("login", Data);
-      setLocalStorageLoginData(Data);
-      localStorage.setItem("signup&loginData", JSON.stringify(Data));
+      if (Data?.status == "fail") {
+        setToaster({
+          status: Data?.status,
+          message: Data?.message,
+        });
+      } else {
+        openChange(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setLoginState(true);
+        setLocalStorageLoginData(Data);
+        localStorage.setItem("signup&loginData", JSON.stringify(Data));
+      }
     }
   }, [Data]);
+
+  // status: 'fail', message: 'Invalid input data. A user must have a name. A user must have an email'}
+  // console.log("Toaster", toaster);
 
   return (
     <>
@@ -147,6 +190,12 @@ const LoginPage = ({ open, openChange }) => {
           </div>
         </div>
       </Modal>
+
+      {toaster.status == "fail" || toaster.status == "warning" ? (
+        <Toaster status={toaster.status} message={toaster.message} />
+      ) : (
+        ""
+      )}
     </>
   );
 };

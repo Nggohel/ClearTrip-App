@@ -121,10 +121,10 @@ function SearchFlightsNavBar() {
         <div className="rightside-searchflights-navbar">
           <SupportLogo />
           <div>
-            <a href="https://www.cleartrip.com/accounts/trips">Support</a>
+            <a href="https://www.cleartrip.com/accounts/trips">Support Me</a>
           </div>
 
-          {loginState || localStorageLoginData !== null ? (
+          {loginState && localStorageLoginData !== null ? (
             <>
               <div>
                 <AvtaarLogo />
