@@ -8,11 +8,16 @@ import { useLoginContext } from "../Hooks/LoginContext";
 import Toaster from "../utils/Toaster";
 
 const LoginPage = ({ open, openChange }) => {
-  const { setLoginState, setLocalStorageLoginData } = useLoginContext();
+  const { setLoginState, setLocalStorageLoginData, localStorageLoginData } =
+    useLoginContext();
   const [isLogin, setIsLogin] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fromData, setFromData] = useState({
+    name: "",
+    email: "",
+    phonenumber: "",
+    password: "",
+  });
+
   const [toaster, setToaster] = useState({
     status: "",
     message: "",
@@ -20,56 +25,59 @@ const LoginPage = ({ open, openChange }) => {
 
   const handleLogin = () => {
     setIsLogin(true);
-    setName("");
-    setEmail("");
-    setPassword("");
+    setFromData({
+      name: "",
+      email: "",
+      phonenumber: "",
+      password: "",
+    });
   };
 
-  const handleNameChange = (e) => {
+  const handleFromChange = (e) => {
     setToaster({
       status: "",
       message: "",
     });
-    setName(e.target.value);
-  };
 
-  const handleEmailChange = (e) => {
-    setToaster({
-      status: "",
-      message: "",
-    });
-    setEmail(e.target.value);
-  };
+    const value = e.target.value;
+    const name = e.target.name;
 
-  const handlePasswordChange = (e) => {
-    setToaster({
-      status: "",
-      message: "",
-    });
-    setPassword(e.target.value);
+    setFromData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const { data: Data, fetchPostData } = useFetch();
 
   const derivedValue = useMemo(() => {
     return toaster;
-  }, [name, email, password]);
+  }, [
+    fromData?.name,
+    fromData?.email,
+    fromData?.password,
+    fromData?.phonenumber,
+  ]);
 
   const handleSignupApi = async () => {
-    if (name == "" || email == "" || password == "") {
+    if (
+      fromData?.name == "" ||
+      fromData?.email == "" ||
+      fromData?.password == "" ||
+      fromData?.phonenumber == ""
+    ) {
       setToaster({
         status: "warning",
         message: "Please Fill The Required Fields",
       });
-      // openChange(true);
     } else {
       fetchPostData(
         `https://academics.newtonschool.co/api/v1/bookingportals/signup`,
         "POST",
         {
-          name: name,
-          email: email,
-          password: password,
+          name: fromData?.name,
+          email: fromData?.email,
+          password: fromData?.password,
           appType: "bookingportals",
         }
       );
@@ -77,19 +85,18 @@ const LoginPage = ({ open, openChange }) => {
   };
 
   const handleLoginApi = async () => {
-    if (email == "" || password == "") {
+    if (fromData?.email == "" || fromData?.password == "") {
       setToaster({
         status: "warning",
         message: "Please Fill The Required Fields",
       });
-      // openChange(true);
     } else {
       fetchPostData(
         `https://academics.newtonschool.co/api/v1/bookingportals/login`,
         "POST",
         {
-          email: email,
-          password: password,
+          email: fromData?.email,
+          password: fromData?.password,
           appType: "bookingportals",
         }
       );
@@ -107,9 +114,18 @@ const LoginPage = ({ open, openChange }) => {
         });
       } else {
         openChange(false);
-        setName("");
-        setEmail("");
-        setPassword("");
+        if (fromData?.phonenumber) {
+          sessionStorage.setItem(
+            "MobileNo",
+            JSON.stringify(fromData?.phonenumber)
+          );
+        }
+        setFromData({
+          name: "",
+          email: "",
+          phonenumber: "",
+          password: "",
+        });
         setLoginState(true);
         setLocalStorageLoginData(Data);
         localStorage.setItem("signup&loginData", JSON.stringify(Data));
@@ -142,29 +158,47 @@ const LoginPage = ({ open, openChange }) => {
                 <label className="name-label">Name</label>
                 <input
                   type="text"
+                  name="name"
                   className="input-name"
                   placeholder="Enter Your Name"
-                  value={name}
-                  onChange={handleNameChange}
+                  value={fromData.name}
+                  onChange={handleFromChange}
+                  required
                 ></input>
               </>
             )}
+
+            <label className="name-label">Mobile No</label>
+            <input
+              type="number"
+              name="phonenumber"
+              className="input-name"
+              placeholder="Enter Your Mobile.No"
+              value={fromData.phonenumber}
+              onChange={handleFromChange}
+              required
+            ></input>
+
             <label className="name-label">Email</label>
             <input
               type="email"
+              name="email"
               className="input-name"
               placeholder="Enter Your Email"
-              value={email}
-              onChange={handleEmailChange}
+              value={fromData.email}
+              onChange={handleFromChange}
+              required
             ></input>
 
             <label className="name-label">Password</label>
             <input
               type="password"
+              name="password"
               className="input-name"
               placeholder="Enter Your Password"
-              value={password}
-              onChange={handlePasswordChange}
+              value={fromData.password}
+              onChange={handleFromChange}
+              required
             ></input>
             <button
               className="login-btn"

@@ -18,6 +18,7 @@ function HotelConfirmationPage() {
   );
 
   const RoomPrice = localStorage.getItem("RoomBookingData");
+  const MobileNo = JSON.parse(sessionStorage.getItem("MobileNo"));
 
   useEffect(() => {
     if (getLoginAndsingUpData != null) {
@@ -51,6 +52,7 @@ function HotelConfirmationPage() {
     100;
   const receiptId = BookingId;
   const currency = "INR";
+
   console.log(amount);
   const handlePayment = async (e) => {
     const response = await fetch(`${Url.Payment_Api}/order`, {
@@ -99,7 +101,7 @@ function HotelConfirmationPage() {
       prefill: {
         name: name, //your customer's name
         email: "Ngsolution@gmail.com",
-        contact: "9991717222", //Provide the customer's phone number for better conversion rates
+        contact: MobileNo,
       },
       notes: {
         address: "Razorpay Corporate Office",

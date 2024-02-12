@@ -8,7 +8,6 @@ export const LoginContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("signup&loginData"))
   );
 
-  // console.log("localStorage", localStorageLoginData);
   const LogincontextValue = {
     loginState,
     setLoginState,

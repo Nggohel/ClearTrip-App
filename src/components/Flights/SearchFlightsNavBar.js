@@ -10,11 +10,11 @@ import "./../../styles/SearchFlightsNavBar.css";
 import FlightCalendar from "../FlightCalendar";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 import { Link } from "react-router-dom";
+import { useLoginContext } from "../../Hooks/LoginContext";
 
 function SearchFlightsNavBar() {
-  const { setSearchNavData, setSearchData, loginState, localStorageLoginData } =
-    useFlightContext();
-
+  const { setSearchNavData, setSearchData } = useFlightContext();
+  const { loginState, localStorageLoginData } = useLoginContext();
   const [wheretoValue, SetWheretoValue] = useState("");
   const [wherefromValue, SetWherefromvalue] = useState("");
   const [dayDeparture, setDayDeparture] = useState("");
@@ -124,7 +124,7 @@ function SearchFlightsNavBar() {
             <a href="https://www.cleartrip.com/accounts/trips">Support Me</a>
           </div>
 
-          {loginState && localStorageLoginData !== null ? (
+          {loginState && localStorageLoginData?.status == "success" ? (
             <>
               <div>
                 <AvtaarLogo />

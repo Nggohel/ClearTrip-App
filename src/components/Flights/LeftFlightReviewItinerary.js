@@ -41,6 +41,9 @@ function LeftFlightReviewItinerary() {
   const getLoginAndsingUpData = JSON.parse(
     localStorage.getItem("signup&loginData")
   );
+
+  const MobileNo = JSON.parse(sessionStorage.getItem("MobileNo"));
+
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -48,7 +51,7 @@ function LeftFlightReviewItinerary() {
   const [password, setPassword] = useState("");
   const arrivalId = localStorage.getItem("ArrivalId");
   const DepartureId = localStorage.getItem("DepartureId");
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
   const [showpayment, setShowPayment] = useState(false);
 
   const { data: singleDepartureData } = useFetch(
@@ -68,8 +71,7 @@ function LeftFlightReviewItinerary() {
 
   // console.log(singleDepartureData, "singleDepartureData");
 
-  const handleContinueClick = () => {
-    setShowForm(true);
+  useEffect(() => {
     if (getLoginAndsingUpData != null) {
       setName(
         getLoginAndsingUpData?.data.name ||
@@ -80,7 +82,7 @@ function LeftFlightReviewItinerary() {
           getLoginAndsingUpData?.data?.user?.email
       );
     }
-  };
+  }, [getLoginAndsingUpData]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -159,7 +161,7 @@ function LeftFlightReviewItinerary() {
       prefill: {
         name: name, //your customer's name
         email: "Ngsolution@gmail.com",
-        contact: "9991717222", //Provide the customer's phone number for better conversion rates
+        contact: MobileNo, //Provide the customer's phone number for better conversion rates
       },
       notes: {
         address: "Razorpay Corporate Office",
@@ -545,95 +547,95 @@ function LeftFlightReviewItinerary() {
             </div>
 
             {/* btn */}
-            <div className="continue">
+            {/* <div className="continue">
               <button className="continue-btn" onClick={handleContinueClick}>
                 Continue
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* 2 */}
 
-        {showForm && (
-          <div className="review-leftside">
-            <div className="heading-itinerary">
-              <div className="no-heading">2</div>
-              <div>
-                <h2>Add Contact details</h2>
-                <p style={{ fontSize: "12px" }}>
-                  E-tickets will be sent to this email address
-                </p>
-              </div>
+        {/* {showForm && ( */}
+        <div className="review-leftside">
+          <div className="heading-itinerary">
+            <div className="no-heading">2</div>
+            <div>
+              <h2>Add Contact details</h2>
+              <p style={{ fontSize: "12px" }}>
+                E-tickets will be sent to this email address
+              </p>
             </div>
-            <div className="additional-info-form">
-              <label htmlFor="phoneNumber">Name:</label>
-              <div className="mobile-card">
-                <input
-                  type="text"
-                  id="phoneNumber"
-                  className="mobile-number"
-                  placeholder="Full Name"
-                  value={name}
-                  onChange={handleNameChange}
-                />
-              </div>
+          </div>
+          <div className="additional-info-form">
+            <label htmlFor="phoneNumber">Name:</label>
+            <div className="mobile-card">
+              <input
+                type="text"
+                id="phoneNumber"
+                className="mobile-number"
+                placeholder="Full Name"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
 
-              <div className="email-card">
-                <label htmlFor="name">Email address</label>
+            <div className="email-card">
+              <label htmlFor="name">Email address</label>
+              <input
+                type="email"
+                id="email"
+                name="name"
+                className="email"
+                placeholder="Email address"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </div>
+            {getLoginAndsingUpData?.data.email ||
+            getLoginAndsingUpData?.data?.user?.email ? (
+              ""
+            ) : (
+              <div className="password-card">
+                <label htmlFor="name">Password</label>
                 <input
-                  type="email"
-                  id="email"
+                  type="password"
+                  id="password"
                   name="name"
                   className="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={handleEmailChange}
+                  placeholder="Password Here"
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
               </div>
-              {getLoginAndsingUpData?.data.email ||
-              getLoginAndsingUpData?.data?.user?.email ? (
-                ""
-              ) : (
-                <div className="password-card">
-                  <label htmlFor="name">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="name"
-                    className="email"
-                    placeholder="Password Here"
-                    value={password}
-                    onChange={handlePasswordChange}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div className="continue-second">
-              <button
-                id="contin-btn"
-                className="continue-btn"
-                onClick={handleConfirmation}
-              >
-                Continue
+            )}
+          </div>
+          {showpayment ? (
+            <div className="continue-payment">
+              <Link to="/flightsearch">
+                <button className="continue-btn">Cancel</button>
+              </Link>
+              {/* <Link to="/bookingconfirmation"> */}
+              <button className="continue-payment-btn" onClick={handlePayment}>
+                Continue to Payment
               </button>
+              {/* </Link> */}
             </div>
-          </div>
-        )}
-
-        {showpayment && (
-          <div className="continue-payment">
-            <Link to="/flightsearch">
-              <button className="continue-btn">Cancel</button>
-            </Link>
-            {/* <Link to="/bookingconfirmation"> */}
-            <button className="continue-payment-btn" onClick={handlePayment}>
-              Continue to Payment
-            </button>
-            {/* </Link> */}
-          </div>
-        )}
+          ) : (
+            <>
+              <div className="continue-second">
+                <button
+                  id="contin-btn"
+                  className="continue-btn"
+                  onClick={handleConfirmation}
+                >
+                  Continue
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

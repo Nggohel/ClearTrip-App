@@ -7,11 +7,12 @@ import FlightCalendar from "../../components/FlightCalendar";
 import MyAccount from "../Flights/MyAccount";
 import LoginPage from "../../Pages/LoginPage";
 import { useFlightContext } from "../../Hooks/useFlightContext";
+import { useLoginContext } from "../../Hooks/LoginContext";
 
 function HotelSearchNavBar({ searchData, btnCss, Apidata, updatedHotelData }) {
-  const { loginState, localStorageLoginData } = useFlightContext();
+  const { loginState, localStorageLoginData } = useLoginContext();
   const StoreCity = JSON.parse(localStorage.getItem("SearchHotelData"));
-  console.log(StoreCity);
+  // console.log(StoreCity);
   const [searchState, setSearchState] = useState(true);
   const [dayStart, setDayStart] = useState("");
   const [dayEnd, setDayEnd] = useState("");
@@ -108,7 +109,7 @@ function HotelSearchNavBar({ searchData, btnCss, Apidata, updatedHotelData }) {
           ""
         )}
 
-        {loginState && localStorageLoginData !== null ? (
+        {loginState && localStorageLoginData?.status == "success" ? (
           <div
             style={{
               display: "flex",

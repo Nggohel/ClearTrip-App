@@ -7,10 +7,11 @@ import "../../styles/FlightReviewItinerary.css";
 import LeftFlightReviewItinerary from "./LeftFlightReviewItinerary";
 import RightFlightReviewItinerary from "./RightFlightReviewItinerary";
 import { useFlightContext } from "../../Hooks/useFlightContext";
+import { useLoginContext } from "../../Hooks/LoginContext";
 
 function FlightReviewItinerary() {
-  const { loginState, localStorageLoginData, loader, setloader } =
-    useFlightContext();
+  const { loader, setloader } = useFlightContext();
+  const { loginState, localStorageLoginData } = useLoginContext();
   const [loginPopup, setLoginPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
 
@@ -21,12 +22,13 @@ function FlightReviewItinerary() {
   const handleMyAccount = () => {
     setLogoutPopUp(true);
   };
+
   return (
     <>
       <div className="review-navbar">
         <img src={applogo} alt="App Logo" width="100" height="30" />
         <div className="review">
-          {loginState && localStorageLoginData !== null ? (
+          {loginState && localStorageLoginData?.status == "success" ? (
             <>
               <div>
                 <AvtaarLogo />
@@ -53,7 +55,7 @@ function FlightReviewItinerary() {
         </div>
       ) : (
         <div style={{ marginLeft: "200px", marginTop: "20px" }}>
-          <h1>Data is Loading...</h1>
+          <h1>Do Not Refresh The Page, Payment is Processing...</h1>
         </div>
       )}
     </>

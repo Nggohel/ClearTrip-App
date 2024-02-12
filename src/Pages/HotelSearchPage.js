@@ -269,11 +269,11 @@ function HotelSearchPage() {
               </FormControl>
             </div>
           </div>
-          <div className="filter-search">
+          {/* <div className="filter-search">
             <img src={search_logo} style={{ height: "24px", width: "24px" }} />
             <input type="text" className="hotel-filter-search-input" />
             <img src={moreoption} style={{ height: "16px", width: "16px" }} />
-          </div>
+          </div> */}
         </div>
       </nav>
 
