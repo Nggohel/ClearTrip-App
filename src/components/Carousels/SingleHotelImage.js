@@ -23,21 +23,27 @@ function SingleHotelImage({ ImageUrL }) {
         // onChange={(index) => setCurrentIndex(index)}
         className="singlehotel-all-images"
       >
-        {Url
-          ? Url.map((url, index) => (
-              <div key={index} className="image-container">
-                <a>
-                  <img
-                    className="single-hotel-image"
-                    id={`hotelCarousel${index}`}
-                    src={url}
-                    alt={`singlehotelimage${index}`}
-                    loading="lazy"
-                  />
-                </a>
-              </div>
-            ))
-          : "PLease Wait Loading"}
+        {Url ? (
+          Url.map((url, index) => (
+            <div key={index} className="image-container">
+              <a>
+                <img
+                  className="single-hotel-image"
+                  id={`hotelCarousel${index}`}
+                  src={url}
+                  alt={`singlehotelimage${index}`}
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          ))
+        ) : (
+          <div>
+            <h2 style={{ textAlign: "center" }}>
+              PLease Wait.. Data is Loading
+            </h2>
+          </div>
+        )}
         {/* 
         <div className="image-container">
           <img
