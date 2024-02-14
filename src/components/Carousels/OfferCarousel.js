@@ -7,6 +7,9 @@ import ICICI from "../../Assests/Images/ICICI";
 import AuBank from "../../Assests/BankLogo/AUBank";
 import IDFC from "../../Assests/BankLogo/IDFC";
 import UPI from "../../Assests/BankLogo/UPI";
+
+//offer - cards in Carousel on Flight HomePage
+
 function OfferCarousel({ icon, offer, bankCard, card }) {
   const [settings] = useState({
     className: "center",

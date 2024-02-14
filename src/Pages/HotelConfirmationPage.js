@@ -19,7 +19,7 @@ function HotelConfirmationPage() {
 
   const RoomPrice = localStorage.getItem("RoomBookingData");
   const MobileNo = JSON.parse(sessionStorage.getItem("MobileNo"));
-
+  // use for name ,email getLoginAndsingUpData
   useEffect(() => {
     if (getLoginAndsingUpData != null) {
       setName(
@@ -32,15 +32,15 @@ function HotelConfirmationPage() {
       );
     }
   }, [name, email]);
-
+  // input change in Name
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-
+  // input change in Email
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  // input change in password
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -54,6 +54,7 @@ function HotelConfirmationPage() {
   const currency = "INR";
 
   console.log(amount);
+  // payment function for Final Value Payment
   const handlePayment = async (e) => {
     const response = await fetch(`${Url.Payment_Api}/order`, {
       method: "POST",

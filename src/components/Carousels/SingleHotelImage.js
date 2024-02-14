@@ -20,7 +20,6 @@ function SingleHotelImage({ ImageUrL }) {
         showIndicators={true}
         selectedItem={currentIndex}
         useKeyboardArrows={true}
-        // onChange={(index) => setCurrentIndex(index)}
         className="singlehotel-all-images"
       >
         {Url ? (

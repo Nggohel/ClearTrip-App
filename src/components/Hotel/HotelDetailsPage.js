@@ -62,9 +62,11 @@ function HotelDetailsPage() {
 
   const [hotelImgNav, setHotelImgNav] = useState(false);
 
+// when Section Change 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   // data get from Api using HotelID
 
   const { data: SingleHotelData } = useFetch(
@@ -101,6 +103,7 @@ function HotelDetailsPage() {
       (SingleHotelData?.avgCostPerNight * 10) / 100
   );
 
+  // all 3 option of Rooms
   const handleRoomonly = () => {
     localStorage.setItem("RoomBookingData", RoomOnlyPrice);
   };

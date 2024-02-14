@@ -15,6 +15,7 @@ function TopCarouselCard() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Slides change with TimeInterval
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
@@ -24,6 +25,7 @@ function TopCarouselCard() {
       clearInterval(intervalId);
     };
   }, [totalSlides, interval]);
+
   return (
     <React.Fragment>
       <Carousel

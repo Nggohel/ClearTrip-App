@@ -36,6 +36,8 @@ function FinalFlightDataCard() {
 
   const navigate = useNavigate();
 
+  // getting Data searchData
+
   const {
     data: departuredata,
     isLoading,
@@ -46,7 +48,8 @@ function FinalFlightDataCard() {
     &day=${searchData?.dayDeparture}`,
     "GET"
   );
-  console.log("coming Data", departuredata);
+  
+  // console.log("coming Data", departuredata);
 
   const {
     data: arrivalData,
@@ -58,6 +61,8 @@ function FinalFlightDataCard() {
     &day=${searchData?.dayArrival}`,
     "GET"
   );
+
+  // getting DepartureData filteredObject
 
   const fetchDepartureData = async () => {
     try {
@@ -85,6 +90,8 @@ function FinalFlightDataCard() {
   };
   console.log(DepartureFilterData, "departureFilterData");
 
+  // getting ArrivalData filteredObject
+
   const fetchArrivalData = async () => {
     try {
       if (filteredObject && Object.keys(filteredObject).length > 0) {
@@ -110,11 +117,13 @@ function FinalFlightDataCard() {
     }
   };
 
+  // calling Function Here
   useEffect(() => {
     fetchDepartureData();
     fetchArrivalData();
   }, [filteredObject]);
 
+  // Showing Current Card Active Uisng both Function
   const handleLeftFlightClick = (e, flight) => {
     e.stopPropagation();
 
@@ -141,6 +150,8 @@ function FinalFlightDataCard() {
     setisArrivalFlightData(flight);
   };
 
+  // navigate to Booking Deatails Page
+
   const handleBookFlight = () => {
     const departureId = leftClick
       ? isDepatureFlightData._id
@@ -155,6 +166,8 @@ function FinalFlightDataCard() {
 
     navigate("/reviewitinerary");
   };
+
+  // if Data Not Found that time we use that
 
   const handleResetFilter = () => {
     window.location.reload();

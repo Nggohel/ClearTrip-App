@@ -14,6 +14,7 @@ function HotelSearchCard() {
   const [dayEnd, setDayEnd] = useState("");
   const [hotelLocation, SethotelLocation] = useState("");
 
+  // updated Data Store in Local Storage 
   const handleSearchbtn = () => {
     localStorage.setItem(
       "SearchHotelData",
@@ -113,7 +114,4 @@ function HotelSearchCard() {
 
 export default HotelSearchCard;
 
-// infinite observer
-// mutation observer
-// performance observer
-// Resize Observer
+

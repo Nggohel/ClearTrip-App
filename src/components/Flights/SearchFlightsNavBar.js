@@ -48,6 +48,7 @@ function SearchFlightsNavBar() {
     }
   }, []);
 
+  // setting location
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
   };
@@ -67,6 +68,7 @@ function SearchFlightsNavBar() {
   let DepartureCity = FromValue[1]?.split(",")[0].trim();
   let ArrivalCity = ToValue[1]?.split(",")[0].trim();
 
+  // setting SearchData in localStorage
   const handleNavFlightSearch = () => {
     setSearchData({
       source: FromValue[0],

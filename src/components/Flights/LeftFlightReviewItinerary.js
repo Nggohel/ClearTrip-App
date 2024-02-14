@@ -54,6 +54,7 @@ function LeftFlightReviewItinerary() {
   // const [showForm, setShowForm] = useState(false);
   const [showpayment, setShowPayment] = useState(false);
 
+  // getting Data
   const { data: singleDepartureData } = useFetch(
     `https://academics.newtonschool.co/api/v1/bookingportals/flight/${DepartureId}`,
     "GET"
@@ -84,22 +85,23 @@ function LeftFlightReviewItinerary() {
     }
   }, [getLoginAndsingUpData]);
 
+  // handleChangeName
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-
+  //EmailChange
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  //PasswordChange
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
+  // for PaymentBtn
   const handleConfirmation = () => {
     setShowPayment(true);
   };
-
+  // for PaymentData
   const handlePayment = async (e) => {
     setloader(false);
     const amount =

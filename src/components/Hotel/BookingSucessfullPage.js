@@ -11,14 +11,14 @@ function BookingSucessfullPage() {
   console.log("hoteldata", hotelName);
 
   const PaymentRes = JSON.parse(localStorage.getItem("PaymentStatus"));
-
+  // clear the LocalStorage and render to the HomePage
   const handleGobackHome = () => {
     localStorage.removeItem("PaymentStatus");
     localStorage.removeItem("ArrivalId");
     localStorage.removeItem("DepartureId");
     localStorage.removeItem("SearchData");
     localStorage.removeItem("SearchHotelData");
-    navigate("/");
+    navigate("/hotel");
   };
 
   return (

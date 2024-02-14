@@ -24,15 +24,17 @@ function HotelSearchNavBar({ searchData, btnCss, Apidata, updatedHotelData }) {
   useEffect(() => {
     setSearchState(searchData);
   }, [searchData]);
-
+  // login and SingUp Page
   const handleLoginAndSignUp = () => {
     setLoginPopUp(true);
   };
 
+  // Showing MyAccount
   const handleMyAccount = () => {
     setLogoutPopUp(true);
   };
 
+  // if Change in City
   const handleCityChange = (e) => {
     const newCity = e.target.value;
     setBtnState(true);
@@ -45,7 +47,7 @@ function HotelSearchNavBar({ searchData, btnCss, Apidata, updatedHotelData }) {
       })
     );
   };
-
+  // for Updating
   const handleUpdateBtn = () => {
     updatedHotelData(true);
   };

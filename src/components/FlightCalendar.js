@@ -11,7 +11,7 @@ const FlightCalendar = ({
   startDateYear,
 }) => {
   const FlightData = JSON.parse(localStorage.getItem("SearchData"));
-
+  // gettting in Formate we want
   const defaultStartDate = new Date(
     `${FlightData?.dayDeparture}, ${FlightData?.StartDateMonth} ${FlightData?.FormattedStartDate} ${FlightData?.StartDateYear}`
   );

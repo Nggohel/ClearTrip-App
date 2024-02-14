@@ -10,6 +10,7 @@ function HotelImg({ hotel, Index }) {
 
   const Images = hotelImgs[Index];
 
+  // onclick Store Hotel_Id 
   const handleClick = () => {
     localStorage.setItem("selectedHotelId", hotel?._id);
   };

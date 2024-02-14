@@ -14,8 +14,8 @@ function FlightsFilters() {
 
   useEffect(() => {
     handleBtn(checkboxValue);
-  }, [checkboxValue]);
-
+  }, [checkboxValue]);  
+  // GettingCheckValue
   const handleCheckboxChange = (event) => {
     const { name, value, checked } = event.target;
     setCheckboxValue((prevValues) => ({
@@ -26,7 +26,7 @@ function FlightsFilters() {
   };
 
   // console.log("checkboxValue:", checkboxValue);
-
+  // for RangeChange
   const handleRangeChange = (event) => {
     const { name, value } = event.target;
 
@@ -37,6 +37,8 @@ function FlightsFilters() {
 
     // handleBtn(checkboxValue);
   };
+
+  //for Btn
 
   function handleBtn(obj) {
     if (

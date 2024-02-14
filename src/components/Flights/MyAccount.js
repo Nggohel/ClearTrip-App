@@ -12,7 +12,7 @@ const MyAccount = ({ open, openChange }) => {
   // const getLoginAndsingUpData = JSON.parse(
   //   localStorage.getItem("signup&loginData")
   // );
-
+  // clear the LocalStorage
   const handleLogout = () => {
     localStorage.removeItem("signup&loginData");
     localStorage.removeItem("ArrivalId");

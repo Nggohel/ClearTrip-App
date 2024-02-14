@@ -15,10 +15,12 @@ function FlightReviewItinerary() {
   const [loginPopup, setLoginPopUp] = useState(false);
   const [logoutPopUp, setLogoutPopUp] = useState(false);
 
+  //singup Page Come
   const handleLoginAndSignUp = () => {
     setLoginPopUp(true);
   };
 
+  //MyAccount Page Come
   const handleMyAccount = () => {
     setLogoutPopUp(true);
   };

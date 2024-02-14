@@ -6,6 +6,8 @@ function ConfirmationPage() {
   const RefNo = localStorage.getItem("ArrivalId");
   const PaymentRes = JSON.parse(localStorage.getItem("PaymentStatus"));
 
+  // clear LocalStorage on click Btn
+
   const handleGobackHome = () => {
     localStorage.removeItem("PaymentStatus");
     localStorage.removeItem("ArrivalId");

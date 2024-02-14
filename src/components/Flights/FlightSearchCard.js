@@ -27,13 +27,14 @@ function FlightSearchCard({ icon }) {
   let DepartureCity = FromValue[1]?.split(",")[0].trim();
   let ArrivalCity = ToValue[1]?.split(",")[0].trim();
 
+  // set Location Value
   const handleWhereFromLocation = (e) => {
     SetWherefromvalue(e.target.value);
   };
   const handleWhereToLocation = (e) => {
     SetWheretoValue(e.target.value);
   };
-
+  // setingData to LocalStorage
   const handleSearchButton = () => {
     setSearchData({
       source: FromValue[0],

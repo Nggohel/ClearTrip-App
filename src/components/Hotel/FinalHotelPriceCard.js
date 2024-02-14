@@ -6,6 +6,7 @@ import Citi from "../../Assests/Images/Citi.svg";
 import "../../styles/FinalHotelPriceCard.css";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 function FinalHotelPriceCard() {
+  //getting Room Data That we Store in Hotel Detail Page
   const RoomPrice = localStorage.getItem("RoomBookingData");
   //   const { singleApiDepartureData, singleApiArrivalData } = useFlightContext();
   return (

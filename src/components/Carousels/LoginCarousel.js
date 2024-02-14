@@ -11,6 +11,7 @@ function LoginCarousel() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Slides change with TimeInterval
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);

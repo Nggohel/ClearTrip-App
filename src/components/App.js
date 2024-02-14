@@ -14,9 +14,11 @@ import { LoginContextProvider } from "../Hooks/LoginContext";
 import BookingSucessfullPage from "./Hotel/BookingSucessfullPage";
 function App() {
   return (
+    // Using Context Api Here
     <FlightContextProvider>
       <LoginContextProvider>
         <>
+          {/* all Routes with Components */}
           <Router>
             <Routes>
               <Route path="/" element={<FlightPage />} />
