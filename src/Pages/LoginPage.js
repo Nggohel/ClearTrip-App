@@ -23,6 +23,7 @@ const LoginPage = ({ open, openChange }) => {
     message: "",
   });
 
+  // onclick login set onchnage value for Api
   const handleLogin = () => {
     setIsLogin(true);
     setFromData({
@@ -33,6 +34,7 @@ const LoginPage = ({ open, openChange }) => {
     });
   };
 
+  // all From Data setting Here
   const handleFromChange = (e) => {
     setToaster({
       status: "",
@@ -58,7 +60,7 @@ const LoginPage = ({ open, openChange }) => {
     fromData?.password,
     fromData?.phonenumber,
   ]);
-
+  // Api calling for Singup
   const handleSignupApi = async () => {
     if (
       fromData?.name == "" ||
@@ -83,7 +85,7 @@ const LoginPage = ({ open, openChange }) => {
       );
     }
   };
-
+  // Api calling For the Login
   const handleLoginApi = async () => {
     if (fromData?.email == "" || fromData?.password == "") {
       setToaster({

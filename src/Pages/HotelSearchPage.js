@@ -23,7 +23,9 @@ import MultiSelect from "../utils/MultiSelect";
 import ExploreDealCarousel from "../components/Hotel/ExploreDealCarousel";
 import Skeleton from "@mui/material/Skeleton";
 const HotelCardsContainer = lazy(() => import("../components/Hotel/HotelCard"));
+
 function HotelSearchPage() {
+
   const [sortBy, setsortBy] = useState(0);
   const [filter, setfilter] = useState("");
   const [ratingFilter, setratingFilter] = useState("");
@@ -124,7 +126,7 @@ function HotelSearchPage() {
 
     fetchData(urlWithFilter, "GET");
   };
-
+// function calling 
   useEffect(() => {
     fetchfilterData(filter, ratingFilter);
   }, [filter, ratingFilter]);
@@ -136,7 +138,7 @@ function HotelSearchPage() {
     }
   }, [updateHotel]);
 
-  console.log("apidata", SortedPriceData);
+  // console.log("apidata", SortedPriceData);
 
   return (
     <>
