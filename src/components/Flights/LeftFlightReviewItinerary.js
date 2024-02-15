@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ArrowItinerary from "../../Assests/Images/ArrowItinerary";
 import AxisLogo from "../../Assests/Images/AxisLogo";
 import Rupees from "../../Assests/Images/AxisbankLogo/Rupees";
@@ -24,8 +24,7 @@ import useFetch from "../../Hooks/UseFetch";
 import { useFlightContext } from "../../Hooks/useFlightContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Url } from "../../Data/Url";
-import { Skeleton } from "@mui/material";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+import Toaster from "../../utils/Toaster";
 
 function LeftFlightReviewItinerary() {
   const {
@@ -51,6 +50,10 @@ function LeftFlightReviewItinerary() {
   const [password, setPassword] = useState("");
   const arrivalId = localStorage.getItem("ArrivalId");
   const DepartureId = localStorage.getItem("DepartureId");
+  const [toaster, setToaster] = useState({
+    status: "",
+    message: "",
+  });
   // const [showForm, setShowForm] = useState(false);
   const [showpayment, setShowPayment] = useState(false);
 
@@ -97,9 +100,19 @@ function LeftFlightReviewItinerary() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  const derivedValue = useMemo(() => {
+    return toaster;
+  }, [name, email, password]);
   // for PaymentBtn
   const handleConfirmation = () => {
-    setShowPayment(true);
+    if (name == "" || email == "" || password == "") {
+      setToaster({
+        status: "warning",
+        message: "Please Fill The Required Fields",
+      });
+    } else {
+      setShowPayment(true);
+    }
   };
   // for PaymentData
   const handlePayment = async (e) => {
@@ -639,6 +652,11 @@ function LeftFlightReviewItinerary() {
           )}
         </div>
       </div>
+      {toaster.status == "fail" || toaster.status == "warning" ? (
+        <Toaster status={toaster.status} message={toaster.message} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
