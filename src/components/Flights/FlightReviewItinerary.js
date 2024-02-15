@@ -57,7 +57,7 @@ function FlightReviewItinerary() {
         </div>
       ) : (
         <div style={{ marginLeft: "200px", marginTop: "20px" }}>
-          <h1>Do Not Refresh The Page, Payment is Processing...</h1>
+          <h1>Do Not Refresh The Page, Payment Card is Loading...</h1>
         </div>
       )}
     </>
