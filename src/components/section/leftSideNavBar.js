@@ -32,6 +32,20 @@ function leftSideNavBar() {
                 )}
               </NavLink>
             </li>
+            {/* <li className="nav-list">
+              <NavLink
+                to="/https://www.cleartrip.com/bus"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : "pending"
+                }
+              >
+                {({ isActive }) => (
+                  <span className="left-navbar">
+                    {isActive ? <Hotel /> : <HiOutlineBuildingOffice2 />} Hotel
+                  </span>
+                )}
+              </NavLink>
+            </li> */}
             <li className="nav-list">
               <NavLink
                 to="/hotel"
